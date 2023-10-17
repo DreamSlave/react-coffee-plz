@@ -1,6 +1,6 @@
 import '../assets/css/entrance.css'
 
-function Entrance () {
+const Entrance = () => {
   return (
     <div className="element">
       <div className="div">
