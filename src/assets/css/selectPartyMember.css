@@ -1,0 +1,126 @@
+:root {
+  --pointcolor: rgba(245, 84, 190, 1);
+  --variable-collection-sub: rgba(255, 231, 250, 1);
+}
+
+.element {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.element .div {
+  background-color: #ffffff;
+  height: 812px;
+  position: relative;
+  width: 375px;
+}
+
+.element .overlap {
+  height: 52px;
+  left: 25px;
+  position: absolute;
+  top: 220px;
+  width: 327px;
+}
+
+.element .group {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 327px;
+}
+
+.element .overlap-group {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #eeeeee;
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 325px;
+}
+
+.element .text-wrapper {
+  color: #ffffff;
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  left: 49px;
+  letter-spacing: -0.9px;
+  line-height: 21.6px;
+  position: absolute;
+  top: 14px;
+  white-space: nowrap;
+}
+
+.element .vector {
+  height: 20px;
+  left: 15px;
+  position: absolute;
+  top: 16px;
+  width: 20px;
+}
+
+.element .p {
+  color: transparent;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 32px;
+  font-weight: 400;
+  left: 90px;
+  letter-spacing: 0;
+  line-height: 38.4px;
+  position: absolute;
+  text-align: center;
+  top: 57px;
+}
+
+.element .span {
+  color: #f553be;
+}
+
+.element .text-wrapper-2 {
+  color: #000000;
+}
+
+.element .text-wrapper-3 {
+  color: #000000;
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 28px;
+  font-weight: 600;
+  left: 166px;
+  letter-spacing: 0;
+  line-height: 33.6px;
+  position: absolute;
+  text-align: center;
+  text-decoration: underline;
+  top: 148px;
+  white-space: nowrap;
+}
+
+.element .group-2 {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #eeeeee;
+  border-radius: 8px;
+  height: 52px;
+  left: 25px;
+  position: absolute;
+  top: 287px;
+  width: 325px;
+}
+
+.element .group-3 {
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #eeeeee;
+  border-radius: 8px;
+  height: 52px;
+  left: 25px;
+  position: absolute;
+  top: 354px;
+  width: 325px;
+}
