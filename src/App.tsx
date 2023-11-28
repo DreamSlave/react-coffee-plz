@@ -5,7 +5,6 @@ import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
 import Entrance from './views/Entrance';
 import SelectMenu from './views/order/SelectMenu';
-import HeaderLayout from './layout/HeaderLayout';
 import SelectPartyMember from './views/party/SelectPartyMember';
 
 function App() {
@@ -31,17 +30,16 @@ function App() {
               </HeaderLayout>
             }
           ></Route>
-      </Routes>
-      <Routes>
-        <Route
-          path="/party/*"
-          element={
-            <HeaderLayout>
-              <Routes>
-                <Route path="/select" element={<SelectPartyMember />} />
-              </Routes>
-            </HeaderLayout>
-          } />
+          <Route
+            path="/party/*"
+            element={
+              <HeaderLayout>
+                <Routes>
+                  <Route path="/select" element={<SelectPartyMember />} />
+                </Routes>
+              </HeaderLayout>
+            } 
+          ></Route>
       </Routes>
     </Router>
   )
