@@ -3,6 +3,24 @@
 import '../../assets/css/orderdetail.css'
 import {useEffect, useState} from "react";
 
+interface orderInfo {
+  title : string;
+  cafeNm : string;
+  endDt : string;
+  orderUserCount : number;
+  orderTagerUserCount : number;
+  orderDrinkCount : number;
+  orderTagerDrinkCount : number;
+  orderState : string;
+  orderMenuInfoList : orderMenuInfo[];
+}
+
+interface orderMenuInfo{
+  menuNm: string;
+  count: number;
+  menuId: string;
+}
+
 function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
@@ -29,21 +47,23 @@ function getOrderInfo(){
 
 function OrderDetail() {
 
-  const [menuList, setMenuList] = useState<any[]>([]);
-  const [orderInfo, setOrderInfo] = useState({
-    title: '',
-    cafeNm: '',
-    endDt: '',
-    orderUserCount: 0,
-    orderTagerUserCount: 0,
+  const [menuList, setMenuList] = useState<orderMenuInfo[]>([]);
+  const [orderInfo, setOrderInfo] = useState<orderInfo>({
+    cafeNm: "",
+    endDt: "",
     orderDrinkCount: 0,
+    orderMenuInfoList: [],
+    orderState: "",
     orderTagerDrinkCount: 0,
+    orderTagerUserCount: 0,
+    orderUserCount: 0,
+    title: ""
   });
 
   useEffect(() => {
-    const orderInfo = getOrderInfo()
-    setOrderInfo(orderInfo)
-    setMenuList(orderInfo.orderMenuInfoList ?? [])
+    const orderInfoData = getOrderInfo()
+    setOrderInfo(orderInfoData)
+    setMenuList(orderInfoData.orderMenuInfoList)
   }, []);
 
   return (
