@@ -2,6 +2,7 @@
 // import "./style.css";
 
 import '../../assets/css/selectPartyMember.css'
+import CheckBox from "@/component/CheckBox.tsx"
 
 const SelectPartyMember = () => {
   return (
@@ -20,6 +21,7 @@ const SelectPartyMember = () => {
           <span className="text-wrapper-2">
             을<br />
             선택해주세요.
+            <CheckBox children="체크박스props"></CheckBox>
           </span>
         </p>
         <div className="text-wrapper-3">3명</div>

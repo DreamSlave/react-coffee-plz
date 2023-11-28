@@ -1,0 +1,479 @@
+:root {
+  --pointcolor: rgba(245, 84, 190, 1);
+  --variable-collection-sub: rgba(255, 231, 250, 1);
+}
+.element {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.element .overlap-wrapper {
+  background-color: #ffffff;
+  height: 943px;
+  width: 375px;
+}
+
+.element .overlap {
+  background-color: var(--pointcolor);
+  height: 943px;
+  position: relative;
+}
+
+.element .title {
+  height: 54px;
+  left: 59px;
+  position: absolute;
+  top: 55px;
+  width: 259px;
+}
+
+.element .text-wrapper {
+  color: #000000;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 45px;
+  font-weight: 400;
+  left: -5px;
+  letter-spacing: 0;
+  line-height: 54px;
+  position: absolute;
+  text-align: center;
+  top: -5px;
+  white-space: nowrap;
+}
+
+.element .overlap-group {
+  height: 808px;
+  left: 0;
+  position: absolute;
+  top: 135px;
+  width: 375px;
+}
+
+.element .contents {
+  height: 755px;
+  left: 35px;
+  position: absolute;
+  top: 0;
+  width: 305px;
+}
+
+.element .order-list-area {
+  height: 755px;
+}
+
+.element .div {
+  background-color: white;
+  border-radius: 8px;
+  height: 755px;
+  position: relative;
+  width: 305px;
+}
+
+.element .bg {
+  height: 746px;
+  left: 0;
+  position: absolute;
+  top: 9px;
+  width: 305px;
+}
+
+.element .clip-img {
+  height: 36px !important;
+  left: 15px !important;
+  position: absolute !important;
+  top: 0 !important;
+  width: 33px !important;
+}
+
+.element .order-title {
+  height: 96px;
+  left: 20px;
+  position: absolute;
+  top: 40px;
+  width: 269px;
+}
+
+.element .text-wrapper-2 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 28px;
+  font-weight: 700;
+  left: 10px;
+  letter-spacing: -1.4px;
+  line-height: 42px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .text-wrapper-3 {
+  color: var(--pointcolor);
+  font-family: "Pretendard-Medium", Helvetica;
+  font-size: 24px;
+  font-weight: 500;
+  left: 10px;
+  letter-spacing: -1.2px;
+  line-height: 36px;
+  position: absolute;
+  top: 42px;
+  white-space: nowrap;
+}
+
+.element .line {
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: 94px;
+  width: 265px;
+}
+
+.element .order-open-img {
+  height: 62px !important;
+  left: 194px !important;
+  position: absolute !important;
+  top: 9px !important;
+  width: 62px !important;
+}
+
+.element .order-time {
+  height: 37px;
+  left: 20px;
+  position: absolute;
+  top: 154px;
+  width: 269px;
+}
+
+.element .text-wrapper-4 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 10px;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .text-wrapper-5 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 82px;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .img {
+  height: 1px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 36px;
+  width: 265px;
+}
+
+.element .order-total {
+  height: 105px;
+  left: 20px;
+  position: absolute;
+  top: 211px;
+  width: 265px;
+}
+
+.element .group {
+  height: 85px;
+  left: 17px;
+  position: absolute;
+  top: 0;
+  width: 227px;
+}
+
+.element .group-2 {
+  height: 85px;
+  left: 138px;
+  position: absolute;
+  top: 0;
+  width: 95px;
+}
+
+.element .overlap-group-2 {
+  height: 62px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 89px;
+}
+
+.element .text-wrapper-6 {
+  color: #1e1e1e;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 30px;
+  font-weight: 400;
+  left: 7px;
+  letter-spacing: -1.5px;
+  line-height: 30px;
+  position: absolute;
+  text-align: center;
+  top: 30px;
+  white-space: nowrap;
+  width: 77px;
+}
+
+.element .text-wrapper-7 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 89px;
+}
+
+.element .text-wrapper-8 {
+  color: #999999;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 15px;
+  font-weight: 400;
+  left: 7px;
+  letter-spacing: -0.75px;
+  line-height: 15px;
+  position: absolute;
+  text-align: center;
+  top: 69px;
+  white-space: nowrap;
+  width: 77px;
+}
+
+.element .group-3 {
+  height: 85px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 95px;
+}
+
+.element .line-2 {
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: 104px;
+  width: 265px;
+}
+
+.element .order-list-sum {
+  height: 358px;
+  left: 30px;
+  position: absolute;
+  top: 336px;
+  width: 247px;
+}
+
+.element .text-wrapper-9 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .item-1 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 38px;
+  width: 249px;
+}
+
+.element .text-wrapper-10 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  left: 0;
+  letter-spacing: -0.8px;
+  line-height: 16px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .text-wrapper-11 {
+  color: #1e1e1e;
+  font-family: "Pretendard-ExtraBold", Helvetica;
+  font-size: 16px;
+  font-weight: 800;
+  left: 227px;
+  letter-spacing: -0.8px;
+  line-height: 16px;
+  position: absolute;
+  text-align: right;
+  text-decoration: underline;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .item-2 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 76px;
+  width: 249px;
+}
+
+.element .text-wrapper-12 {
+  color: #1e1e1e;
+  font-family: "Pretendard-ExtraBold", Helvetica;
+  font-size: 16px;
+  font-weight: 800;
+  left: 234px;
+  letter-spacing: -0.8px;
+  line-height: 16px;
+  position: absolute;
+  text-align: right;
+  text-decoration: underline;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .item-3 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 114px;
+  width: 249px;
+}
+
+.element .text-wrapper-13 {
+  color: #1e1e1e;
+  font-family: "Pretendard-ExtraBold", Helvetica;
+  font-size: 16px;
+  font-weight: 800;
+  left: 235px;
+  letter-spacing: -0.8px;
+  line-height: 16px;
+  position: absolute;
+  text-align: right;
+  text-decoration: underline;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .item-4 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 152px;
+  width: 249px;
+}
+
+.element .item-5 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 190px;
+  width: 249px;
+}
+
+.element .item-6 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 228px;
+  width: 249px;
+}
+
+.element .item-7 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 266px;
+  width: 249px;
+}
+
+.element .item-8 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 304px;
+  width: 249px;
+}
+
+.element .text-wrapper-14 {
+  color: #1e1e1e;
+  font-family: "Pretendard-ExtraBold", Helvetica;
+  font-size: 16px;
+  font-weight: 800;
+  left: 237px;
+  letter-spacing: -0.8px;
+  line-height: 16px;
+  position: absolute;
+  text-align: right;
+  text-decoration: underline;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .item-9 {
+  height: 16px;
+  left: 0;
+  position: absolute;
+  top: 342px;
+  width: 249px;
+}
+
+.element .footer {
+  background-color: var(--pointcolor);
+  height: 82px;
+  left: 0;
+  position: absolute;
+  top: 726px;
+  width: 375px;
+}
+
+.element .large-btn-b {
+  height: 52px;
+  left: 25px;
+  position: relative;
+  width: 327px;
+}
+
+.element .div-wrapper {
+  background-color: #000000;
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 325px;
+}
+
+.element .text-wrapper-15 {
+  color: #ffffff;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 69px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 11px;
+  white-space: nowrap;
+  width: 188px;
+}
