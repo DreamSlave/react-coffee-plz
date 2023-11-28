@@ -19,7 +19,7 @@ interface MemberProps {
 
 
 const SelectPartyMember = () => {
-  const [members, setMembers] = useState<MemberProps[]>([
+  const [members] = useState<MemberProps[]>([
     {
       "name": "김진미",
       "team": "PD팀",
