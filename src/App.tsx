@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
 import Entrance from './views/Entrance';
+import SelectMenu from './views/order/SelectMenu';
+import HeaderLayout from './layout/HeaderLayout';
 import SelectPartyMember from './views/party/SelectPartyMember';
 
 function App() {
@@ -19,6 +21,16 @@ function App() {
               </Routes>
             </NoHeaderLayout>
           } />
+          <Route
+            path="/order/*"
+            element={
+              <HeaderLayout>
+                <Routes>
+                  <Route path="/menu" element={<SelectMenu/>}></Route>
+                </Routes>
+              </HeaderLayout>
+            }
+          ></Route>
       </Routes>
       <Routes>
         <Route
