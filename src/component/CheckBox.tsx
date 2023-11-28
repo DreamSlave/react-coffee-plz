@@ -1,23 +1,26 @@
 import React from 'react';
 
 interface CheckBoxProps {
-    checked?: boolean;
-    onClick?(): void;
+  children : string;
+  checked?: boolean;
+  onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CheckBox = ({
-    checked,
-    onClick
+  children,
+  checked,
+  onChange
 }: CheckBoxProps) => {
-    return (
-        <>
-            <div className="container" onClick={onClick}>
-                <div className="checkIcon">
-                    {checked && "✔︎"}
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <label>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+      />
+      {children}
+    </label>
+  );
 }
 
 export default CheckBox;
