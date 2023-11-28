@@ -29,7 +29,7 @@ function getOrderInfo(){
 
 function OrderDetail() {
 
-  const [menuList, setMenuList] = useState([]);
+  const [menuList, setMenuList] = useState<any[]>([]);
   const [orderInfo, setOrderInfo] = useState({
     title: '',
     cafeNm: '',
