@@ -58,9 +58,12 @@ const SelectPartyMember = () => {
   ])
   
 
+  const teamList : String[] = ([...new Set(members.map(item => item.team))]) 
+  
+
   return (
     <div className="element">
-      <div className="overlap">
+      {/* <div className="overlap">
         <div className="group">      
         연구소
         </div>
@@ -74,16 +77,24 @@ const SelectPartyMember = () => {
 
         </span>
       </p>
-      <div className="text-wrapper-3">3명</div>
+      <div className="text-wrapper-3">3명</div> */}
       
-      <div className="group-2">
-        {members.map((item, index) =>{
-          return <CheckBox key={index}> 
-            <div className="list">
-              <div className="text-wrapper-2">{item.name} {item.rank} ({item.team})</div>
-            </div></CheckBox>
-        })}
-      </div>
+      {teamList.map((teamItem, teamIndex) => 
+        <div key={teamIndex}>
+          <CheckBox key={teamIndex}>
+            <span key={teamIndex+`_span`}>{teamItem}</span>
+          </CheckBox>
+        <div key={teamIndex+`_innder_div`}>
+          {members.filter(item => item.team === teamItem).map((item, index) => 
+          <CheckBox key={index}>
+            <div key={index}>
+              <div key={index}>{item.name} {item.rank} ({item.team})</div>
+            </div>
+          </CheckBox>
+          )}
+        </div></div>
+      )}
+      
         
     </div>
   );
