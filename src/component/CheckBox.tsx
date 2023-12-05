@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface CheckBoxProps {
-  children : string;
+  children : React.ReactElement
   checked?: boolean;
   onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
 }
