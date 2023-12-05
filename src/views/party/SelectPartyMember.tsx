@@ -17,6 +17,12 @@ interface MemberProps {
   checked?: boolean;
 }
 
+interface TeamProps {
+  team : string;
+  checked?: boolean;
+  isView : boolean;
+}
+
 
 const SelectPartyMember = () => {
   const [members] = useState<MemberProps[]>([
@@ -58,8 +64,23 @@ const SelectPartyMember = () => {
   ])
   
 
-  const teamList : String[] = ([...new Set(members.map(item => item.team))]) 
+  //const [teamList] : String[] = ([...new Set(members.map(item => item.team))]) 
   
+  const [teamList, setTeamList] = useState<TeamProps[]>([...new Set(members.map(item => item.team))].map(mapData => {
+    return {
+      team : mapData,
+      checked : false,
+      isView : false,
+    }
+  }))
+
+  const changeIsView = (index: number, data: boolean) => {
+    const result = [...teamList]
+    result[index].isView = !data;
+    setTeamList(result);
+  };
+
+
 
   return (
     <div className="element">
@@ -81,21 +102,23 @@ const SelectPartyMember = () => {
       
       {teamList.map((teamItem, teamIndex) => 
         <div key={teamIndex}>
-          <CheckBox key={teamIndex}>
-            <span key={teamIndex+`_span`}>{teamItem}</span>
+          <CheckBox key={teamItem.team}>
+            <span key={teamIndex+`_span`}>{teamItem.team}</span>
           </CheckBox>
-        <div key={teamIndex+`_innder_div`}>
-          {members.filter(item => item.team === teamItem).map((item, index) => 
-          <CheckBox key={index}>
-            <div key={index}>
-              <div key={index}>{item.name} {item.rank} ({item.team})</div>
-            </div>
-          </CheckBox>
-          )}
-        </div></div>
+          <div onClick={() => changeIsView(teamIndex, teamItem.isView)}>
+            &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp;
+          </div>
+          <div key={teamIndex+`_innder_div`} >
+            {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
+            <CheckBox key={item.name}>
+              <div key={index}>
+                <div key={index}>{item.name} {item.rank} ({item.team})</div>
+              </div>
+            </CheckBox>
+            )}
+          </div>          
+        </div>
       )}
-      
-        
     </div>
   );
 };
