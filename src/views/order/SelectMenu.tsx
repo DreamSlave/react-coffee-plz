@@ -1,7 +1,7 @@
 // import React from "react";
 // import { useNavigate } from 'react-router-dom'
 
-// import "@assets/temp-selectmenu/selectmenu.css"
+import "@/assets/temp-selectmenu/selectmenu.css"
 
 // import searchIcSvg from '@assets/temp-selectmenu/search-ic.svg'
 

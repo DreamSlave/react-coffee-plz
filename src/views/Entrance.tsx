@@ -1,9 +1,9 @@
 // import React from "react";
 import { useNavigate } from 'react-router-dom'
 
-import "../assets/temp-entrance/entrance.css";
-import hurryImg from '../assets/temp-entrance/entrance1.png'
-import logoImg from '../assets/temp-entrance/entrance2.png'
+import "@/assets/temp-entrance/entrance.css";
+import hurryImg from '@/assets/temp-entrance/entrance1.png'
+import logoImg from '@/assets/temp-entrance/entrance2.png'
 
 const Entrance = () => {
   const navigate = useNavigate()
