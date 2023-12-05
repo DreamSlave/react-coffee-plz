@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface CheckBoxProps {
   children : React.ReactElement
@@ -11,12 +11,22 @@ const CheckBox = ({
   checked,
   onChange
 }: CheckBoxProps) => {
+  const [state, setState] = useState(checked)
+
+  const handleChange = (event: any) => {
+    const checked = event.target.checked
+    setState(checked);
+    if (onChange) {
+      onChange(checked);
+    }
+  };
+  
   return (
     <label>
       <input
         type="checkbox"
-        checked={checked}
-        onChange={onChange}
+        checked={state}
+        onChange={handleChange}
       />
       {children}
     </label>
