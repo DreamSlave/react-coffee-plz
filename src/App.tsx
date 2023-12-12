@@ -6,6 +6,8 @@ import NoHeaderLayout from './layout/NoHeaderLayout'
 import Entrance from './views/Entrance';
 import SelectMenu from './views/order/SelectMenu';
 import SelectPartyMember from './views/party/SelectPartyMember';
+import OrderDetail from "@/views/order/OrderDetail";
+import OrderPopup from "@/views/order/OrderPopup";
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
               <HeaderLayout>
                 <Routes>
                   <Route path="/menu" element={<SelectMenu/>}></Route>
+                  <Route path="/test" element={<OrderDetail />} />
+                  <Route path="/test2" element={<OrderPopup />} />
                 </Routes>
               </HeaderLayout>
             }
