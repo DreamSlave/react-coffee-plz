@@ -10,6 +10,7 @@ const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
 const SelectPartyMember = lazy(() => import('./views/party/SelectPartyMember'))
 const OrderDetail = lazy(() => import('./views/order/OrderDetail'))
 const OrderPopup = lazy(() => import('./views/order/OrderPopup'))
+const OrderMember = lazy(() => import('./views/order/OrderMember'))
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                   <Route path="/menu" element={<SelectMenu/>}></Route>
                   <Route path="/detail" element={<OrderDetail />} />
                   <Route path="/detail/popup" element={<OrderPopup />} />
+                  <Route path="/detail/member" element={<OrderMember />} />
                 </Routes>
               </HeaderLayout>
             }
