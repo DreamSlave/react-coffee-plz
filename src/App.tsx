@@ -1,17 +1,20 @@
-import './App.css'
-import "./assets/css/style.scss"
+import '@/App.css'
+import "@/assets/css/style.scss"
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
-import Entrance from './views/Entrance';
-import SelectMenu from './views/order/SelectMenu';
-import SelectPartyMember from './views/party/SelectPartyMember';
-import OrderDetail from "@/views/order/OrderDetail";
-import OrderPopup from "@/views/order/OrderPopup";
+
+const Entrance = lazy(() => import('./views/Entrance'))
+const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
+const SelectPartyMember = lazy(() => import('./views/party/SelectPartyMember'))
+const OrderDetail = lazy(() => import('./views/order/OrderDetail'))
+const OrderPopup = lazy(() => import('./views/order/OrderPopup'))
 
 function App() {
   return (
     <Router>
+      <Suspense fallback={<div>Wait a moment...</div>}>
       <Routes>
         <Route
           path="/*"
@@ -28,8 +31,8 @@ function App() {
               <HeaderLayout>
                 <Routes>
                   <Route path="/menu" element={<SelectMenu/>}></Route>
-                  <Route path="/test" element={<OrderDetail />} />
-                  <Route path="/test2" element={<OrderPopup />} />
+                  <Route path="/detail" element={<OrderDetail />} />
+                  <Route path="/detail/popup" element={<OrderPopup />} />
                 </Routes>
               </HeaderLayout>
             }
@@ -44,7 +47,8 @@ function App() {
               </HeaderLayout>
             } 
           ></Route>
-      </Routes>
+        </Routes>
+      </Suspense>
     </Router>
   )
 }

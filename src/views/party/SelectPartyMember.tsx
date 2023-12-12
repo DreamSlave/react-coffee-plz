@@ -17,50 +17,96 @@ interface MemberProps {
   checked?: boolean;
 }
 
+interface TeamProps {
+  team : string;
+  checked: boolean;
+  isView : boolean;
+}
+
 
 const SelectPartyMember = () => {
-  const [members] = useState<MemberProps[]>([
+  const [members, setMembers] = useState<MemberProps[]>([
     {
       "name": "김진미",
       "team": "PD팀",
       "department": "기업부설연구소",
       "rank": "프로",
-      "c_no": "01058935898"
+      "c_no": "01058935898",
+      "checked":false,
     },
     {
       "name": "김세인",
       "team": "PD팀",
       "department": "기업부설연구소",
       "rank": "프로",
-      "c_no": "01058935898"
+      "c_no": "01058935898",
+      "checked":false,
     },
     {
       "name": "조도은",
       "team": "PD팀",
       "department": "기업부설연구소",
       "rank": "프로",
-      "c_no": "01058935898"
+      "c_no": "01058935898",
+      "checked":false,
     },
     {
       "name": "권혜란",
       "team": "PD팀",
       "department": "기업부설연구소",
       "rank": "프로",
-      "c_no": "01058935898"
+      "c_no": "01058935898",
+      "checked":false,
     },
     {
       "name": "정민재",
       "team": "UX디자인팀",
       "department": "기업부설연구소",
       "rank": "프로",
-      "c_no": "01058935898"
+      "c_no": "01058935898",
+      "checked":false,
     }
   ])
   
 
+  //const [teamList] : String[] = ([...new Set(members.map(item => item.team))]) 
+  
+  const [teamList, setTeamList] = useState<TeamProps[]>([...new Set(members.map(item => item.team))].map(mapData => {
+    return {
+      team : mapData,
+      checked : false,
+      isView : false,
+    }
+  }))
+
+  const changeIsView = (index: number, data: boolean) => {
+    const result = [...teamList]
+    result[index].isView = !data;
+    setTeamList(result);
+  };
+
+  const onCheckTeam = (team: string, event: any) => {
+    console.log("::data::0", event.target.checked);
+    
+    const checked = event.target.checked
+
+    let result : any[] = []
+
+    members.forEach(element => {
+      if(element.team === team){
+        element.checked = checked
+      }
+      result.push(element)
+    });
+    setMembers(result);
+    console.log("::result::",result);
+  }
+
+
+
   return (
     <div className="element">
-      <div className="overlap">
+      {/* <div className="overlap">
         <div className="group">      
         연구소
         </div>
@@ -74,17 +120,27 @@ const SelectPartyMember = () => {
 
         </span>
       </p>
-      <div className="text-wrapper-3">3명</div>
+      <div className="text-wrapper-3">3명</div> */}
       
-      <div className="group-2">
-        {members.map((item, index) =>{
-          return <CheckBox key={index}> 
-            <div className="list">
-              <div className="text-wrapper-2">{item.name} {item.rank} ({item.team})</div>
-            </div></CheckBox>
-        })}
-      </div>
-        
+      {teamList.map((teamItem, teamIndex) => 
+        <div key={teamIndex}>
+          <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={() => onCheckTeam(teamItem.team, event)}>
+            <span key={teamIndex+`_span`}>{teamItem.team}</span>
+          </CheckBox>
+          <div onClick={() => changeIsView(teamIndex, teamItem.isView)}>
+            &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp;
+          </div>
+          <div key={teamIndex+`_innder_div`} >
+            {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
+            <CheckBox key={item.name} checked={item.checked}>
+              <div key={index}>
+                <div key={index}>{item.name} {item.rank} ({item.team})</div>
+              </div>
+            </CheckBox>
+            )}
+          </div>          
+        </div>
+      )}
     </div>
   );
 };
