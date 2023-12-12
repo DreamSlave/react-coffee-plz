@@ -60,7 +60,7 @@ function OrderPopup() {
                       <div className="call-btn">
                         <div className="overlap-group">
                           {/*<img className="vector" alt="Vector" src="vector-3.svg" />*/}
-                          <div className="div">전화걸기</div>
+                          <div className="div" onClick={() => document.location.href=`tel:${item.phoneNumber}` }>전화걸기</div>
                         </div>
                       </div>
                       {/*// <img className="img" alt="Vector" src="vector.svg" />*/}
