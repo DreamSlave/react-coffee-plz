@@ -3,13 +3,18 @@
 
 import "@/assets/temp-selectmenu/selectmenu.css"
 
-// import searchIcSvg from '@assets/temp-selectmenu/search-ic.svg'
-
-// import hurryImg from '../assets/temp-entrance/entrance1.png'
-// import logoImg from '../assets/temp-entrance/entrance2.png'
+import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
+import { useState } from "react";
 
 const SelectMenu = () => {
   // const navigate = useNavigate()
+  const [searchText] = useState<string>('')
+  //setSearchText
+
+  const onChangeSearchText = () => {
+    //test
+    console.log(`onChangeSearchText ::: ${searchText}`)
+  }
 
   return (
     <div className="element">
@@ -35,9 +40,15 @@ const SelectMenu = () => {
         <div className="search-area">
           <div className="form-search">
             <div className="overlap-group-2">
-              <img className="line" alt="Line" src="line-1.svg" />
-              <div className="text-wrapper-3">검색</div>
-              {/* <img className="search-ic" alt="Search ic" src={searchIcSvg} /> */}
+              {/* <img className="line" alt="Line" src="line-1.svg" />
+              <div className="text-wrapper-3">검색</div> */}
+              <input  type="text"
+                      placeholder="검색"
+                      value={searchText}
+                      onChange={onChangeSearchText}
+                      className="text-wrapper-3"
+              />
+              <img className="search-ic" alt="Search ic" src={searchIcSvg} />
             </div>
           </div>
           <div className="tag-group">
