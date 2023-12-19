@@ -1,11 +1,6 @@
-// import React from "react";
-// import "./style.css";
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../assets/css/selectPartyMember.css'
 import CheckBox from "@/component/CheckBox.tsx"
-
-
 
 
 interface MemberProps {
@@ -67,6 +62,10 @@ const SelectPartyMember = () => {
       "checked":false,
     }
   ])
+
+  useEffect(() => {
+    // checked 상태가 변경될 때마다 실행되는 코드
+  }, [members]);
   
 
   //const [teamList] : String[] = ([...new Set(members.map(item => item.team))]) 
@@ -85,28 +84,22 @@ const SelectPartyMember = () => {
     setTeamList(result);
   };
 
-  const onCheckTeam = (team: string, event: any) => {
-    console.log("::data::0", event.target.checked);
-    
-    const checked = event.target.checked
+  const onCheckTeam = (team: string, checked: boolean) => {
+    const result = [...members]
 
-    let result : any[] = []
-
-    members.forEach(element => {
+    result.forEach(element => {
       if(element.team === team){
         element.checked = checked
       }
-      result.push(element)
-    });
+    });    
     setMembers(result);
-    console.log("::result::",result);
   }
 
 
 
   return (
     <div className="element">
-      {/* <div className="overlap">
+      <div className="overlap">
         <div className="group">      
         연구소
         </div>
@@ -117,14 +110,14 @@ const SelectPartyMember = () => {
         <span className="text-wrapper-2">
           을<br />
           선택해주세요.
-
         </span>
       </p>
-      <div className="text-wrapper-3">3명</div> */}
+
+      <div className="text-wrapper-3">{members.filter(item => item.checked).length}명</div>
       
       {teamList.map((teamItem, teamIndex) => 
         <div key={teamIndex}>
-          <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={() => onCheckTeam(teamItem.team, event)}>
+          <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={(event) => onCheckTeam(teamItem.team, event.target.checked)}>
             <span key={teamIndex+`_span`}>{teamItem.team}</span>
           </CheckBox>
           <div onClick={() => changeIsView(teamIndex, teamItem.isView)}>
@@ -132,8 +125,9 @@ const SelectPartyMember = () => {
           </div>
           <div key={teamIndex+`_innder_div`} >
             {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
-            <CheckBox key={item.name} checked={item.checked}>
+            <CheckBox key={item.name} checked={item.checked} onChange={(event) => setMembers((prevMembers) => prevMembers.map(prevItem => prevItem.name === item.name ? { ...prevItem, checked: event.target.checked } : prevItem))}>
               <div key={index}>
+                
                 <div key={index}>{item.name} {item.rank} ({item.team})</div>
               </div>
             </CheckBox>
