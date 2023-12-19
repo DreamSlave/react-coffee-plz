@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface CheckBoxProps {
   children : React.ReactElement
-  checked?: boolean;
+  checked?: boolean | undefined;
   onChange?:(e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,11 +13,15 @@ const CheckBox = ({
 }: CheckBoxProps) => {
   const [state, setState] = useState(checked)
 
-  const handleChange = (event: any) => {
+  useEffect(() => {
+    setState(checked);
+  }, [checked]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const checked = event.target.checked
     setState(checked);
     if (onChange) {
-      onChange(checked);
+      onChange(event);
     }
   };
   
