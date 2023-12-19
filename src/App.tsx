@@ -8,6 +8,7 @@ import NoHeaderLayout from './layout/NoHeaderLayout'
 const Entrance = lazy(() => import('./views/Entrance'))
 const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
 const SelectPartyMember = lazy(() => import('./views/party/SelectPartyMember'))
+const SaveParty = lazy(() => import('./views/party/SaveParty'))
 const OrderDetail = lazy(() => import('./views/order/OrderDetail'))
 const OrderPopup = lazy(() => import('./views/order/OrderPopup'))
 const OrderMember = lazy(() => import('./views/order/OrderMember'))
@@ -45,6 +46,8 @@ function App() {
               <HeaderLayout>
                 <Routes>
                   <Route path="/select" element={<SelectPartyMember />} />
+                  <Route path="/save" element={<SaveParty />} />
+                  
                 </Routes>
               </HeaderLayout>
             } 

@@ -3,13 +3,22 @@
 
 import "@/assets/temp-selectmenu/selectmenu.css"
 
-// import searchIcSvg from '@assets/temp-selectmenu/search-ic.svg'
-
-// import hurryImg from '../assets/temp-entrance/entrance1.png'
-// import logoImg from '../assets/temp-entrance/entrance2.png'
+import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
+import { ChangeEvent, useState } from "react";
 
 const SelectMenu = () => {
   // const navigate = useNavigate()
+  const [searchText, setSearchText] = useState<string>('')
+
+
+  const onChangeSearchText = (e:ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value)
+  }
+
+  // 검색 실행 함수
+  const doSearch = () => {
+    // TODO: 
+  }
 
   return (
     <div className="element">
@@ -28,6 +37,7 @@ const SelectMenu = () => {
           </p>
           <div className="person-info">
             <div className="overlap-group">
+              {/* TODO : 선택한 주문자명 표시(Redux) */}
               <div className="text-wrapper-2">정민재 프로(UX디자인팀)</div>
             </div>
           </div>
@@ -35,11 +45,16 @@ const SelectMenu = () => {
         <div className="search-area">
           <div className="form-search">
             <div className="overlap-group-2">
-              <img className="line" alt="Line" src="line-1.svg" />
-              <div className="text-wrapper-3">검색</div>
-              {/* <img className="search-ic" alt="Search ic" src={searchIcSvg} /> */}
+              <input  type="text"
+                      placeholder="검색"
+                      value={searchText}
+                      onChange={onChangeSearchText}
+                      className="text-wrapper-3"
+              />
+              <img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} />
             </div>
           </div>
+          {/* start : 태그 영역 */}
           <div className="tag-group">
             <div className="menu-tag">
               <div className="div-wrapper">
@@ -77,9 +92,19 @@ const SelectMenu = () => {
               </div>
             </div>
           </div>
+          {/* end : 태그 영역 */}
         </div>
         <div className="contents">
-          <div className="item-list">
+          {/* start : 목록 영역 */}
+          <div className="coffee-menu">
+            <ul>
+              <li key="a">아메리카노 - 아이스</li>
+              <li key="b">아메리카노 - 아이스 - 연하게</li>
+              <li key="c">아메리카노 - 핫</li>
+            </ul>
+          </div>
+          {/* end : 목록 영역 */}
+          {/* <div className="item-list">
             <div className="item">
               <div className="overlap-group-3">
                 <img className="img" alt="Line" src="line-3.svg" />
@@ -98,43 +123,7 @@ const SelectMenu = () => {
                 <div className="text-wrapper-8">아메리카노 - 핫</div>
               </div>
             </div>
-            <div className="item-4">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-3.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-5">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-4.svg" />
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-            </div>
-            <div className="item-6">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-5.svg" />
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-            </div>
-            <div className="item-7">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-6.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-8">
-              <div className="overlap-4">
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-              <img className="line-2" alt="Line" src="line-3-7.svg" />
-            </div>
-            <div className="item-9">
-              <div className="overlap-4">
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-              <img className="line-2" alt="Line" src="line-3-8.svg" />
-            </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
