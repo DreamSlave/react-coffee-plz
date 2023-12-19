@@ -4,12 +4,20 @@
 import "@/assets/temp-selectmenu/selectmenu.css"
 
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+
+interface Menu {
+  menuId: string;
+  menuNm: string;
+}
 
 const SelectMenu = () => {
-  // const navigate = useNavigate()
   const [searchText, setSearchText] = useState<string>('')
+  const [menuList, setMenuList] = useState<Menu[]>([])
 
+  useEffect(() => {
+    doSearch()
+  }, [])
 
   const onChangeSearchText = (e:ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value)
@@ -17,9 +25,21 @@ const SelectMenu = () => {
 
   // 검색 실행 함수
   const doSearch = () => {
-    // TODO: 
-  }
+    console.log(`doSearch called ::: param ::: ${searchText}`)
 
+    // TODO: API call
+    setMenuList([
+      { menuId: 'MENU0001', menuNm: '아메리카노(ICE)' },
+      { menuId: 'MENU0002', menuNm: '아메리카노(ICE) 연하게' },
+      { menuId: 'MENU0003', menuNm: '아메리카노(HOT)' },
+      { menuId: 'MENU0004', menuNm: '아메리카노(HOT) 연하게' },
+      { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
+      { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
+      { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
+    ])
+    
+  }
+  
   return (
     <div className="element">
       <div className="div">
@@ -98,9 +118,11 @@ const SelectMenu = () => {
           {/* start : 목록 영역 */}
           <div className="coffee-menu">
             <ul>
-              <li key="a">아메리카노 - 아이스</li>
-              <li key="b">아메리카노 - 아이스 - 연하게</li>
-              <li key="c">아메리카노 - 핫</li>
+              {
+                menuList.map((menu) => (
+                  <li key={menu.menuId}>{menu.menuNm}</li>
+                ))
+              }
             </ul>
           </div>
           {/* end : 목록 영역 */}
