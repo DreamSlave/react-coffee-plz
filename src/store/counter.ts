@@ -29,7 +29,7 @@ function counter(state: CounterState = initialState, action: CounterAction) {
     case DECREASE:
       return { count: state.count - 1 };
     case INCREASE_BY:
-      return { count: state.count + action?.payload };
+      return { count: state.count + action.payload };
     default:
       return state;
   }
