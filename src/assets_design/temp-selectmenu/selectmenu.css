@@ -1,0 +1,470 @@
+:root {
+  --pointcolor: rgba(245, 84, 190, 1);
+  --variable-collection-sub: rgba(255, 231, 250, 1);
+}
+
+
+.element {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.element .div {
+  background-color: #ffffff;
+  height: 812px;
+  overflow: hidden;
+  position: relative;
+  width: 375px;
+}
+
+.element .header {
+  background-color: #ffffff;
+  height: 50px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 375px;
+}
+
+.element .back-icon {
+  height: 20px;
+  left: 14px;
+  position: absolute;
+  top: 15px;
+  width: 11px;
+}
+
+.element .close-icon {
+  height: 18px;
+  left: 342px;
+  position: absolute;
+  top: 16px;
+  width: 18px;
+}
+
+.element .title {
+  height: 127px;
+  left: 90px;
+  position: absolute;
+  top: 58px;
+  width: 196px;
+}
+
+.element .p {
+  color: transparent;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 32px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 38.4px;
+  position: absolute;
+  text-align: center;
+  top: 0;
+}
+
+.element .text-wrapper {
+  color: #f553be;
+}
+
+.element .span {
+  color: #000000;
+}
+
+.element .person-info {
+  height: 36px;
+  left: 4px;
+  position: absolute;
+  top: 118px;
+  width: 190px;
+}
+
+.element .overlap-group {
+  background-color: var(--variable-collection-sub);
+  border-radius: 5px;
+  height: 36px;
+  position: relative;
+  width: 188px;
+}
+
+.element .text-wrapper-2 {
+  color: var(--pointcolor);
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 14px;
+  font-weight: 600;
+  left: 25px;
+  letter-spacing: -0.31px;
+  line-height: 21px;
+  position: absolute;
+  text-align: center;
+  top: 8px;
+  white-space: nowrap;
+}
+
+.element .search-area {
+  height: 136px;
+  left: 24px;
+  position: absolute;
+  top: 210px;
+  width: 326px;
+}
+
+.element .form-search {
+  height: 52px;
+  left: 1px;
+  position: absolute;
+  top: 0;
+  width: 327px;
+}
+
+.element .overlap-group-2 {
+  background-color: #ffffff;
+  height: 52px;
+  position: relative;
+  width: 325px;
+
+  display: flex;
+  align-items: center;
+}
+
+.element .line {
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: 50px;
+  width: 325px;
+}
+
+.element .text-wrapper-3 {
+  color: #999999;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 10px;
+  letter-spacing: -0.9px;
+  line-height: 21.6px;
+  position: absolute;
+  top: 15px;
+  white-space: nowrap;
+  
+  background-color: #ffffff;
+  border: none;
+  border-bottom: 2px solid #999999;
+  outline: none;
+  padding-bottom: 4px;
+  /* margin-right: 10px; */
+}
+
+.element .search-ic {
+  height: 22px;
+  left: 288px;
+  position: absolute;
+  top: 15px;
+  width: 22px;
+}
+
+.element .tag-group {
+  height: 66px;
+  left: 0;
+  position: absolute;
+  top: 70px;
+  width: 285px;
+}
+
+.element .menu-tag {
+  height: 29px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 78px;
+}
+
+.element .div-wrapper {
+  background-color: var(--pointcolor);
+  border-radius: 14.5px;
+  height: 29px;
+  position: relative;
+  width: 76px;
+}
+
+.element .text-wrapper-4 {
+  color: #ffffff;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  left: 15px;
+  letter-spacing: -0.7px;
+  line-height: 16.8px;
+  position: absolute;
+  top: 6px;
+  white-space: nowrap;
+}
+
+.element .overlap-wrapper {
+  height: 29px;
+  left: 81px;
+  position: absolute;
+  top: 0;
+  width: 55px;
+}
+
+.element .overlap {
+  background-color: var(--pointcolor);
+  border-radius: 14.5px;
+  height: 29px;
+  position: relative;
+  width: 53px;
+}
+
+.element .overlap-group-wrapper {
+  height: 29px;
+  left: 139px;
+  position: absolute;
+  top: 0;
+  width: 67px;
+}
+
+.element .overlap-2 {
+  background-color: var(--pointcolor);
+  border-radius: 14.5px;
+  height: 29px;
+  position: relative;
+  width: 65px;
+}
+
+.element .menu-tag-2 {
+  height: 29px;
+  left: 209px;
+  position: absolute;
+  top: 0;
+  width: 78px;
+}
+
+.element .menu-tag-3 {
+  height: 29px;
+  left: 0;
+  position: absolute;
+  top: 37px;
+  width: 78px;
+}
+
+.element .menu-tag-4 {
+  height: 29px;
+  left: 81px;
+  position: absolute;
+  top: 37px;
+  width: 78px;
+}
+
+.element .menu-tag-5 {
+  height: 29px;
+  left: 162px;
+  position: absolute;
+  top: 37px;
+  width: 101px;
+}
+
+.element .overlap-3 {
+  background-color: var(--pointcolor);
+  border-radius: 14.5px;
+  height: 29px;
+  position: relative;
+  width: 99px;
+}
+
+.element .text-wrapper-5 {
+  color: #ffffff;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  left: 15px;
+  letter-spacing: -0.7px;
+  line-height: 16.8px;
+  position: absolute;
+  top: 6px;
+  width: 70px;
+}
+
+.element .contents {
+  height: 522px;
+  left: 0;
+  position: absolute;
+  top: 376px;
+  width: 375px;
+}
+
+.element .item-list {
+  height: 522px;
+  position: relative;
+}
+
+.element .item {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 377px;
+}
+
+.element .overlap-group-3 {
+  background-color: #ffffff;
+  height: 58px;
+  position: relative;
+  width: 375px;
+}
+
+.element .img {
+  height: 1px;
+  left: 0;
+  object-fit: cover;
+  position: absolute;
+  top: 57px;
+  width: 375px;
+}
+
+.element .text-wrapper-6 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 17px;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  top: 20px;
+  width: 152px;
+}
+
+.element .item-2 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 58px;
+  width: 377px;
+}
+
+.element .text-wrapper-7 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 17px;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  /* position: absolute; */
+  top: 20px;
+  width: 219px;
+}
+
+.element .item-3 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 116px;
+  width: 377px;
+}
+
+.element .text-wrapper-8 {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  left: 17px;
+  letter-spacing: -0.9px;
+  line-height: 18px;
+  position: absolute;
+  top: 20px;
+  width: 119px;
+}
+
+.element .item-4 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 174px;
+  width: 377px;
+}
+
+.element .item-5 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 232px;
+  width: 377px;
+}
+
+.element .item-6 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 290px;
+  width: 377px;
+}
+
+.element .item-7 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 348px;
+  width: 377px;
+}
+
+.element .item-8 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 406px;
+  width: 377px;
+}
+
+.element .overlap-4 {
+  background-color: #ffffff;
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 375px;
+}
+
+.element .line-2 {
+  height: 1px;
+  left: -1162px;
+  object-fit: cover;
+  position: absolute;
+  top: -288px;
+  width: 375px;
+}
+
+.element .item-9 {
+  height: 58px;
+  left: 0;
+  position: absolute;
+  top: 464px;
+  width: 377px;
+}
+
+
+
+.coffee-menu {
+  color: #1e1e1e;
+  font-family: "Pretendard-Bold", Helvetica;
+  margin: 20px;
+}
+.coffee-menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+.coffee-menu li {
+  margin: 5px 0;
+  padding: 8px;
+  /* background-color: #f2f2f2; */
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+.coffee-menu li:hover {
+  background-color: #ddd;
+}

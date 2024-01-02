@@ -1,0 +1,41 @@
+$len  : 20;
+
+@for $i from 1 through $len {
+    .w#{$i * 5} {width : $i * 5 + '%';}
+
+    .pd#{$i * 5}  { padding: $i * 5 + px; }
+    .pdl#{$i * 5} { padding-left: $i * 5 + px;}
+    .pdr#{$i * 5} { padding-right: $i * 5 + px;}
+    .pdt#{$i * 5} { padding-top: $i * 5 + px;}
+    .pdb#{$i * 5} { padding-bottom: $i * 5 + px;}
+
+    .mg#{$i * 5}  { margin: $i * 5 + px;}
+    .mgl#{$i * 5} { margin-left: $i * 5 + px;}
+    .mgr#{$i * 5} { margin-right: $i * 5 + px;}
+    .mgt#{$i * 5} { margin-top: $i * 5 + px;}
+    .mgb#{$i * 5} { margin-bottom: $i * 5 + px;}
+}
+
+@font-face {
+    font-family: 'LOTTERIA CHAB-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/LOTTERIACHAB.woff2') format('woff2');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Medium';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: normal;
+}
