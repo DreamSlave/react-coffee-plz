@@ -1,16 +1,46 @@
 // import React from "react";
 // import { useNavigate } from 'react-router-dom'
 
-// import "@assets/temp-selectmenu/selectmenu.css"
+import "@/assets/temp-selectmenu/selectmenu.css"
 
-// import searchIcSvg from '@assets/temp-selectmenu/search-ic.svg'
+import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
+import { ChangeEvent, useEffect, useState } from "react";
 
-// import hurryImg from '../assets/temp-entrance/entrance1.png'
-// import logoImg from '../assets/temp-entrance/entrance2.png'
+interface Menu {
+  menuId: string;
+  menuNm: string;
+}
 
 const SelectMenu = () => {
-  // const navigate = useNavigate()
+  const [searchText, setSearchText] = useState<string>('')
+  const [menuList, setMenuList] = useState<Menu[]>([])
+  const [defaultTagList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
 
+  useEffect(() => {
+    doSearch()
+  }, [])
+
+  const onChangeSearchText = (e:ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value)
+  }
+
+  // 검색 실행 함수
+  const doSearch = () => {
+    console.log(`doSearch called ::: param ::: ${searchText}`)
+
+    // TODO: API call
+    setMenuList([
+      { menuId: 'MENU0001', menuNm: '아메리카노(ICE)' },
+      { menuId: 'MENU0002', menuNm: '아메리카노(ICE) 연하게' },
+      { menuId: 'MENU0003', menuNm: '아메리카노(HOT)' },
+      { menuId: 'MENU0004', menuNm: '아메리카노(HOT) 연하게' },
+      { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
+      { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
+      { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
+    ])
+    
+  }
+  
   return (
     <div className="element">
       <div className="div">
@@ -28,6 +58,7 @@ const SelectMenu = () => {
           </p>
           <div className="person-info">
             <div className="overlap-group">
+              {/* TODO : 선택한 주문자명 표시(Redux) */}
               <div className="text-wrapper-2">정민재 프로(UX디자인팀)</div>
             </div>
           </div>
@@ -35,106 +66,41 @@ const SelectMenu = () => {
         <div className="search-area">
           <div className="form-search">
             <div className="overlap-group-2">
-              <img className="line" alt="Line" src="line-1.svg" />
-              <div className="text-wrapper-3">검색</div>
-              {/* <img className="search-ic" alt="Search ic" src={searchIcSvg} /> */}
+              <input  type="text"
+                      placeholder="검색"
+                      value={searchText}
+                      onChange={onChangeSearchText}
+                      className="text-wrapper-3"
+              />
+              <img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} />
             </div>
           </div>
+          {/* start : 태그 영역 */}
           <div className="tag-group">
-            <div className="menu-tag">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 아이스</div>
-              </div>
-            </div>
-            <div className="overlap-wrapper">
-              <div className="overlap">
-                <div className="text-wrapper-4"># 핫</div>
-              </div>
-            </div>
-            <div className="overlap-group-wrapper">
-              <div className="overlap-2">
-                <div className="text-wrapper-4"># 라떼</div>
-              </div>
-            </div>
-            <div className="menu-tag-2">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 에이드</div>
-              </div>
-            </div>
-            <div className="menu-tag-3">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 샷추가</div>
-              </div>
-            </div>
-            <div className="menu-tag-4">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 생과일</div>
-              </div>
-            </div>
-            <div className="menu-tag-5">
-              <div className="overlap-3">
-                <div className="text-wrapper-5"># 아메리카노</div>
-              </div>
-            </div>
+            {
+              defaultTagList.map((tag) => (
+                <div className="menu-tag">
+                  <div className="div-wrapper">
+                    <div className="text-wrapper-4"># {tag}</div>
+                  </div>
+                </div>
+              ))
+            }
           </div>
+          {/* end : 태그 영역 */}
         </div>
         <div className="contents">
-          <div className="item-list">
-            <div className="item">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-2">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="image.svg" />
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-            </div>
-            <div className="item-3">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-2.svg" />
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-            </div>
-            <div className="item-4">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-3.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-5">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-4.svg" />
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-            </div>
-            <div className="item-6">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-5.svg" />
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-            </div>
-            <div className="item-7">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-6.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-8">
-              <div className="overlap-4">
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-              <img className="line-2" alt="Line" src="line-3-7.svg" />
-            </div>
-            <div className="item-9">
-              <div className="overlap-4">
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-              <img className="line-2" alt="Line" src="line-3-8.svg" />
-            </div>
+          {/* start : 목록 영역 */}
+          <div className="coffee-menu">
+            <ul>
+              {
+                menuList.map((menu) => (
+                  <li key={menu.menuId}>{menu.menuNm}</li>
+                ))
+              }
+            </ul>
           </div>
+          {/* end : 목록 영역 */}
         </div>
       </div>
     </div>

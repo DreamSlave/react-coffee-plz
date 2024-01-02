@@ -1,0 +1,316 @@
+.element {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.element .div {
+    background-color: #ffffff;
+    height: 812px;
+    overflow: hidden;
+    position: relative;
+    width: 375px;
+}
+
+.element .header {
+    background-color: #ffffff;
+    height: 50px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 375px;
+}
+
+.element .back-icon {
+    height: 20px;
+    left: 14px;
+    position: absolute;
+    top: 15px;
+    width: 11px;
+}
+
+.element .title {
+    height: 76px;
+    left: 90px;
+    position: absolute;
+    top: 58px;
+    width: 196px;
+}
+
+.element .p {
+    color: transparent;
+    font-family: "LOTTERIA CHAB-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 38.4px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+}
+
+.element .text-wrapper {
+    color: #f553be;
+}
+
+.element .span {
+    color: #000000;
+}
+
+.element .contents {
+    height: 638px;
+    left: 0;
+    position: absolute;
+    top: 187px;
+    width: 375px;
+}
+
+.element .item-list {
+    height: 638px;
+    position: relative;
+}
+
+.element .item {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 377px;
+}
+
+.element .overlap-group {
+    background-color: #ffffff;
+    height: 58px;
+    position: relative;
+    width: 375px;
+}
+
+.element .line {
+    height: 1px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 57px;
+    width: 375px;
+}
+
+.element .text-wrapper-2 {
+    color: #1e1e1e;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 267px;
+}
+
+.element .overlap-wrapper {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 58px;
+    width: 377px;
+}
+
+.element .text-wrapper-3 {
+    color: #1e1e1e;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 219px;
+}
+
+.element .overlap-group-wrapper {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 116px;
+    width: 377px;
+}
+
+.element .text-wrapper-4 {
+    color: #1e1e1e;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 220px;
+}
+
+.element .item-done {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 174px;
+    width: 377px;
+}
+
+.element .text-wrapper-5 {
+    color: #cccccc;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 199px;
+}
+
+.element .done-label {
+    height: 29px;
+    left: 281px;
+    position: absolute;
+    top: 14px;
+    width: 79px;
+}
+
+.element .div-wrapper {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    height: 29px;
+    position: relative;
+    width: 77px;
+}
+
+.element .text-wrapper-6 {
+    color: #aaaaaa;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 14px;
+    font-weight: 700;
+    left: 15px;
+    letter-spacing: -0.7px;
+    line-height: 14px;
+    position: absolute;
+    top: 8px;
+    white-space: nowrap;
+}
+
+.element .item-done-2 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 232px;
+    width: 377px;
+}
+
+.element .text-wrapper-7 {
+    color: #cccccc;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 219px;
+}
+
+.element .item-2 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 290px;
+    width: 377px;
+}
+
+.element .text-wrapper-8 {
+    color: #1e1e1e;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 208px;
+}
+
+.element .item-3 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 348px;
+    width: 377px;
+}
+
+.element .text-wrapper-9 {
+    color: #1e1e1e;
+    font-family: "Pretendard-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 700;
+    left: 17px;
+    letter-spacing: -0.9px;
+    line-height: 18px;
+    position: absolute;
+    top: 20px;
+    width: 242px;
+}
+
+.element .item-done-3 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 406px;
+    width: 377px;
+}
+
+.element .item-4 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 464px;
+    width: 377px;
+}
+
+.element .item-5 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 522px;
+    width: 377px;
+}
+
+.element .item-6 {
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 580px;
+    width: 377px;
+}
+
+.element .overlap {
+    background-color: #ffffff;
+    height: 58px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 375px;
+}
+
+.element .img {
+    height: 1px;
+    left: -712px;
+    object-fit: cover;
+    position: absolute;
+    top: -288px;
+    width: 375px;
+}
