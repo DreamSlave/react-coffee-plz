@@ -171,14 +171,16 @@
   left: 0;
   position: absolute;
   top: 70px;
-  width: 285px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .element .menu-tag {
   height: 29px;
-  left: 0;
-  position: absolute;
-  top: 0;
+  /* left: 0; */
+  /* position: absolute; */
+  /* top: 0; */
   width: 78px;
 }
 
@@ -188,6 +190,7 @@
   height: 29px;
   position: relative;
   width: 76px;
+  cursor: pointer;
 }
 
 .element .text-wrapper-4 {

@@ -14,6 +14,7 @@ interface Menu {
 const SelectMenu = () => {
   const [searchText, setSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
+  const [defaultTagList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
 
   useEffect(() => {
     doSearch()
@@ -76,41 +77,15 @@ const SelectMenu = () => {
           </div>
           {/* start : 태그 영역 */}
           <div className="tag-group">
-            <div className="menu-tag">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 아이스</div>
-              </div>
-            </div>
-            <div className="overlap-wrapper">
-              <div className="overlap">
-                <div className="text-wrapper-4"># 핫</div>
-              </div>
-            </div>
-            <div className="overlap-group-wrapper">
-              <div className="overlap-2">
-                <div className="text-wrapper-4"># 라떼</div>
-              </div>
-            </div>
-            <div className="menu-tag-2">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 에이드</div>
-              </div>
-            </div>
-            <div className="menu-tag-3">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 샷추가</div>
-              </div>
-            </div>
-            <div className="menu-tag-4">
-              <div className="div-wrapper">
-                <div className="text-wrapper-4"># 생과일</div>
-              </div>
-            </div>
-            <div className="menu-tag-5">
-              <div className="overlap-3">
-                <div className="text-wrapper-5"># 아메리카노</div>
-              </div>
-            </div>
+            {
+              defaultTagList.map((tag) => (
+                <div className="menu-tag">
+                  <div className="div-wrapper">
+                    <div className="text-wrapper-4"># {tag}</div>
+                  </div>
+                </div>
+              ))
+            }
           </div>
           {/* end : 태그 영역 */}
         </div>
@@ -126,26 +101,6 @@ const SelectMenu = () => {
             </ul>
           </div>
           {/* end : 목록 영역 */}
-          {/* <div className="item-list">
-            <div className="item">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3.svg" />
-                <div className="text-wrapper-6">아메리카노 - 아이스</div>
-              </div>
-            </div>
-            <div className="item-2">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="image.svg" />
-                <p className="text-wrapper-7">아메리카노 - 아이스 - 연하게</p>
-              </div>
-            </div>
-            <div className="item-3">
-              <div className="overlap-group-3">
-                <img className="img" alt="Line" src="line-3-2.svg" />
-                <div className="text-wrapper-8">아메리카노 - 핫</div>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
