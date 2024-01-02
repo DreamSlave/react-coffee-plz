@@ -4,9 +4,19 @@ import '../../assets/css/saveParty.css'
 import DropDown from "@/component/DropDown.tsx"
 
 const SaveParty = () => {
+  const onChangeDropDown = (data : string) =>{
+    console.log("data",data)
+    
+  }
   return (
-    <div>
-      <DropDown dataItem={[{value : '1'},{value:'2'}]}><span>데이터</span></DropDown>
+    <div className="element">
+      <div>
+        <input/>
+      </div>
+      <div>
+        <DropDown onChange={(data) => onChangeDropDown(data.id)}
+          dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}><span>카페이름</span></DropDown>
+      </div>
     </div>
     // <div className="element">
     //   <div className="div">

@@ -1,43 +1,39 @@
 import '../../assets/css/ordermember.css'
 import {useEffect, useState} from "react";
-import Counter from "@/component/Counter";
+import { setSelectOrderer } from "@/store/order";
 import { RootState } from "@/store";
-import { increase, decrease, increaseBy } from "@/store/counter";
+import OrdererItem from "@/views/order/OrdererItem";
 import {useDispatch, useSelector} from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 interface memberInfo {
-  userNm : string;
+  name : string;
   userId: string;
-  teamNm: string;
+  team: string;
+  rank: string;
   isOrderComplete: boolean;
 }
 
 function getMemberList(){
   return [
-    {userNm: '김진미 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '김세인 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '조도은 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '정민재 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'UX디자인팀', isOrderComplete : false},
-    {userNm: '이광수 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'UX디자인팀', isOrderComplete : true},
-    {userNm: '김우빈 프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : false},
+    {name: '김진미', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '김세인', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '조도은', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '정민재', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'UX디자인팀', isOrderComplete : false},
+    {name: '이광수', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'UX디자인팀', isOrderComplete : true},
+    {name: '김우빈', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : false},
   ]
 }
 
 function OrderMember() {
 
-  const count = useSelector((state: RootState) => state.counter.count);
   const dispatch = useDispatch();
 
-  const onIncrease = () => {
-    dispatch(increase())
-  };
-
-  const onDecrease = () => {
-    dispatch(decrease())
-  };
-
-  const onIncreaseBy = (diff: number) => {
-    dispatch(increaseBy(diff))
+  const userInfo = useSelector((state: RootState) => state.order);
+  const navigate  = useNavigate();
+  const onClickOrderer = (userId: string, name: string, rank: string, team: string) => {
+    dispatch(setSelectOrderer({userId, name, rank, team}))
+    navigate('/order/menu')
   };
 
   const [orderMemberList, setOrderMemberList] = useState<memberInfo[]>([]);
@@ -50,14 +46,9 @@ function OrderMember() {
   return (
     <>
       <div className="element">
-        <Counter
-          count={count}
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
-          onIncreaseBy={onIncreaseBy}
-        />
         <div className="div">
           <header className="header">
+            { userInfo.name }
             {/*<img className="back-icon" alt="Back icon" src="back-icon.png" />*/}
           </header>
           <div className="title">
@@ -74,18 +65,9 @@ function OrderMember() {
                   const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
                   return (
                     <div key={item.userId+index} className={className}>
-                      <div className="overlap-group">
-                        {/*<img className="line" alt="Line" src="line-3.svg" />*/}
-                        <div className="text-wrapper-2">{item.userNm} ({item.teamNm})</div>
-                        {
-                          item.isOrderComplete ?
-                            <div className="done-label">
-                              <div className="div-wrapper">
-                                <div className="text-wrapper-6">주문완료</div>
-                              </div>
-                            </div> : ''
-                        }
-                      </div>
+                      <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team}}
+                                   isOrderComplete={item.isOrderComplete}
+                                   selectOrderer={onClickOrderer}/>
                     </div>
                   )
                 })

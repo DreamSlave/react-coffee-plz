@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import counter from "./counter.ts";
+import order from "./order.ts";
 
 const rootReducer = combineReducers({
-  counter
+  counter,
+  order
 });
 
 export default rootReducer;
