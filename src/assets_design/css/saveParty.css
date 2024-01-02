@@ -1,0 +1,216 @@
+:root {
+  --pointcolor: rgba(245, 84, 190, 1);
+  --variable-collection-sub: rgba(255, 231, 250, 1);
+}
+
+.element {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.element .div {
+  background-color: #ffffff;
+  height: 812px;
+  position: relative;
+  width: 375px;
+}
+
+.element .p {
+  color: transparent;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 32px;
+  font-weight: 400;
+  left: 56px;
+  letter-spacing: 0;
+  line-height: 38.4px;
+  position: absolute;
+  text-align: center;
+  top: 57px;
+}
+
+.element .text-wrapper {
+  color: #000000;
+}
+
+.element .span {
+  color: #f553be;
+}
+
+.element .form-input {
+  height: 73px;
+  left: 25px;
+  position: absolute;
+  top: 184px;
+  width: 329px;
+}
+
+.element .overlap-group {
+  background-color: #ffffff;
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 21px;
+  width: 325px;
+}
+
+.element .line {
+  height: 2px;
+  left: 0;
+  position: absolute;
+  top: 50px;
+  width: 325px;
+}
+
+.element .text-wrapper-2 {
+  color: #000000;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  left: 10px;
+  letter-spacing: -0.9px;
+  line-height: 21.6px;
+  position: absolute;
+  top: 15px;
+  white-space: nowrap;
+}
+
+.element .text-wrapper-3 {
+  color: #999999;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: -0.31px;
+  line-height: 21px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.element .form-select {
+  height: 73px;
+  left: 25px;
+  position: absolute;
+  top: 277px;
+  width: 329px;
+}
+
+.element .vector {
+  height: 8px;
+  left: 296px;
+  position: absolute;
+  top: 22px;
+  width: 14px;
+}
+
+.element .formbox {
+  height: 135px;
+  left: 25px;
+  position: absolute;
+  top: 370px;
+  width: 327px;
+}
+
+.element .form-calendar {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 21px;
+  width: 327px;
+}
+
+.element .overlap-group-2 {
+  background-color: #ffffff;
+  height: 52px;
+  position: relative;
+  width: 325px;
+}
+
+.element .img {
+  height: 22px;
+  left: 288px;
+  position: absolute;
+  top: 15px;
+  width: 22px;
+}
+
+.element .form-time {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 83px;
+  width: 327px;
+}
+
+.element .btn-group {
+  height: 114px;
+  left: 25px;
+  position: absolute;
+  top: 633px;
+  width: 325px;
+}
+
+.element .large-btn {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 327px;
+}
+
+.element .div-wrapper {
+  background-color: var(--pointcolor);
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 325px;
+}
+
+.element .text-wrapper-4 {
+  color: #ffffff;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 69px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 11px;
+  white-space: nowrap;
+  width: 188px;
+}
+
+.element .large-btn-nd {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 62px;
+  width: 327px;
+}
+
+.element .overlap {
+  background-color: #ffe6fa;
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 325px;
+}
+
+.element .text-wrapper-5 {
+  color: var(--pointcolor);
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 69px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 11px;
+  white-space: nowrap;
+  width: 188px;
+}
