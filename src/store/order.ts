@@ -12,18 +12,30 @@ const initialOrdererInfo: OrdererInfo = {
   rank: '',
 };
 
-export const setSelectOrderer = (payload : OrdererInfo) => ({
-  payload
+export const setSelectOrderer = (ordererInfo : OrdererInfo) => ({
+  type: 'SELECT_ORDERER',
+  payload: {
+    userId: ordererInfo.userId,
+    name: ordererInfo.name,
+    team: ordererInfo.team,
+    rank: ordererInfo.rank
+  }
 })
 
+type SelectOrderAction  = ReturnType<typeof setSelectOrderer>
 
-type selectOrderAction = ReturnType<typeof setSelectOrderer>
-
-function selectOrderer(ordererInfo: OrdererInfo = initialOrdererInfo, action: selectOrderAction){
-  ordererInfo.userId = action.payload.userId
-  ordererInfo.name = action.payload.name
-  ordererInfo.team = action.payload.team
-  ordererInfo.rank = action.payload.rank
+function selectOrderer(ordererInfo: OrdererInfo = initialOrdererInfo, action: SelectOrderAction ){
+  console.log(ordererInfo)
+  if (action.payload) {
+    ordererInfo = {
+      ...ordererInfo,
+      userId: action.payload.userId,
+      name: action.payload.name,
+      team: action.payload.team,
+      rank: action.payload.rank,
+    };
+  }
+  return ordererInfo;
 }
 
 export default selectOrderer;
