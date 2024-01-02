@@ -21,7 +21,9 @@ const DropDown = <T extends { value: string},>({
   }, [showDropDown]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue : T = event.target.value as unknown as T;
+    const selectedIndex = event.target.selectedIndex;
+    const selectedValue: T = dataItem[selectedIndex];
+  
     if (onChange) {
       onChange(selectedValue);
     }
@@ -29,11 +31,10 @@ const DropDown = <T extends { value: string},>({
   
   return (
     <div>
-      {/* Render child components or elements */}
       {children}
       <select onChange={handleSelectChange}>
         {dataItem.map((item, index) => (
-          <option key={index} >
+          <option key={index} value={item.value}>
             {item.value}
           </option>
         ))}
