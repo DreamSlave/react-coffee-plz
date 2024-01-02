@@ -2,20 +2,45 @@
 // import "./style.css";
 import '../../assets/css/saveParty.css'
 import DropDown from "@/component/DropDown.tsx"
+import { useState } from 'react';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const SaveParty = () => {
+  const [startDate, setStartDate] = useState<Date| null>(new Date());
+  const [startTime, setStartTime] = useState<Date| null>(new Date());
   const onChangeDropDown = (data : string) =>{
     console.log("data",data)
     
   }
   return (
-    <div className="element">
+    <div>
       <div>
         <input/>
       </div>
       <div>
         <DropDown onChange={(data) => onChangeDropDown(data.id)}
           dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}><span>카페이름</span></DropDown>
+      </div>
+      <div>
+        <DatePicker
+          dateFormat='yyyy/MM/dd' // 날짜 형태 
+          shouldCloseOnSelect 
+          selected={startDate} 
+          minDate={new Date()}
+          onChange={(date: Date ) => setStartDate(date)} />
+      </div>
+      <div>
+      <DatePicker
+        selected={startTime}
+        onChange={(date: Date ) => setStartTime(date)}
+        showTimeSelect
+        showTimeSelectOnly
+        timeIntervals={15}
+        timeCaption="Time"
+        dateFormat="hh:mm aa"
+      />
       </div>
     </div>
     // <div className="element">
