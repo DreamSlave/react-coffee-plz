@@ -7,21 +7,21 @@ import {useDispatch, useSelector} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 interface memberInfo {
-  userNm : string;
+  name : string;
   userId: string;
-  teamNm: string;
+  team: string;
   rank: string;
   isOrderComplete: boolean;
 }
 
 function getMemberList(){
   return [
-    {userNm: '김진미', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '김세인', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '조도은', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : true},
-    {userNm: '정민재', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'UX디자인팀', isOrderComplete : false},
-    {userNm: '이광수', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'UX디자인팀', isOrderComplete : true},
-    {userNm: '김우빈', rank: '프로', userId: 'ID'+ (~~(Math.random() * 10)), teamNm: 'PD팀', isOrderComplete : false},
+    {name: '김진미', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '김세인', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '조도은', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : true},
+    {name: '정민재', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'UX디자인팀', isOrderComplete : false},
+    {name: '이광수', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'UX디자인팀', isOrderComplete : true},
+    {name: '김우빈', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', isOrderComplete : false},
   ]
 }
 
@@ -65,7 +65,7 @@ function OrderMember() {
                   const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
                   return (
                     <div key={item.userId+index} className={className}>
-                      <OrdererItem userInfo={{userId: item.userId, name: item.userNm, rank: item.rank, team: item.teamNm}}
+                      <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team}}
                                    isOrderComplete={item.isOrderComplete}
                                    selectOrderer={onClickOrderer}/>
                     </div>
