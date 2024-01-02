@@ -1,9 +1,8 @@
 import '../../assets/css/ordermember.css'
 import {useEffect, useState} from "react";
-import Counter from "@/component/Counter";
-import { RootState } from "@/store";
-import { increase, decrease, increaseBy } from "@/store/counter";
-import {useDispatch, useSelector} from "react-redux";
+import { setSelectOrderer } from "@/store/order";
+import {useDispatch} from "react-redux";
+import OrdererItem from "@/views/order/OrdererItem";
 
 interface memberInfo {
   userNm : string;
@@ -25,19 +24,10 @@ function getMemberList(){
 
 function OrderMember() {
 
-  const count = useSelector((state: RootState) => state.counter.count);
   const dispatch = useDispatch();
 
-  const onIncrease = () => {
-    dispatch(increase())
-  };
-
-  const onDecrease = () => {
-    dispatch(decrease())
-  };
-
-  const onIncreaseBy = (diff: number) => {
-    dispatch(increaseBy(diff))
+  const onClickOrderer = (userId: string, name: string, rank: string, team: string) => {
+    dispatch(setSelectOrderer({userId, name, rank, team}))
   };
 
   const [orderMemberList, setOrderMemberList] = useState<memberInfo[]>([]);
@@ -50,12 +40,6 @@ function OrderMember() {
   return (
     <>
       <div className="element">
-        <Counter
-          count={count}
-          onIncrease={onIncrease}
-          onDecrease={onDecrease}
-          onIncreaseBy={onIncreaseBy}
-        />
         <div className="div">
           <header className="header">
             {/*<img className="back-icon" alt="Back icon" src="back-icon.png" />*/}
@@ -74,18 +58,9 @@ function OrderMember() {
                   const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
                   return (
                     <div key={item.userId+index} className={className}>
-                      <div className="overlap-group">
-                        {/*<img className="line" alt="Line" src="line-3.svg" />*/}
-                        <div className="text-wrapper-2">{item.userNm} ({item.teamNm})</div>
-                        {
-                          item.isOrderComplete ?
-                            <div className="done-label">
-                              <div className="div-wrapper">
-                                <div className="text-wrapper-6">주문완료</div>
-                              </div>
-                            </div> : ''
-                        }
-                      </div>
+                      <OrdererItem userInfo={{userId: item.userId, name: item.userNm, rank: item.userNm, team: item.teamNm}}
+                                   isOrderComplete={item.isOrderComplete}
+                                   selectOrderer={onClickOrderer}/>
                     </div>
                   )
                 })
