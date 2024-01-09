@@ -84,9 +84,10 @@ function App() {
               <NoHeaderLayout>
                 <Routes>
                   <Route path="/menu" element={<DesignSelectMenu/>}></Route>
-                  <Route path="/detail" element={<DesignOrderDetail />} />
-                  <Route path="/detail/popup" element={<DesignOrderPopup />} />
-                  <Route path="/detail/member" element={<DesignOrderMember />} />
+                  <Route path="/:partyNo" element={<DesignOrderDetail />} />
+                  {/*popup은 url이 없지만 화면 확인용으로 임시로 만들어둠*/}
+                  <Route path="/:partyNo/popup" element={<DesignOrderPopup />} />
+                  <Route path="/:partyNo/member" element={<DesignOrderMember />} />
                 </Routes>
               </NoHeaderLayout>
             }
