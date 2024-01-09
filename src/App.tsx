@@ -33,9 +33,10 @@ function App() {
               <HeaderLayout>
                 <Routes>
                   <Route path="/menu" element={<SelectMenu/>}></Route>
-                  <Route path="/detail" element={<OrderDetail />} />
-                  <Route path="/detail/popup" element={<OrderPopup />} />
-                  <Route path="/detail/member" element={<OrderMember />} />
+                  <Route path="/:partyNo" element={<OrderDetail />} />
+                  {/*popup은 url이 없지만 화면 확인용으로 임시로 만들어둠*/}
+                  <Route path="/:partyNo/popup" element={<OrderPopup />} />
+                  <Route path="/:partyNo/member" element={<OrderMember />} />
                 </Routes>
               </HeaderLayout>
             }
