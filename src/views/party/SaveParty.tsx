@@ -4,6 +4,7 @@ import '../../assets/css/saveParty.css'
 import DropDown from "@/component/DropDown.tsx"
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
+import ko from "date-fns/locale/ko";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,6 +26,7 @@ const SaveParty = () => {
       </div>
       <div>
         <DatePicker
+          locale={ko}   
           dateFormat='yyyy/MM/dd' // 날짜 형태 
           shouldCloseOnSelect 
           selected={startDate} 
