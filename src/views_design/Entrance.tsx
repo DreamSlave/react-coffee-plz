@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import "@/assets/temp-entrance/entrance.css";
+import "@/assets_design/temp-entrance/entrance.css";
 import hurryImg from '@/assets/temp-entrance/entrance1.png'
 import logoImg from '@/assets/temp-entrance/entrance2.png'
 

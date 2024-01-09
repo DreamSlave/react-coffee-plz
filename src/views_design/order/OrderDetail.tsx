@@ -1,6 +1,7 @@
 // import './App.css'
 // import "./scss/style.scss"
-import '../../assets/css/all.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
 
 interface orderInfo {
@@ -68,46 +69,37 @@ function OrderDetail() {
 
   return (
     <>
-      <div className="element">
+      <div id='order' className="element">
             <div className="main_tit">
               커피주문현황
             </div>
 
             <div className="order-list-area">
-                {/*<img className="bg" alt="Bg" src="bg.png" />*/}
-                {/*<ClipImg className="clip-img" />*/}
+                {/* <img className="bg" alt="Bg" src="bg.png" />
+                <ClipImg className="clip-img" /> */}
 
                 <div className="order-title">
-                  <div className="title">{ orderInfo.title }</div>
-                  <div className="cafenm">{ orderInfo.cafeNm }</div>
-                  {/*<img className="line" alt="Line" src="line-2.svg" />*/}
+                  <div className="text">
+                    <div className="title">{ orderInfo.title }</div>
+                    <div className="cafenm point">{ orderInfo.cafeNm }</div>
+                  </div>
+                  <div className="image">이미지</div>
                   {/*<OrderOpenImg className="order-open-img" />*/}
                 </div>
                 <div className="order-time">
-                  <div className="limit">마감시간</div>
-                  <div className="date">{ orderInfo.endDt }</div>
-                  {/*<img className="img" alt="Line" src="line-3.svg" />*/}
+                  <span className="mgr5"><b>마감시간</b></span> { orderInfo.endDt }
                 </div>
 
                 <div className="order-total">
-                  
-                  <div className="">
-                    <div className="">
-                      <div className="">
-                        <div className="">{ orderInfo.orderDrinkCount } 잔</div>
-                        <div className="">주문된 음료</div>
-                      </div>
-                      <div className="">총 { orderInfo.orderTagerDrinkCount } 잔</div>
-                    </div>
-
-                    <div className="">
-                      <div className="">
-                        <div className="">{ orderInfo.orderUserCount } 명</div>
-                        <div className="">주문한 인원</div>
-                      </div>
-                      <div className="">총 { orderInfo.orderTagerUserCount }명</div>
-                    </div>
-
+                  <div className="detail">
+                    <div className="title">주문한 인원</div>
+                    <div className="count">{ orderInfo.orderUserCount } 명</div>
+                    <div className="all gray">총 { orderInfo.orderTagerUserCount }명</div>
+                  </div>
+                  <div className="detail">
+                    <div className="title">주문된 음료</div>
+                    <div className="count">{ orderInfo.orderDrinkCount } 잔</div>
+                    <div className="all gray">총 { orderInfo.orderTagerDrinkCount } 잔</div>
                   </div>
                 </div>
                 
