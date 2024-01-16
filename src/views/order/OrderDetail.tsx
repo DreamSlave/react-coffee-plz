@@ -1,6 +1,8 @@
 // import './App.css'
 // import "./scss/style.scss"
-import '../../assets/css/orderdetail.css'
+// import '../../assets/css/orderdetail.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
 
 interface orderInfo {
@@ -25,7 +27,7 @@ function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
     cafeNm: '메에가커픠',
-    endDt: '2023/09/06 12:13',
+    endDt: '2024/01/16 20:09',
     orderUserCount: 18 + ~~(Math.random() * 100),
     orderTagerUserCount: 30 + ~~(Math.random() * 100),
     orderDrinkCount: 15 + ~~(Math.random() * 100),
@@ -59,83 +61,83 @@ function OrderDetail() {
     orderUserCount: 0,
     title: ""
   });
+  const [isOpen, setIsOpen] = useState<boolean>(true)
 
   useEffect(() => {
     const orderInfoData = getOrderInfo()
     setOrderInfo(orderInfoData)
     setMenuList(orderInfoData.orderMenuInfoList)
-  }, []);
 
+    const endTime = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""))
+    const nowTime = new Date();
+    const afterTime = endTime - nowTime;
+    setTimeout(closeTime, afterTime);
+  }, []);
+  function closeTime() {setIsOpen(false)}
+
+  function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI){
+    const yyyy = stringYYYYMMDDHHMI.substring(0,4)
+    const mm = stringYYYYMMDDHHMI.substring(4,6)
+    const dd = stringYYYYMMDDHHMI.substring(6,8)
+    const hh = stringYYYYMMDDHHMI.substring(8,10)
+    const mi = stringYYYYMMDDHHMI.substring(10,12)
+    return new Date(yyyy, mm-1, dd, hh, mi, 0)
+  }
   return (
     <>
-      <div className="element">
-        <div className="overlap-wrapper">
-          <div className="overlap">
-            <div className="title">
-              <div className="text-wrapper">커피주문현황</div>
+      <div id='order' className="element">
+        <div className="main_tit">
+          커피주문현황
+        </div>
+
+        <div className="order-list-area">
+          <div className="order-title">
+            <div className="text">
+              <div className="title">{ orderInfo.title }</div>
+              <div className="cafenm point">{ orderInfo.cafeNm }</div>
             </div>
-            <div className="overlap-group">
-              <div className="contents">
-                <div className="order-list-area">
-                  <div className="div">
-                    {/*<img className="bg" alt="Bg" src="bg.png" />*/}
-                    {/*<ClipImg className="clip-img" />*/}
-                    <div className="order-title">
-                      <div className="text-wrapper-2">{ orderInfo.title }</div>
-                      <div className="text-wrapper-3">{ orderInfo.cafeNm }</div>
-                      {/*<img className="line" alt="Line" src="line-2.svg" />*/}
-                      {/*<OrderOpenImg className="order-open-img" />*/}
-                    </div>
-                    <div className="order-time">
-                      <div className="text-wrapper-4">마감시간</div>
-                      <div className="text-wrapper-5">{ orderInfo.endDt }</div>
-                      {/*<img className="img" alt="Line" src="line-3.svg" />*/}
-                    </div>
-                    <div className="order-total">
-                      <div className="group">
-                        <div className="group-2">
-                          <div className="overlap-group-2">
-                            <div className="text-wrapper-6">{ orderInfo.orderDrinkCount } 잔</div>
-                            <div className="text-wrapper-7">주문된 음료</div>
-                          </div>
-                          <div className="text-wrapper-8">총 { orderInfo.orderTagerDrinkCount } 잔</div>
-                        </div>
-                        <div className="group-3">
-                          <div className="overlap-group-2">
-                            <div className="text-wrapper-6">{ orderInfo.orderUserCount } 명</div>
-                            <div className="text-wrapper-7">주문한 인원</div>
-                          </div>
-                          <div className="text-wrapper-8">총 { orderInfo.orderTagerUserCount }명</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="order-list-sum">
-                      <div className="text-wrapper-9">주문 취합 리스트</div>
-                      {
-                        menuList.map((item, index)=>{
-                          const className = 'item-'+(index+1)
-                          return (
-                            <div key={item.menuId} className={className} >
-                              <div className="text-wrapper-10">{item.menuNm}</div>
-                              <div className="text-wrapper-11">{item.count}</div>
-                            </div>
-                          )
-                        })
-                      }
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <footer className="footer">
-                <div className="large-btn-b">
-                  <div className="div-wrapper">
-                    <div className="text-wrapper-15">주문하기</div>
-                  </div>
-                </div>
-              </footer>
+            {isOpen ? <img className="image" src="/src/assets/img/icon_open.png" /> : <img className="image"  src="/src/assets/img/icon_close.png"/>}
+          </div>
+          <div className="order-time">
+            <span className="mgr5"><b>마감시간</b></span> { orderInfo.endDt }
+          </div>
+
+          <div className="order-total">
+            <div className="detail">
+              <div className="title">주문한 인원</div>
+              <div className="count">{ orderInfo.orderUserCount } 명</div>
+              <div className="all gray">총 { orderInfo.orderTagerUserCount }명</div>
+            </div>
+            <div className="detail">
+              <div className="title">주문된 음료</div>
+              <div className="count">{ orderInfo.orderDrinkCount } 잔</div>
+              <div className="all gray">총 { orderInfo.orderTagerDrinkCount } 잔</div>
             </div>
           </div>
+
+          <div className="order-list-sum">
+            <div className="title"><b>주문 취합 리스트</b></div>
+            {
+              menuList.map((item)=>{
+                return (
+                  <div key={item.menuId}>
+                    <div className="menunm">{item.menuNm}</div>
+                    <div className="count">{item.count}</div>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
+
+        <footer id="footer">
+          <div className="large-btn-b">
+            <div className="div-wrapper">
+              { isOpen ? <div className="text-wrapper-15">주문하기</div> : <div className="text-wrapper-15">주문불가</div>}
+            </div>
+          </div>
+        </footer>
+
       </div>
     </>
   )
