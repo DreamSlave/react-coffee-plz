@@ -3,6 +3,9 @@
 
 $main-color: #ff5cc3;
 $sub-color: #ffe7fa;
+$basic-color01: #000000;
+$basic-color02: #ffffff;
+$basic-color03: #aaaaaa;
 $text_01: #000000;
 $text_02: #1e1e1e;
 $text_03: #999999;
@@ -28,6 +31,22 @@ h1 {
 
 .gray {
     color: $text_03;
+}
+
+.bg_black {
+    background-color: $basic-color01;
+}
+
+.bg_white {
+    background-color: $basic-color02;
+}
+
+.bg_gray {
+    background-color: $basic-color03;
+}
+
+.bg_pink {
+    background-color: $main-color;
 }
 
 #order {

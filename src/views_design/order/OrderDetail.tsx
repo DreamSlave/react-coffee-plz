@@ -119,12 +119,15 @@ function OrderDetail() {
                 </div>
             </div>
             
-            <footer id="footer">
-              <div className="large-btn-b">
-                <div className="div-wrapper">
-                  <div className="text-wrapper-15">주문하기</div>
-                </div>
+            <footer id="footer" className="bg_pink">
+              <div className="large-btn bg_black">
+                  주문하기
               </div>
+              
+              {/*///주문불가 시 버튼 스타일///*/}
+              {/* <div className="large-btn bg_gray">
+                  주문불가
+              </div> */}
             </footer>
           
       </div>

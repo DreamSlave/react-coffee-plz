@@ -5,7 +5,6 @@
 } */
 
 #footer {
-  background-color: aliceblue;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -16,6 +15,7 @@
 
 #order {
   min-height: 100vh;
+  padding-bottom: 50px;
 }
 
 .element {
@@ -30,6 +30,21 @@ h1 {
   font-family: "LOTTERIA CHAB-Regular", Helvetica;
   letter-spacing: 0;
   text-align: center;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.large-btn {
+  height: 52px;
+  width: 100%;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  background-color: #ff5cc3;
+  border-radius: 8px;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  font-size: 22px;
+  line-height: 52px;
 }
 
 .main_tit {
@@ -41,10 +56,12 @@ h1 {
   text-align: center;
 }
 
+/*주문자 주문현황*/
+
 .order-list-area {
   width: 80%;
   margin: 0 auto;
-  padding: 30px 5% 60px 5%;
+  padding: 30px 5%;
   background-color: #fff;
   border: 2px #000 solid;
   border-radius: 10px;
@@ -143,4 +160,31 @@ h1 {
   text-align: right;
   text-decoration: underline;
   font-weight: 700;
+}
+
+/*크리에이터 파티원선택*/
+.total_chck {
+  font-size: 28px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.chck_person {
+  border: 2px #000 solid;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.chck_person label input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  margin-right: 8px;
+}
+
+.p_2dpth_btn {
+ float:right;
 }

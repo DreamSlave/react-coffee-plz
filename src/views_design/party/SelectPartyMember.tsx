@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import '../../assets/css/all.css'
-import '../../assets/css/selectPartyMember.css'
+// import '../../assets/css/all.css'
+// import '../../assets/css/selectPartyMember.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import CheckBox from "@/component/CheckBox.tsx"
 
 
@@ -99,32 +101,24 @@ const SelectPartyMember = () => {
 
 
   return (
-    <div className="element">
-      <div className="overlap">
-        <div className="group">      
-        연구소
-        </div>
-      
-      </div>
-      <p className="p">
-        <span className="span">대상 인원</span>
-        <span className="text-wrapper-2">
-          을<br />
-          선택해주세요.
-        </span>
-      </p>
+    <div id='party' className="element">
+      <h1>
+        <span className="point">대상인원을</span><br/>선택해주세요.
+      </h1>
 
-      <div className="text-wrapper-3">{members.filter(item => item.checked).length}명</div>
+      <div className="total_chck">
+        {members.filter(item => item.checked).length}명
+      </div>
       
       {teamList.map((teamItem, teamIndex) => 
-        <div key={teamIndex}>
+        <div key={teamIndex} className="chck_person">
           <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={(event) => onCheckTeam(teamItem.team, event.target.checked)}>
             <span key={teamIndex+`_span`}>{teamItem.team}</span>
           </CheckBox>
-          <div onClick={() => changeIsView(teamIndex, teamItem.isView)}>
+          <div className="p_2dpth_btn" onClick={() => changeIsView(teamIndex, teamItem.isView)}>
             &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp;
           </div>
-          <div key={teamIndex+`_innder_div`} >
+          <div className="p_2dpth" key={teamIndex+`_innder_div`} >
             {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
             <CheckBox key={item.name} checked={item.checked} onChange={(event) => setMembers((prevMembers) => prevMembers.map(prevItem => prevItem.name === item.name ? { ...prevItem, checked: event.target.checked } : prevItem))}>
               <div key={index}>
@@ -136,6 +130,13 @@ const SelectPartyMember = () => {
           </div>          
         </div>
       )}
+
+      <footer id="footer">
+        <div className="large-btn">
+            파티생성하기
+        </div>
+      </footer>
+      
     </div>
   );
 };
