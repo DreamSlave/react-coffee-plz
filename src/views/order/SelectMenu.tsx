@@ -1,10 +1,7 @@
-// import React from "react";
-// import { useNavigate } from 'react-router-dom'
-
 import "@/assets/temp-selectmenu/selectmenu.css"
 
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 
 interface Menu {
   menuId: string;
@@ -12,21 +9,38 @@ interface Menu {
 }
 
 const SelectMenu = () => {
-  const [searchText, setSearchText] = useState<string>('')
+  const [searchInputValue, setSearchInputValue] = useState<string>('')
+  const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
-  const [defaultTagList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
+  const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
 
   useEffect(() => {
-    doSearch()
-  }, [])
+    fetchMenuList()
+  }, [menuSearchText])
 
-  const onChangeSearchText = (e:ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value)
+
+  // 검색어 change 이벤트 핸들링
+  const onChangeSearchInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(`onChangeSearchInputValue!!!`)
+    setSearchInputValue(e.target.value)
   }
 
   // 검색 실행 함수
   const doSearch = () => {
-    console.log(`doSearch called ::: param ::: ${searchText}`)
+    setMenuSearchText(searchInputValue)
+  }
+
+  // 태그 버튼 클릭 이벤트 핸들링
+  const onClickTagButton = (tagText: string) => {
+
+    // TODO: 이렇게 해야만할까..
+    setSearchInputValue(tagText)
+    setMenuSearchText(tagText)
+  }
+
+  // 메뉴 리스트 조회 API call
+  const fetchMenuList = () => {
+    console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
 
     // TODO: API call
     setMenuList([
@@ -68,20 +82,21 @@ const SelectMenu = () => {
             <div className="overlap-group-2">
               <input  type="text"
                       placeholder="검색"
-                      value={searchText}
-                      onChange={onChangeSearchText}
+                      value={searchInputValue}
+                      onChange={onChangeSearchInputValue}
                       className="text-wrapper-3"
               />
               <img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} />
             </div>
           </div>
+          
           {/* start : 태그 영역 */}
           <div className="tag-group">
             {
-              defaultTagList.map((tag) => (
-                <div className="menu-tag">
-                  <div className="div-wrapper">
-                    <div className="text-wrapper-4"># {tag}</div>
+              defaultTagTextList.map((tagText, index) => (
+                <div className="menu-tag" key={index}>
+                  <div className="div-wrapper" onClick={() => onClickTagButton(tagText)}>
+                    <div className="text-wrapper-4"># {tagText}</div>
                   </div>
                 </div>
               ))
