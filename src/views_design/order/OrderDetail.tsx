@@ -104,14 +104,14 @@ function OrderDetail() {
                 </div>
                 
                 <div className="order-list-sum">
-                  <div className="">주문 취합 리스트</div>
+                  <div className="title"><b>주문 취합 리스트</b></div>
                   {
                     menuList.map((item, index)=>{
                       const className = 'item-'+(index+1)
                       return (
-                        <div key={item.menuId} className={className} >
-                          <div className="text-wrapper-10">{item.menuNm}</div>
-                          <div className="text-wrapper-11">{item.count}</div>
+                        <div key={item.menuId} className={className}>
+                          <div className="menunm">{item.menuNm}</div>
+                          <div className="count">{item.count}</div>
                         </div>
                       )
                     })
@@ -131,5 +131,7 @@ function OrderDetail() {
     </>
   )
 }
+
+
 
 export default OrderDetail

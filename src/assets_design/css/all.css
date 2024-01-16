@@ -14,6 +14,9 @@
   box-sizing: border-box;
 }
 
+#order {
+  min-height: 100vh;
+}
 
 .element {
   width: 90%;
@@ -111,4 +114,33 @@ h1 {
 
 .order-total .detail .all {
   font-size: 15px;
+}
+
+.order-list-sum {
+  width: 100%;
+  height: auto;
+  padding: 10px 10px 15px 10px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.order-list-sum .title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.order-list-sum .menunm {
+  font-size: 16px;
+  width: 85%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.order-list-sum .count {
+  width: 15%;
+  float: right;
+  text-align: right;
+  text-decoration: underline;
+  font-weight: 700;
 }
