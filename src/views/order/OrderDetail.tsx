@@ -27,7 +27,7 @@ function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
     cafeNm: '메에가커픠',
-    endDt: '2024/01/16 20:09',
+    endDt: '2024/01/16 21:01',
     orderUserCount: 18 + ~~(Math.random() * 100),
     orderTagerUserCount: 30 + ~~(Math.random() * 100),
     orderDrinkCount: 15 + ~~(Math.random() * 100),
@@ -68,20 +68,21 @@ function OrderDetail() {
     setOrderInfo(orderInfoData)
     setMenuList(orderInfoData.orderMenuInfoList)
 
-    const endTime = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""))
-    const nowTime = new Date();
-    const afterTime = endTime - nowTime;
+    const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
+    const nowTime: Date = new Date();
+    const afterTime: number = endTime.getTime() - nowTime.getTime();
+    console.log(afterTime)
     setTimeout(closeTime, afterTime);
   }, []);
   function closeTime() {setIsOpen(false)}
 
-  function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI){
-    const yyyy = stringYYYYMMDDHHMI.substring(0,4)
-    const mm = stringYYYYMMDDHHMI.substring(4,6)
-    const dd = stringYYYYMMDDHHMI.substring(6,8)
-    const hh = stringYYYYMMDDHHMI.substring(8,10)
-    const mi = stringYYYYMMDDHHMI.substring(10,12)
-    return new Date(yyyy, mm-1, dd, hh, mi, 0)
+  function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI: string): Date {
+    const yyyy = parseInt(stringYYYYMMDDHHMI.substring(0, 4), 10);
+    const mm = parseInt(stringYYYYMMDDHHMI.substring(4, 6), 10) - 1;
+    const dd = parseInt(stringYYYYMMDDHHMI.substring(6, 8), 10);
+    const hh = parseInt(stringYYYYMMDDHHMI.substring(8, 10), 10);
+    const mi = parseInt(stringYYYYMMDDHHMI.substring(10, 12), 10);
+    return new Date(yyyy, mm, dd, hh, mi, 0);
   }
   return (
     <>
