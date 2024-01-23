@@ -69,22 +69,23 @@ function OrderDetail() {
 
   return (
     <>
-      <div id='order' className="element">
+      <div id='order' className="element bg_pink">
             <div className="main_tit">
-              커피주문현황
+              커피주문 현황
             </div>
 
             <div className="order-list-area">
-                {/* <img className="bg" alt="Bg" src="bg.png" />
-                <ClipImg className="clip-img" /> */}
-
+                <div className="clipimg">
+                  <img src="/src/assets/img/clip_img.png" />
+                </div>
                 <div className="order-title">
                   <div className="text">
                     <div className="title">{ orderInfo.title }</div>
                     <div className="cafenm point">{ orderInfo.cafeNm }</div>
                   </div>
-                  <div className="image">이미지</div>
-                  {/*<OrderOpenImg className="order-open-img" />*/}
+                  <div className="image">
+                    <img src="/src/assets/img/icon_open.png" />
+                  </div>
                 </div>
                 <div className="order-time">
                   <span className="mgr5"><b>마감시간</b></span> { orderInfo.endDt }

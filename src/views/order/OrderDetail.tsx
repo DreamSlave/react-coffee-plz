@@ -86,13 +86,15 @@ function OrderDetail() {
   }
   return (
     <>
-      <div id='order' className="element">
+      <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황
         </div>
 
         <div className="order-list-area">
-          <img src="/src/assets/img/clip_img.png" />
+          <div className="clipimg">
+            <img src="/src/assets/img/clip_img.png" />
+          </div>
           <div className="order-title">
             <div className="text">
               <div className="title">{ orderInfo.title }</div>
@@ -132,11 +134,9 @@ function OrderDetail() {
           </div>
         </div>
 
-        <footer id="footer">
-          <div className="large-btn-b">
-            <div className="div-wrapper">
-              { isOpen ? <div className="text-wrapper-15">주문하기</div> : <div className="text-wrapper-15">주문불가</div>}
-            </div>
+        <footer id="footer" className="bg_pink">
+          <div className="">
+            { isOpen ? <div className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
           </div>
         </footer>
 

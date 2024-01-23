@@ -26,31 +26,31 @@ h1 {
 }
 
 .point {
-    color: $text_point;
+    color: $text_point !important;
 }
 
 .gray {
-    color: $text_03;
+    color: $text_03 !important;
 }
 
 .bg_black {
-    background-color: $basic-color01;
+    background-color: $basic-color01 !important;
 }
 
 .bg_white {
-    background-color: $basic-color02;
+    background-color: $basic-color02 !important;
 }
 
 .bg_gray {
-    background-color: $basic-color03;
+    background-color: $basic-color03 !important;
 }
 
 .bg_pink {
-    background-color: $main-color;
+    background-color: $main-color !important;
 }
 
 #order {
-    background-color: $main-color;
+    background-color: $basic-color02;
 }
 
 

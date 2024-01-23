@@ -1,4 +1,6 @@
-import '../../assets/css/all.css'
+// import '../../assets/css/all.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
 import Counter from "@/component/Counter";
 import { RootState } from "@/store";
@@ -49,50 +51,35 @@ function OrderMember() {
 
   return (
     <>
-      <div className="element">
-        <Counter
+      <header className="header"></header>
+      <div id='order' className="element orderer">
+        {/* <Counter
           count={count}
           onIncrease={onIncrease}
           onDecrease={onDecrease}
           onIncreaseBy={onIncreaseBy}
-        />
-        <div className="div">
-          <header className="header">
-            {/*<img className="back-icon" alt="Back icon" src="back-icon.png" />*/}
-          </header>
-          <div className="title">
-            <p className="p">
-              <span className="text-wrapper">주문자</span>
-              <span className="span">를<br/>선택해주세요.
-            </span>
-            </p>
+        /> */}
+          <h1>
+            <span className="point">주문자를</span><br/>선택해주세요.
+          </h1>
+          <div className="orderer-list">
+            {
+              orderMemberList.map((item, index)=>{
+                const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
+                return (
+                  <div key={item.userId+index} className="item">
+                    <div className="name">{item.userNm} ({item.teamNm})</div>
+                    {
+                      item.isOrderComplete ?
+                        <div className="done-label">
+                          주문완료
+                        </div> : ''
+                    }
+                  </div>
+                )
+              })
+            }
           </div>
-          <div className="contents">
-            <div className="item-list">
-              {
-                orderMemberList.map((item, index)=>{
-                  const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
-                  return (
-                    <div key={item.userId+index} className={className}>
-                      <div className="overlap-group">
-                        {/*<img className="line" alt="Line" src="line-3.svg" />*/}
-                        <div className="text-wrapper-2">{item.userNm} ({item.teamNm})</div>
-                        {
-                          item.isOrderComplete ?
-                            <div className="done-label">
-                              <div className="div-wrapper">
-                                <div className="text-wrapper-6">주문완료</div>
-                              </div>
-                            </div> : ''
-                        }
-                      </div>
-                    </div>
-                  )
-                })
-              }
-            </div>
-          </div>
-        </div>
       </div>
     </>
   )

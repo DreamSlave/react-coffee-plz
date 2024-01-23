@@ -54,6 +54,7 @@ h1 {
   letter-spacing: 0;
   line-height: 54px;
   text-align: center;
+  word-break: keep-all;
 }
 
 /*주문자 주문현황*/
@@ -65,6 +66,17 @@ h1 {
   background-color: #fff;
   border: 2px #000 solid;
   border-radius: 10px;
+}
+
+.order-list-area .clipimg {
+  position: absolute;
+}
+
+.order-list-area .clipimg img {
+  position: relative;
+  left: 0;
+  top: -42px;
+  width: 35px;
 }
 
 .order-title {
@@ -94,7 +106,11 @@ h1 {
 .order-title .image {
   float: right;
   width: 25%;
-  background-color: #eee;
+  max-width: 75px;
+}
+
+.order-title .image img {
+  width: 100%;
 }
 
 .order-time {
@@ -186,5 +202,45 @@ h1 {
 }
 
 .p_2dpth_btn {
- float:right;
+  float:right;
+}
+
+/*주문자 대상 선택*/
+
+.orderer {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.orderer-list {
+  margin-top: 50px;
+}
+
+.orderer-list .item {
+  width: 100%;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px #ccc dashed;
+  font-size: 18px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.orderer-list .item .name {
+  width: 70%;
+  float: left;
+}
+
+.orderer-list .item .done-label {
+  display: inline-block;
+  float: right;
+  width: 30%;
+  color: #aaa;
+  background: #eee;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 3px 0;
+  max-width: 72px;
 }
