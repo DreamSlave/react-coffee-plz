@@ -27,7 +27,7 @@ function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
     cafeNm: '메에가커픠',
-    endDt: '2024/01/16 21:01',
+    endDt: '2024/01/23 20:01',
     orderUserCount: 18 + ~~(Math.random() * 100),
     orderTagerUserCount: 30 + ~~(Math.random() * 100),
     orderDrinkCount: 15 + ~~(Math.random() * 100),
@@ -92,6 +92,7 @@ function OrderDetail() {
         </div>
 
         <div className="order-list-area">
+          <img src="/src/assets/img/clip_img.png" />
           <div className="order-title">
             <div className="text">
               <div className="title">{ orderInfo.title }</div>
