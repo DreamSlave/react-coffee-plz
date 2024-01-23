@@ -17,6 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%; */
 }
+
 body {
   margin: 0;
   /* display: flex;
@@ -25,6 +26,28 @@ body {
   min-height: 100vh; */
 }
 
+#header {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  left: 0;
+  z-index: 99999;
+  box-sizing: border-box;
+  padding: 15px;
+  background-color: #fff;
+}
+
+#header img {
+  height: 20px;
+}
+
+#header .back_ic {
+  width: 13px;
+}
+
+#header .x_ic {
+  float: right;
+}
 
 /* 필요하지 않은 css는 주석처리 해놓음 -저격달인- */
 /* 
