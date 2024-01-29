@@ -1,6 +1,8 @@
 // import './App.css'
 // import "./scss/style.scss"
-import '../../assets/css/all.css'
+// import '../../assets/css/all.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
 
 
@@ -48,34 +50,34 @@ function OrderPopup() {
 
   return (
     <>
-      <div className="box">
-        <div className="contents">
+      <div id="popup">
+        <div className="popup-area">
+          <div>닫기</div>
+          <div className="order-item">
+            <p className="p">{orderPopupInfo.menuNm}</p>
+            <div className="text-wrapper-3">{orderPopupInfo.count}</div>
+          </div>
           <div className="order-person-detail">
               {
                 orderPopupInfo.orderUserInfoList.map((item, index)=>{
                   const className = 'list-'+(index+1)
                   return (
                     <div key={item.userId} className={className}>
-                      <div className="text-wrapper">{item.userNm}</div>
+                      <div className="text-wrapper">
+                      <svg width="22px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                      </svg>
+                        {item.userNm}
+                      </div>
                       <div className="call-btn">
                         <div className="overlap-group">
-                          {/*<img className="vector" alt="Vector" src="vector-3.svg" />*/}
                           <div className="div" onClick={() => document.location.href=`tel:${item.phoneNumber}` }>전화걸기</div>
                         </div>
                       </div>
-                      {/*// <img className="img" alt="Vector" src="vector.svg" />*/}
                     </div>
                   )
                 })
               }
-          </div>
-          <div className="order-item">
-            {/*<img className="line" alt="Line" src="line-4.svg" />*/}
-            <p className="p">{orderPopupInfo.menuNm}</p>
-            <div className="text-wrapper-3">{orderPopupInfo.count}</div>
-          </div>
-          <div className="top">
-            {/*<PopCloseIcon className="pop-close-icon" />*/}
           </div>
         </div>
       </div>

@@ -227,6 +227,10 @@ h1 {
   display: inline-block;
 }
 
+.orderer-list .item:last-child {
+  border-bottom: none;
+}
+
 .orderer-list .item .name {
   width: 70%;
   float: left;
@@ -243,4 +247,24 @@ h1 {
   border-radius: 5px;
   padding: 3px 0;
   max-width: 72px;
+}
+
+/*전화걸기 팝업*/
+
+#popup {
+  width: 100%;
+  height: 100vh;
+  background-color: #00000047;
+  position: fixed;
+  padding-top: 55%;
+}
+
+.popup-area {
+  width: 80%;
+  margin: 0 10%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 25px;
+  z-index: 999999;
 }
