@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../../assets/css/selectPartyMember.css'
 import CheckBox from "@/component/CheckBox.tsx"
+import ApiUtil from "../../api/api.util";
+import ApiConfig from "../../api/api.config";
 
 
 interface MemberProps {
@@ -20,6 +22,11 @@ interface TeamProps {
 
 
 const SelectPartyMember = () => {
+  console.log("왜안나오지")
+  getSample()
+  getSample2()
+
+
   const [members, setMembers] = useState<MemberProps[]>([
     {
       "name": "김진미",
@@ -94,6 +101,24 @@ const SelectPartyMember = () => {
     });    
     setMembers(result);
   }
+  function getSample() {
+    ApiUtil.get(`${ApiConfig.defaultDomain}/6a1b7083a78540c891016615926385fb`)
+        .then(function (response) {
+            console.log(response);
+        })
+        
+  }
+  function getSample2(){
+    const params = {
+      title : [{text: {content: '제모오오옥'}}]
+    }
+    ApiUtil.patch(`${ApiConfig.defaultDomain}/v1/databases/6a1b7083a78540c891016615926385fb`,params)
+        .then(function (response) {
+          console.log(response);
+        })
+  }
+
+
 
 
 
