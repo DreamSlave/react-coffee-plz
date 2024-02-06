@@ -1,18 +1,24 @@
 import "@/assets/temp-selectmenu/selectmenu.css"
-
-import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
 import { useEffect, useState, ChangeEvent } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
-interface Menu {
-  menuId: string;
-  menuNm: string;
-}
+import { Menu } from './MenuInterface'
+import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
+import SelectMenuPopup from "./SelectMenuPopup";
 
 const SelectMenu = () => {
+  const orderer = {
+    name: useSelector((state: RootState) => state.order.name),
+    rank: useSelector((state: RootState) => state.order.rank),
+    team: useSelector((state: RootState) => state.order.team),
+  }
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
+  const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
+  const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
     fetchMenuList()
@@ -38,6 +44,8 @@ const SelectMenu = () => {
     setMenuSearchText(tagText)
   }
 
+  
+
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
     console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
@@ -53,6 +61,12 @@ const SelectMenu = () => {
       { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
     ])
     
+  }
+
+  const onClickMenu = (menu: Menu) => {
+    console.log(`selectedMenu ::: ${JSON.stringify(menu)}`)
+    setShowPopup(true)
+    setSelectedMenu(menu)
   }
   
   return (
@@ -73,7 +87,7 @@ const SelectMenu = () => {
           <div className="person-info">
             <div className="overlap-group">
               {/* TODO : 선택한 주문자명 표시(Redux) */}
-              <div className="text-wrapper-2">정민재 프로(UX디자인팀)</div>
+              <div className="text-wrapper-2">{orderer.name} {orderer.rank}({orderer.team})</div>
             </div>
           </div>
         </div>
@@ -110,7 +124,7 @@ const SelectMenu = () => {
             <ul>
               {
                 menuList.map((menu) => (
-                  <li key={menu.menuId}>{menu.menuNm}</li>
+                  <li key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</li>
                 ))
               }
             </ul>
@@ -118,6 +132,9 @@ const SelectMenu = () => {
           {/* end : 목록 영역 */}
         </div>
       </div>
+
+      {/* 선택 메뉴 팝업 */}
+      {showPopup && <SelectMenuPopup menu={selectedMenu} orderer={orderer} />}
     </div>
   );
 };

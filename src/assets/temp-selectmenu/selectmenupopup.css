@@ -1,0 +1,157 @@
+.index {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.index .overlap-wrapper {
+  background-color: #ffffff;
+  height: 812px;
+  overflow: hidden;
+  width: 375px;
+}
+
+.index .overlap {
+  height: 812px;
+  position: relative;
+  width: 381px;
+}
+
+.index .dim {
+  background-color: #00000080;
+  height: 812px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 375px;
+}
+
+.index .bottom-sheet {
+  height: 240px;
+  left: 0;
+  position: absolute;
+  top: 572px;
+  width: 381px;
+}
+
+.index .overlap-group {
+  background-color: #ffffff;
+  border-radius: 30px 30px 0px 0px;
+  height: 240px;
+  position: relative;
+  width: 375px;
+}
+
+.index .btn-group {
+  height: 52px;
+  left: 25px;
+  position: absolute;
+  top: 158px;
+  width: 325px;
+}
+
+.index .large-btn {
+  height: 52px;
+  left: 170px;
+  position: absolute;
+  top: 0;
+  width: 157px;
+}
+
+.index .div-wrapper {
+  background-color: var(--pointcolor);
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 155px;
+}
+
+.index .text-wrapper {
+  color: #ffffff;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 33px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 11px;
+  white-space: nowrap;
+  width: 90px;
+}
+
+.index .large-btn-st {
+  height: 52px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 157px;
+}
+
+.index .div {
+  background-color: var(--variable-collection-sub);
+  border-radius: 8px;
+  height: 52px;
+  position: relative;
+  width: 155px;
+}
+
+.index .text-wrapper-2 {
+  color: var(--pointcolor);
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 22px;
+  font-weight: 400;
+  left: 33px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 11px;
+  white-space: nowrap;
+  width: 90px;
+}
+
+.index .text-wrapper-3 {
+  color: #000000;
+  font-family: "Pretendard-Bold", Helvetica;
+  font-size: 22px;
+  font-weight: 700;
+  left: 114px;
+  letter-spacing: -0.48px;
+  line-height: 33px;
+  position: absolute;
+  text-align: center;
+  top: 98px;
+  white-space: nowrap;
+}
+
+.index .text-wrapper-4 {
+  color: #000000;
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  left: 110px;
+  letter-spacing: -0.35px;
+  line-height: 24px;
+  position: absolute;
+  text-align: center;
+  top: 59px;
+  white-space: nowrap;
+}
+
+.index .text-wrapper-5 {
+  color: #000000;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  left: 45px;
+  letter-spacing: -0.53px;
+  line-height: 36px;
+  position: absolute;
+  text-align: center;
+  top: 22px;
+  white-space: nowrap;
+}
