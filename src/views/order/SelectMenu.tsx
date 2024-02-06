@@ -1,15 +1,11 @@
 import "@/assets/temp-selectmenu/selectmenu.css"
+import { useEffect, useState, ChangeEvent } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
+import { Menu } from './MenuInterface'
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
-import { useEffect, useState, ChangeEvent } from "react";
 import SelectMenuPopup from "./SelectMenuPopup";
-
-interface Menu {
-  menuId: string;
-  menuNm: string;
-}
 
 const SelectMenu = () => {
   const orderer = {
@@ -20,7 +16,7 @@ const SelectMenu = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
-  // const [selectedMenu, setSelectedMenu] = useState<Menu>()
+  const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
 
@@ -48,6 +44,8 @@ const SelectMenu = () => {
     setMenuSearchText(tagText)
   }
 
+  
+
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
     console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
@@ -65,10 +63,10 @@ const SelectMenu = () => {
     
   }
 
-  const onClickMenu = (menu: object) => {
+  const onClickMenu = (menu: Menu) => {
     console.log(`selectedMenu ::: ${JSON.stringify(menu)}`)
     setShowPopup(true)
-    // setSelectedMenu = menu
+    setSelectedMenu(menu)
   }
   
   return (
@@ -136,7 +134,7 @@ const SelectMenu = () => {
       </div>
 
       {/* 선택 메뉴 팝업 */}
-      {showPopup && <SelectMenuPopup />}
+      {showPopup && <SelectMenuPopup menu={selectedMenu} orderer={orderer} />}
     </div>
   );
 };
