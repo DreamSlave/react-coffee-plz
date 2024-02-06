@@ -32,7 +32,7 @@ function OrderMember() {
   const userInfo = useSelector((state: RootState) => state.order);
   const navigate  = useNavigate();
   const onClickOrderer = (userId: string, name: string, rank: string, team: string) => {
-    dispatch(setSelectOrderer({userId, name, rank, team}))
+    dispatch(setSelectOrderer(userId, name, rank, team))
     navigate('/order/menu')
   };
 
@@ -49,6 +49,7 @@ function OrderMember() {
         <div className="div">
           <header className="header">
             { userInfo.name }
+            { userInfo.partyNo }
             {/*<img className="back-icon" alt="Back icon" src="back-icon.png" />*/}
           </header>
           <div className="title">

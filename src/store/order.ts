@@ -1,4 +1,9 @@
+const SET_PARTY_NO = "SET_PARTY_NO" as const;
+const SET_ORDERER = "SET_ORDERER" as const;
+
+
 type OrdererInfo = {
+  partyNo: string
   userId: string
   name: string
   team: string
@@ -6,36 +11,54 @@ type OrdererInfo = {
 };
 
 const initialOrdererInfo: OrdererInfo = {
+  partyNo: '',
   userId: '',
   name: '',
   team: '',
   rank: '',
 };
 
-export const setSelectOrderer = (ordererInfo : OrdererInfo) => ({
-  type: 'SELECT_ORDERER',
+export const setSelectOrderer = (userId : string, name : string, team : string, rank : string) => ({
+  type: SET_ORDERER,
   payload: {
-    userId: ordererInfo.userId,
-    name: ordererInfo.name,
-    team: ordererInfo.team,
-    rank: ordererInfo.rank
+    userId: userId,
+    name: name,
+    team: team,
+    rank: rank
   }
 })
 
-type SelectOrderAction  = ReturnType<typeof setSelectOrderer>
+export const setOrderPartyNo = (partyNo : string) => ({
+  type: SET_PARTY_NO,
+  payload: {
+    partyNo: partyNo,
+  }
+})
+
+type SelectOrderAction  = ReturnType<typeof setSelectOrderer> | ReturnType<typeof setOrderPartyNo>
 
 function selectOrderer(ordererInfo: OrdererInfo = initialOrdererInfo, action: SelectOrderAction ){
   console.log(ordererInfo)
-  if (action.payload) {
-    ordererInfo = {
-      ...ordererInfo,
-      userId: action.payload.userId,
-      name: action.payload.name,
-      team: action.payload.team,
-      rank: action.payload.rank,
-    };
+  switch (action.type) {
+    case SET_ORDERER:
+      return {
+        partyNo: ordererInfo.partyNo,
+        userId: action.payload.userId,
+        name: action.payload.name,
+        team: action.payload.team,
+        rank: action.payload.rank,
+      };
+    case SET_PARTY_NO:
+      return {
+        partyNo: action.payload.partyNo,
+        userId: ordererInfo.userId,
+        name: ordererInfo.name,
+        team: ordererInfo.team,
+        rank: ordererInfo.rank,
+      };
+    default:
+      return ordererInfo;
   }
-  return ordererInfo;
 }
 
 export default selectOrderer;

@@ -4,6 +4,10 @@
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import {setOrderPartyNo} from "@/store/order";
+import {useDispatch} from "react-redux";
 
 interface orderInfo {
   title : string;
@@ -27,7 +31,7 @@ function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
     cafeNm: '메에가커픠',
-    endDt: '2024/01/23 20:01',
+    endDt: '2024/02/23 20:01',
     orderUserCount: 18 + ~~(Math.random() * 100),
     orderTagerUserCount: 30 + ~~(Math.random() * 100),
     orderDrinkCount: 15 + ~~(Math.random() * 100),
@@ -49,6 +53,9 @@ function getOrderInfo(){
 
 function OrderDetail() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [menuList, setMenuList] = useState<orderMenuInfo[]>([]);
   const [orderInfo, setOrderInfo] = useState<orderInfo>({
     cafeNm: "",
@@ -62,6 +69,12 @@ function OrderDetail() {
     title: ""
   });
   const [isOpen, setIsOpen] = useState<boolean>(true)
+
+  const { partyNo } = useParams();
+  const onClickGoOrder = ()=>{
+    dispatch(setOrderPartyNo( partyNo || ''))
+    navigate(`/order/member`)
+  }
 
   useEffect(() => {
     const orderInfoData = getOrderInfo()
@@ -136,7 +149,7 @@ function OrderDetail() {
 
         <footer id="footer" className="bg_pink">
           <div className="">
-            { isOpen ? <div className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
+            { isOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
           </div>
         </footer>
 
