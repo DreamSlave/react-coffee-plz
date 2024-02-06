@@ -2,10 +2,6 @@
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
-import Counter from "@/component/Counter";
-import { RootState } from "@/store";
-import { increase, decrease, increaseBy } from "@/store/counter";
-import {useDispatch, useSelector} from "react-redux";
 
 interface memberInfo {
   userNm : string;
@@ -27,20 +23,20 @@ function getMemberList(){
 
 function OrderMember() {
 
-  const count = useSelector((state: RootState) => state.counter.count);
-  const dispatch = useDispatch();
-
-  const onIncrease = () => {
-    dispatch(increase())
-  };
-
-  const onDecrease = () => {
-    dispatch(decrease())
-  };
-
-  const onIncreaseBy = (diff: number) => {
-    dispatch(increaseBy(diff))
-  };
+  // const count = useSelector((state: RootState) => state.counter.count);
+  // const dispatch = useDispatch();
+  //
+  // const onIncrease = () => {
+  //   dispatch(increase())
+  // };
+  //
+  // const onDecrease = () => {
+  //   dispatch(decrease())
+  // };
+  //
+  // const onIncreaseBy = (diff: number) => {
+  //   dispatch(increaseBy(diff))
+  // };
 
   const [orderMemberList, setOrderMemberList] = useState<memberInfo[]>([]);
 
@@ -65,7 +61,7 @@ function OrderMember() {
           <div className="orderer-list">
             {
               orderMemberList.map((item, index)=>{
-                const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
+                // const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
                 return (
                   <div key={item.userId+index} className="item">
                     <div className="name">{item.userNm} ({item.teamNm})</div>
