@@ -38,21 +38,31 @@ function App() {
                 <Route path="/entrance" element={<Entrance />} />
               </Routes>
             </NoHeaderLayout>
-          } />
-          <Route
-            path="/order/*"
-            element={
-              <HeaderLayout>
-                <Routes>
-                  <Route path="/menu" element={<SelectMenu/>}></Route>
-                  <Route path="/:partyNo" element={<OrderDetail />} />
-                  {/*popup은 url이 없지만 화면 확인용으로 임시로 만들어둠*/}
-                  <Route path="/:partyNo/popup" element={<OrderPopup />} />
-                  <Route path="/:partyNo/member" element={<OrderMember />} />
-                </Routes>
-              </HeaderLayout>
-            }
-          ></Route>
+          }/>
+        <Route
+          path="/order/*"
+          element={
+            <Routes>
+              <Route
+                path="/menu"
+                element={<HeaderLayout><SelectMenu /></HeaderLayout>}
+              />
+              <Route
+                path="/member"
+                element={<HeaderLayout><OrderMember /></HeaderLayout>}
+              />
+              <Route
+                path="/:partyNo"
+                element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>}
+              />
+              {/* popup은 url이 없지만 화면 확인용으로 임시로 만들어둠 */}
+              <Route
+                path="/:partyNo/popup"
+                element={<HeaderLayout><OrderPopup /></HeaderLayout>}
+              />
+            </Routes>
+          }
+        />
           <Route
             path="/party/*"
             element={
@@ -64,7 +74,7 @@ function App() {
                   <Route path="/confirm" element={<ConfirmParty />} />
                 </Routes>
               </HeaderLayout>
-            } 
+            }
           ></Route>
         </Routes>
         <Routes>
@@ -103,7 +113,7 @@ function App() {
                   <Route path="/confirm" element={<DesignConfirmParty />} />
                 </Routes>
               </NoHeaderLayout>
-            } 
+            }
           ></Route>
         </Routes>
       </Suspense>
