@@ -4,6 +4,7 @@ import { RootState } from "@/store";
 
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
 import { useEffect, useState, ChangeEvent } from "react";
+import SelectMenuPopup from "./SelectMenuPopup";
 
 interface Menu {
   menuId: string;
@@ -19,7 +20,9 @@ const SelectMenu = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
+  // const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
+  const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
     fetchMenuList()
@@ -60,6 +63,12 @@ const SelectMenu = () => {
       { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
     ])
     
+  }
+
+  const onClickMenu = (menu: object) => {
+    console.log(`selectedMenu ::: ${JSON.stringify(menu)}`)
+    setShowPopup(true)
+    // setSelectedMenu = menu
   }
   
   return (
@@ -117,7 +126,7 @@ const SelectMenu = () => {
             <ul>
               {
                 menuList.map((menu) => (
-                  <li key={menu.menuId}>{menu.menuNm}</li>
+                  <li key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</li>
                 ))
               }
             </ul>
@@ -125,6 +134,9 @@ const SelectMenu = () => {
           {/* end : 목록 영역 */}
         </div>
       </div>
+
+      {/* 선택 메뉴 팝업 */}
+      {showPopup && <SelectMenuPopup />}
     </div>
   );
 };
