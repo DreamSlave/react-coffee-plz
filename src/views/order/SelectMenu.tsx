@@ -1,4 +1,6 @@
 import "@/assets/temp-selectmenu/selectmenu.css"
+import { useSelector } from "react-redux";
+import { RootState } from "@/store";
 
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
 import { useEffect, useState, ChangeEvent } from "react";
@@ -9,6 +11,11 @@ interface Menu {
 }
 
 const SelectMenu = () => {
+  const orderer = {
+    name: useSelector((state: RootState) => state.order.name),
+    rank: useSelector((state: RootState) => state.order.rank),
+    team: useSelector((state: RootState) => state.order.team),
+  }
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
@@ -73,7 +80,7 @@ const SelectMenu = () => {
           <div className="person-info">
             <div className="overlap-group">
               {/* TODO : 선택한 주문자명 표시(Redux) */}
-              <div className="text-wrapper-2">정민재 프로(UX디자인팀)</div>
+              <div className="text-wrapper-2">{orderer.name} {orderer.rank}({orderer.team})</div>
             </div>
           </div>
         </div>
