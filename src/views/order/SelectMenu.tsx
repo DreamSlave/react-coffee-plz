@@ -134,7 +134,8 @@ const SelectMenu = () => {
       </div>
 
       {/* 선택 메뉴 팝업 */}
-      {showPopup && <SelectMenuPopup menu={selectedMenu} orderer={orderer} />}
+      {JSON.stringify(selectedMenu)}
+      {showPopup && <SelectMenuPopup />}
     </div>
   );
 };

@@ -1,8 +1,18 @@
-import '../../assets/temp-selectmenu/selectmenupopup.css'
+import '@/assets/temp-selectmenu/selectmenupopup.css'
 // import {useEffect, useState} from "react";
+
+// import { Menu } from './MenuInterface'
+// import { Orderer } from './OrdererInterface'
+
+/* interface SelectMenuPopupProps {
+  menu: Menu;
+  orderer: Orderer;
+} */
 
 
 function SelectMenuPopup() {
+// function SelectMenuPopup({menu = [], orderer: []}) {
+
   return (
     <div className="index">
       <div className="overlap-wrapper">
@@ -22,8 +32,8 @@ function SelectMenuPopup() {
                   </div>
                 </div>
               </div>
-              <div className="text-wrapper-3">초코라떼 - 아이스</div>
-              <div className="text-wrapper-4">정민재 프로(UX디자인팀)</div>
+              {/* // <div className="text-wrapper-3">{menu.menuNm}</div>
+              // <div className="text-wrapper-4">{orderer.name} {orderer.rank}({orderer.team})</div> */}
               <div className="text-wrapper-5">선택한 메뉴를 확인해주세요.</div>
             </div>
           </div>
