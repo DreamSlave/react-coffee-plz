@@ -9,6 +9,7 @@ import SelectMenuPopup from "./SelectMenuPopup";
 
 const SelectMenu = () => {
   const orderer = {
+    partyNo: useSelector((state: RootState) => state.order.partyNo),
     userId: useSelector((state: RootState) => state.order.userId),
     name: useSelector((state: RootState) => state.order.name),
     team: useSelector((state: RootState) => state.order.team),
