@@ -1,16 +1,9 @@
+import { Orderer } from "@/views/order/OrdererInterface";
+
 const SET_PARTY_NO = "SET_PARTY_NO" as const;
 const SET_ORDERER = "SET_ORDERER" as const;
 
-
-type OrdererInfo = {
-  partyNo: string
-  userId: string
-  name: string
-  team: string
-  rank: string
-};
-
-const initialOrdererInfo: OrdererInfo = {
+const initialOrdererInfo: Orderer = {
   partyNo: '',
   userId: '',
   name: '',
@@ -37,7 +30,7 @@ export const setOrderPartyNo = (partyNo : string) => ({
 
 type SelectOrderAction  = ReturnType<typeof setSelectOrderer> | ReturnType<typeof setOrderPartyNo>
 
-function selectOrderer(ordererInfo: OrdererInfo = initialOrdererInfo, action: SelectOrderAction ){
+function selectOrderer(ordererInfo: Orderer = initialOrdererInfo, action: SelectOrderAction ){
   console.log(ordererInfo)
   switch (action.type) {
     case SET_ORDERER:
