@@ -7,6 +7,7 @@ import NoHeaderLayout from './layout/NoHeaderLayout'
 
 const Entrance = lazy(() => import('./views/Entrance'))
 const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
+const CompleteMenu = lazy(() => import('./views/order/CompleteMenu'))
 const SelectPartyMember = lazy(() => import('./views/party/SelectPartyMember'))
 const SaveParty = lazy(() => import('./views/party/SaveParty'))
 const OrderDetail = lazy(() => import('./views/order/OrderDetail'))
@@ -46,6 +47,10 @@ function App() {
               <Route
                 path="/menu"
                 element={<HeaderLayout><SelectMenu /></HeaderLayout>}
+              />
+              <Route
+                path="/complete/:partyNo"
+                element={<HeaderLayout><CompleteMenu /></HeaderLayout>}
               />
               <Route
                 path="/member"
