@@ -1,9 +1,9 @@
-import '../../assets/css/ordermember.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import {useEffect, useState} from "react";
 import { setSelectOrderer } from "@/store/order";
-import { RootState } from "@/store";
 import OrdererItem from "@/views/order/OrdererItem";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 interface memberInfo {
@@ -29,7 +29,6 @@ function OrderMember() {
 
   const dispatch = useDispatch();
 
-  const userInfo = useSelector((state: RootState) => state.order);
   const navigate  = useNavigate();
   const onClickOrderer = (userId: string, name: string, rank: string, team: string) => {
     dispatch(setSelectOrderer(userId, name, rank, team))
@@ -45,36 +44,22 @@ function OrderMember() {
 
   return (
     <>
-      <div className="element">
-        <div className="div">
-          <header className="header">
-            { userInfo.name }
-            { userInfo.partyNo }
-            {/*<img className="back-icon" alt="Back icon" src="back-icon.png" />*/}
-          </header>
-          <div className="title">
-            <p className="p">
-              <span className="text-wrapper">주문자</span>
-              <span className="span">를<br/>선택해주세요.
-            </span>
-            </p>
-          </div>
-          <div className="contents">
-            <div className="item-list">
-              {
-                orderMemberList.map((item, index)=>{
-                  const className = 'item-'+(item.isOrderComplete ? 'done-' : '') +(index+1)
-                  return (
-                    <div key={item.userId+index} className={className}>
-                      <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team}}
-                                   isOrderComplete={item.isOrderComplete}
-                                   selectOrderer={onClickOrderer}/>
-                    </div>
-                  )
-                })
-              }
-            </div>
-          </div>
+      <div id='order' className="element orderer">
+        <h1>
+          <span className="point">주문자를</span><br/>선택해주세요.
+        </h1>
+        <div className="orderer-list">
+          {
+            orderMemberList.map((item, index) => {
+              return (
+                <div key={item.userId + index} className="item">
+                  <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team}}
+                               isOrderComplete={item.isOrderComplete}
+                               selectOrderer={onClickOrderer}/>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </>
