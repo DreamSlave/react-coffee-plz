@@ -18,6 +18,7 @@ const SelectMenu = () => {
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
+  const [cafeId, setCafeId] = useState<string>('')
   const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
@@ -29,7 +30,6 @@ const SelectMenu = () => {
 
   // 검색어 change 이벤트 핸들링
   const onChangeSearchInputValue = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(`onChangeSearchInputValue!!!`)
     setSearchInputValue(e.target.value)
   }
 
@@ -46,28 +46,35 @@ const SelectMenu = () => {
     setMenuSearchText(tagText)
   }
 
-  
-
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
     console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
 
     // TODO: API call
-    setMenuList([
-      { menuId: 'MENU0001', menuNm: '아메리카노(ICE)' },
-      { menuId: 'MENU0002', menuNm: '아메리카노(ICE) 연하게' },
-      { menuId: 'MENU0003', menuNm: '아메리카노(HOT)' },
-      { menuId: 'MENU0004', menuNm: '아메리카노(HOT) 연하게' },
-      { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
-      { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
-      { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
-      { menuId: 'MENU9999', menuNm: '직접입력' },
-    ])
-    
+    let response = {
+      cafeId: 'CAFE0001',
+      menuList: [
+        { menuId: 'MENU0001', menuNm: '아메리카노(ICE)' },
+        { menuId: 'MENU0002', menuNm: '아메리카노(ICE) 연하게' },
+        { menuId: 'MENU0003', menuNm: '아메리카노(HOT)' },
+        { menuId: 'MENU0004', menuNm: '아메리카노(HOT) 연하게' },
+        { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
+        { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
+        { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
+        { menuId: 'MENU9999', menuNm: '직접입력' },
+      ]
+    }
+
+    setMenuList(response.menuList)
+    setCafeId(response.cafeId)
+  }
+
+  const toggleShowPopup = () => {
+    setShowPopup(prevState => !prevState)
   }
 
   const onClickMenu = (menu: Menu) => {
-    setShowPopup(true)
+    toggleShowPopup()
     setSelectedMenu(menu)
   }
   
@@ -136,7 +143,12 @@ const SelectMenu = () => {
       </div>
 
       {/* 선택 메뉴 팝업 */}
-      {showPopup && selectedMenu && <SelectMenuPopup menu={selectedMenu} orderer={orderer} />}
+      {showPopup && selectedMenu && 
+        <SelectMenuPopup
+          cafeId={cafeId}
+          menu={selectedMenu}
+          orderer={orderer}
+          toggleShowPopup={toggleShowPopup} />}
     </div>
   );
 };

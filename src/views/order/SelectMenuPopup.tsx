@@ -1,18 +1,44 @@
 import '@/assets/temp-selectmenu/selectmenupopup.css'
+import { useState, ChangeEvent } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import { Menu } from './MenuInterface'
 import { Orderer } from './OrdererInterface'
 
 interface SelectMenuPopupProps {
+  cafeId: String;
   menu: Menu;
   orderer: Orderer;
+  toggleShowPopup: () => void;
 }
 
-function SelectMenuPopup({ menu, orderer }: SelectMenuPopupProps) {
+function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuPopupProps) {
+  const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
 
-  const closePopup = () => {
-    //test
-    console.log(`재선택`)
+  const onChangeMenuNmInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setMenuNmInputValue(e.target.value)
+  }
+
+  const submit = () => {
+    let menuNm = menu.menuId === 'MENU9999' ? menuNmInpuValue : menu.menuNm
+    
+    if(menuNm.trim() === '') {
+      alert('메뉴명을 확인해주세요.')
+      return false
+    }
+
+    let params = {
+      cafeId,
+      userId: orderer.userId,
+      menuId: menu.menuId,
+      menuNm
+    }
+
+    console.log(`submit called ::: param ::: ${JSON.stringify(params)}`)
+
+    const navigate = useNavigate()
+    navigate(`/order/complete/${orderer.partyNo}`)
+
   }
 
   return (
@@ -25,12 +51,12 @@ function SelectMenuPopup({ menu, orderer }: SelectMenuPopupProps) {
               <div className="btn-group">
                 <div className="large-btn">
                   <div className="div-wrapper">
-                    <div className="text-wrapper">확인</div>
+                    <div className="text-wrapper" onClick={submit}>확인</div>
                   </div>
                 </div>
                 <div className="large-btn-st">
                   <div className="div">
-                    <div className="text-wrapper-2" onClick={closePopup}>재선택</div>
+                    <div className="text-wrapper-2" onClick={toggleShowPopup}>재선택</div>
                   </div>
                 </div>
               </div>
@@ -38,6 +64,8 @@ function SelectMenuPopup({ menu, orderer }: SelectMenuPopupProps) {
                 menu.menuId === 'MENU9999' ?
                   <input  type="text"
                           placeholder="메뉴명을 입력하세요."
+                          value={menuNmInpuValue}
+                          onChange={onChangeMenuNmInputValue}
                           className="text-wrapper-3"
                   /> :
                   <div className="text-wrapper-3">{menu.menuNm}</div>
