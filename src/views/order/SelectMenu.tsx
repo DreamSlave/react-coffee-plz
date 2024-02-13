@@ -9,9 +9,11 @@ import SelectMenuPopup from "./SelectMenuPopup";
 
 const SelectMenu = () => {
   const orderer = {
+    partyNo: useSelector((state: RootState) => state.order.partyNo),
+    userId: useSelector((state: RootState) => state.order.userId),
     name: useSelector((state: RootState) => state.order.name),
-    rank: useSelector((state: RootState) => state.order.rank),
     team: useSelector((state: RootState) => state.order.team),
+    rank: useSelector((state: RootState) => state.order.rank),
   }
   const [searchInputValue, setSearchInputValue] = useState<string>('')
   const [menuSearchText, setMenuSearchText] = useState<string>('')
@@ -59,12 +61,12 @@ const SelectMenu = () => {
       { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
       { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
       { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
+      { menuId: 'MENU9999', menuNm: '직접입력' },
     ])
     
   }
 
   const onClickMenu = (menu: Menu) => {
-    console.log(`selectedMenu ::: ${JSON.stringify(menu)}`)
     setShowPopup(true)
     setSelectedMenu(menu)
   }
@@ -134,8 +136,7 @@ const SelectMenu = () => {
       </div>
 
       {/* 선택 메뉴 팝업 */}
-      {JSON.stringify(selectedMenu)}
-      {showPopup && <SelectMenuPopup />}
+      {showPopup && selectedMenu && <SelectMenuPopup menu={selectedMenu} orderer={orderer} />}
     </div>
   );
 };
