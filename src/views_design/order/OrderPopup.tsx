@@ -3,50 +3,50 @@
 // import '../../assets/css/all.css'
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
-import {useEffect, useState} from "react";
+//import {useEffect, useState} from "react";
 
 
-interface orderUserInfo {
-  userNm : string;
-  count: number;
-  userId: string;
-  phoneNumber: string;
-}
+// interface orderUserInfo {
+//   userNm : string;
+//   count: number;
+//   userId: string;
+//   phoneNumber: string;
+// }
 
-interface orderPopupInfo{
-  menuNm: string;
-  menuId: string;
-  count: number;
-  orderUserInfoList: orderUserInfo[];
-}
+// interface orderPopupInfo{
+//   menuNm: string;
+//   menuId: string;
+//   count: number;
+//   orderUserInfoList: orderUserInfo[];
+// }
 
 
-function getOrderPopupInfo(){
-  return{
-    menuNm: '아메리카노-아이스-연하게',
-    menuId: 'IDIDIDID',
-    count: 30,
-    orderUserInfoList: [
-      {userNm: '김진미 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
-      {userNm: '김세인 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
-      {userNm: '조도은 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
-    ]
-  }
-}
+// function getOrderPopupInfo(){
+//   return{
+//     menuNm: '아메리카노-아이스-연하게',
+//     menuId: 'IDIDIDID',
+//     count: 30,
+//     orderUserInfoList: [
+//       {userNm: '김진미 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
+//       {userNm: '김세인 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
+//       {userNm: '조도은 프로(PD팀)', count: ~~(Math.random() * 10), userId: 'ID'+ (~~(Math.random() * 10)), phoneNumber: '010-3722-8040'},
+//     ]
+//   }
+// }
 
 function OrderPopup() {
 
-  const [orderPopupInfo, setOrderPopupInfo] = useState<orderPopupInfo>({
-    menuNm: '',
-    menuId: '',
-    count: 0,
-    orderUserInfoList: []
-  });
+//   const [orderPopupInfo, setOrderPopupInfo] = useState<orderPopupInfo>({
+//     menuNm: '',
+//     menuId: '',
+//     count: 0,
+//     orderUserInfoList: []
+//   });
 
-  useEffect(() => {
-    const orderInfo = getOrderPopupInfo()
-    setOrderPopupInfo(orderInfo)
-  }, []);
+//   useEffect(() => {
+//     const orderInfo = getOrderPopupInfo()
+//     setOrderPopupInfo(orderInfo)
+//   }, []);
 
   return (
     <>
