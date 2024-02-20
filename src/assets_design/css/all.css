@@ -3,6 +3,14 @@
   --pointcolor: #f554be;
   --variable-collection-sub: #ffe7fa;
 } */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+li {
+  list-style: none;
+}
 
 #footer {
   position: fixed;
@@ -32,6 +40,14 @@ h1 {
   text-align: center;
   font-weight: 400;
   line-height: 1.2;
+}
+
+h2 {
+  font-size: 24px;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  letter-spacing: 0;
+  text-align: center;
+  font-weight: 400;
 }
 
 .large-btn {
@@ -260,11 +276,161 @@ h1 {
 }
 
 .popup-area {
-  width: 80%;
-  margin: 0 10%;
+  width: 90%;
+  display: inline-block;
+  margin: 0 5%;
   background-color: #fff;
   border-radius: 10px;
   box-sizing: border-box;
   padding: 25px;
-  z-index: 999999;
+}
+
+.order-item {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px #333 dashed;
+  font-size: 18px;
+}
+
+.order-item .menunm {
+  width: 85%;
+  float: left;
+}
+
+.order-item .count {
+  width: 15%;
+  float: right;
+  text-align: right;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.order-person-detail .person-info {
+  float: left;
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+.order-person-detail .person-info svg {
+  /* color: #FFE7FA */
+}
+
+.order-person-detail .call-btn {
+  float:right;
+  width: 30%;
+  text-align: center;
+  background-color: #FFBDF2;
+  border-radius: 15px;
+  padding: 2px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/*주문자 메뉴 선택*/
+
+.selectmenu {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.selectmenu .person-info {
+  text-align: center;
+  padding: 8px 20px;
+  display: inline-block;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 70%;
+  margin: 0 15%;
+  box-sizing: border-box;
+}
+
+.form-search {
+  width: 90%;
+  margin: 0 5%;
+  display: inline-block;
+}
+
+.form-search .input {
+  width: 90%;
+  float: left;
+}
+
+.form-search .btn {
+  width: 10%;
+  float: right;
+  text-align: right;
+  display: inline-block;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+.tag-group {
+  width: 90%;
+  margin: 0 5%;
+}
+
+.tag-group .menu-tag {
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: 500;
+  display: inline-block;
+}
+
+input {
+  border: 0;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+/*주문자 주문확인 팝업*/
+
+.pop_confirm {
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  border-radius: 25px 25px 0 0;  
+  box-sizing: border-box;
+  padding: 35px 25px;
+  text-align: center;
+}
+
+.pop_confirm .person-info {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.pop_confirm .menunm {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.btn-area {
+
+}
+
+.btn-area li {
+  float: left;
+  width: 48%;
+  margin-right: 2%;
+}
+
+.btn-area li:last-child {
+  margin-right: 0%;
 }

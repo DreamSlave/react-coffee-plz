@@ -50,35 +50,65 @@ function OrderPopup() {
 
   return (
     <>
-      <div id="popup">
+      {/* <div id="popup">
         <div className="popup-area">
-          <div>닫기</div>
+          <div className="fr">
+            <svg width="27px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          </div>
           <div className="order-item">
-            <p className="p">{orderPopupInfo.menuNm}</p>
-            <div className="text-wrapper-3">{orderPopupInfo.count}</div>
+            <div className="menunm">{orderPopupInfo.menuNm}</div>
+            <div className="count">{orderPopupInfo.count}</div>
           </div>
           <div className="order-person-detail">
-              {
-                orderPopupInfo.orderUserInfoList.map((item, index)=>{
-                  const className = 'list-'+(index+1)
-                  return (
-                    <div key={item.userId} className={className}>
-                      <div className="text-wrapper">
-                      {/*<svg width="22px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">*/}
-                      {/*  <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />*/}
-                      {/*</svg>*/}
-                        {item.userNm}
-                      </div>
-                      <div className="call-btn">
-                        <div className="overlap-group">
-                          <div className="div" onClick={() => document.location.href=`tel:${item.phoneNumber}` }>전화걸기</div>
-                        </div>
-                      </div>
+            {
+              orderPopupInfo.orderUserInfoList.map((item, index)=>{
+                const className = 'list-'+(index+1)
+                return (
+                  <div key={item.userId} className={className}>
+                    <div className="person-info">
+                      <svg className="fl mgr5" width="22px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" clip-rule="evenodd" />
+                      </svg>
+                      {item.userNm}
                     </div>
-                  )
-                })
-              }
+                    <div className="call-btn point" onClick={() => document.location.href=`tel:${item.phoneNumber}` }>전화걸기</div>
+                  </div>
+                )
+              })
+            }
           </div>
+        </div>
+      </div> */}
+
+      <div id="popup">
+        <div className='pop_confirm'>
+          <h2>선택한 메뉴를 확인해주세요.</h2>
+          <div className='person-info'>정민재 프로 (UX디자인팀)</div>
+          {/* <div className='menunm'>초코라떼-아이스</div> */}
+          <div>
+            <input  type="text"
+                    placeholder="메뉴명 입력"
+                    className="mgt10 mgb5"
+            />
+            <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
+          </div>
+          <div className='btn-area'>
+            <ul>
+              <li>
+                <div className="large-btn bg_sub point">
+                  재선택
+                </div>
+              </li>
+              <li>
+                <div className="large-btn">
+                  확인
+                </div>
+              </li>
+            </ul>
+          </div>
+          
         </div>
       </div>
     </>
