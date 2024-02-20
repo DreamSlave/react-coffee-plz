@@ -1,4 +1,3 @@
-// import "@/assets/temp-selectmenu/selectmenu.css"
 import '@/assets_design/css/all.css'
 import '@/assets_design/css/style.scss'
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
