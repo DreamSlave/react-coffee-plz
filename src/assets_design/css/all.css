@@ -12,6 +12,53 @@ li {
   list-style: none;
 }
 
+input {
+  border: 0;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+select {
+  border: 0;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.label {
+  color: #999;
+  margin-top: 15px;
+}
+
+.react-datepicker-wrapper {
+  width: 90%;
+}
+.form_date .btn {
+  width: 10%;
+  float: right;
+  display: inline-block;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+.form_date .btn img {
+  width: 22px;
+}
+
 #footer {
   position: fixed;
   bottom: 0;
@@ -309,6 +356,7 @@ h2 {
 .order-item .menunm {
   width: 85%;
   float: left;
+  font-weight: 500;
 }
 
 .order-item .count {
@@ -395,20 +443,6 @@ h2 {
   display: inline-block;
 }
 
-input {
-  border: 0;
-  border-bottom: 1.5px #000 solid;
-  height: 52px;
-  font-size: 18px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0 15px;
-}
-
-input::placeholder {
-  color: #999;
-}
-
 /*주문자 주문확인 팝업*/
 
 .pop_confirm {
@@ -446,4 +480,10 @@ input::placeholder {
 
 .btn-area li:last-child {
   margin-right: 0%;
+}
+
+/*크리에이터 파티생성*/
+
+.form-area {
+  margin-top: 30px;
 }

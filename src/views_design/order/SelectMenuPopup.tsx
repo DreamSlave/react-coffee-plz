@@ -88,7 +88,11 @@ function OrderPopup() {
         <div className='pop_confirm'>
           <h2>선택한 메뉴를 확인해주세요.</h2>
           <div className='person-info'>정민재 프로 (UX디자인팀)</div>
+
+          {/* 메뉴명표시 */}
           {/* <div className='menunm'>초코라떼-아이스</div> */}
+
+          {/* 메뉴직접입력 선택 시 */}
           <div>
             <input  type="text"
                     placeholder="메뉴명 입력"

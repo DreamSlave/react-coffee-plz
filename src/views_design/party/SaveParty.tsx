@@ -1,12 +1,82 @@
 // import React from "react";
 // import "./style.css";
-import '../../assets/css/all.css'
+// import '../../assets/css/saveParty.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
 import DropDown from "@/component/DropDown.tsx"
+import { useState } from 'react';
+import DatePicker from "react-datepicker";
+import ko from "date-fns/locale/ko";
+
+import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 const SaveParty = () => {
+  const [startDate, setStartDate] = useState<Date| null>(new Date());
+  const [startTime, setStartTime] = useState<Date| null>(new Date());
+  const onChangeDropDown = (data : string) =>{
+    console.log("data",data)
+    
+  }
+  const partyInfo = useSelector((state: RootState) => state.party);
+  console.log(":partyInfo:",partyInfo);
+  
   return (
-    <div>
-      <DropDown dataItem={[{value : '1'},{value:'2'}]}><span>데이터</span></DropDown>
+    <div id='party' className="element">
+      <h1>
+        본격적으로<br/><span className="point">파티를 생성</span>합니다.
+      </h1>
+      
+      <div className="form-area">
+        <div className="input">
+          <div className="label">파티명</div>
+          <input  type="text"
+                  placeholder="파티명을 입력하세요."
+                  className=""
+          />
+        </div>
+        <div>
+          <div className="label">카페선택</div>
+          <DropDown onChange={(data) => onChangeDropDown(data.id)}
+            dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}></DropDown>
+        </div>
+        <div className="form_date mgb10">
+          <div className="label">마감설정</div>
+            <DatePicker
+              locale={ko}   
+              dateFormat='yyyy/MM/dd' // 날짜 형태 
+              shouldCloseOnSelect 
+              className=""
+              selected={startDate} 
+              minDate={new Date()}
+              onChange={(date: Date ) => setStartDate(date)} />
+              <div className="btn">
+                <img src="/src/assets/img/calendar_ic.png"></img>
+              </div>
+        </div>
+        <div className="form_date mgb10">
+          <DatePicker
+            selected={startTime}
+            onChange={(date: Date ) => setStartTime(date)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="hh:mm aa"
+          />
+          <div className="btn">
+          <img src="/src/assets/img/clock_ic.png"></img>
+          </div>
+        </div>
+      </div>
+
+      <footer id="footer">
+        <div className="large-btn">
+            미리보기
+        </div>
+      </footer>
+
     </div>
     // <div className="element">
     //   <div className="div">
