@@ -9,6 +9,7 @@ $basic-color03: #aaaaaa;
 $text_01: #000000;
 $text_02: #1e1e1e;
 $text_03: #999999;
+$text_04: #ffffff;
 $text_point: #ff5cc3;
 
 /*색상지정*/
@@ -33,6 +34,10 @@ h1 {
     color: $text_03 !important;
 }
 
+.white {
+    color: $text_04 !important;
+}
+
 .bg_black {
     background-color: $basic-color01 !important;
 }
@@ -47,6 +52,10 @@ h1 {
 
 .bg_pink {
     background-color: $main-color !important;
+}
+
+.bg_sub {
+    background-color: $sub-color !important;
 }
 
 #order {
