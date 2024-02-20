@@ -14,6 +14,7 @@ interface SelectMenuPopupProps {
 
 function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuPopupProps) {
   const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
+  const navigate = useNavigate()
 
   const onChangeMenuNmInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     setMenuNmInputValue(e.target.value)
@@ -35,10 +36,8 @@ function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuP
     }
 
     console.log(`submit called ::: param ::: ${JSON.stringify(params)}`)
-
-    const navigate = useNavigate()
+    
     navigate(`/order/complete/${orderer.partyNo}`)
-
   }
 
   return (
