@@ -282,7 +282,19 @@ h2 {
   background-color: #fff;
   border-radius: 10px;
   box-sizing: border-box;
-  padding: 25px;
+  padding: 65px 25px 25px 25px;
+  position: relative;
+}
+
+.popup-area .close {
+  width: 100%;
+  background: #eee;
+  padding: 15px 15px 9px 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
 }
 
 .order-item {
@@ -344,6 +356,7 @@ h2 {
   border-radius: 5px;
   width: 70%;
   margin: 0 15%;
+  margin-top: 15px;
   box-sizing: border-box;
 }
 
