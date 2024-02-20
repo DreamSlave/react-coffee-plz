@@ -1,4 +1,6 @@
-import '@/assets/temp-selectmenu/selectmenupopup.css'
+import '@/assets_design/css/all.css'
+import '@/assets_design/css/style.scss'
+
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -41,40 +43,39 @@ function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuP
   }
 
   return (
-    <div className="index">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          <div className="dim" />
-          <div className="bottom-sheet">
-            <div className="overlap-group">
-              <div className="btn-group">
-                <div className="large-btn">
-                  <div className="div-wrapper">
-                    <div className="text-wrapper" onClick={submit}>확인</div>
-                  </div>
-                </div>
-                <div className="large-btn-st">
-                  <div className="div">
-                    <div className="text-wrapper-2" onClick={toggleShowPopup}>재선택</div>
-                  </div>
-                </div>
+    <div id="popup">
+      <div className='pop_confirm'>
+        <h2>선택한 메뉴를 확인해주세요.</h2>
+        <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
+
+        {
+          menu.menuId === 'MENU9999' ?
+            <div>
+              <input  type="text"
+                      placeholder="메뉴명 입력"
+                      value={menuNmInpuValue}
+                      onChange={onChangeMenuNmInputValue}
+                      className="mgt10 mgb5"
+              />
+              <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
+            </div> :
+            <div className='menunm'>{menu.menuNm}</div>
+        }
+        <div className='btn-area'>
+          <ul>
+            <li>
+              <div className="large-btn bg_sub point" onClick={toggleShowPopup}>
+                재선택
               </div>
-              {
-                menu.menuId === 'MENU9999' ?
-                  <input  type="text"
-                          placeholder="메뉴명을 입력하세요."
-                          value={menuNmInpuValue}
-                          onChange={onChangeMenuNmInputValue}
-                          className="text-wrapper-3"
-                  /> :
-                  <div className="text-wrapper-3">{menu.menuNm}</div>
-              }
-              
-              <div className="text-wrapper-4">{orderer.name} {orderer.rank}({orderer.team})</div>
-              <div className="text-wrapper-5">선택한 메뉴를 확인해주세요.</div>
-            </div>
-          </div>
+            </li>
+            <li>
+              <div className="large-btn" onClick={submit}>
+                확인
+              </div>
+            </li>
+          </ul>
         </div>
+
       </div>
     </div>
   );
