@@ -11,7 +11,6 @@ const CompleteMenu = lazy(() => import('./views/order/CompleteMenu'))
 const SelectPartyMember = lazy(() => import('./views/party/SelectPartyMember'))
 const SaveParty = lazy(() => import('./views/party/SaveParty'))
 const OrderDetail = lazy(() => import('./views/order/OrderDetail'))
-const OrderPopup = lazy(() => import('./views/order/OrderPopup'))
 const OrderMember = lazy(() => import('./views/order/OrderMember'))
 const PreviewParty = lazy(() => import('./views/party/PreviewParty'))
 const ConfirmParty = lazy(() => import('./views/party/ConfirmParty'))
@@ -60,11 +59,6 @@ function App() {
               <Route
                 path="/:partyNo"
                 element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>}
-              />
-              {/* popup은 url이 없지만 화면 확인용으로 임시로 만들어둠 */}
-              <Route
-                path="/:partyNo/popup"
-                element={<HeaderLayout><OrderPopup /></HeaderLayout>}
               />
             </Routes>
           }

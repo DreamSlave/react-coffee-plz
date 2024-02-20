@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {setOrderPartyNo} from "@/store/order";
 import {useDispatch} from "react-redux";
+import OrderPopup from "@/views/order/OrderPopup";
 
 interface orderInfo {
   title : string;
@@ -68,13 +69,19 @@ function OrderDetail() {
     orderUserCount: 0,
     title: ""
   });
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isStoreOpen, setIsStoreOpen] = useState<boolean>(true)
 
   const { partyNo } = useParams();
   const onClickGoOrder = ()=>{
     dispatch(setOrderPartyNo( partyNo || ''))
     navigate(`/order/member`)
   }
+
+
+  const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
+  const togglePopup = () => {
+    setPopupOpen(!isPopupOpen);
+  };
 
   useEffect(() => {
     const orderInfoData = getOrderInfo()
@@ -84,10 +91,9 @@ function OrderDetail() {
     const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
     const nowTime: Date = new Date();
     const afterTime: number = endTime.getTime() - nowTime.getTime();
-    console.log(afterTime)
     setTimeout(closeTime, afterTime);
   }, []);
-  function closeTime() {setIsOpen(false)}
+  function closeTime() {setIsStoreOpen(false)}
 
   function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI: string): Date {
     const yyyy = parseInt(stringYYYYMMDDHHMI.substring(0, 4), 10);
@@ -99,6 +105,7 @@ function OrderDetail() {
   }
   return (
     <>
+      <OrderPopup isOpen={isPopupOpen} onClose={togglePopup} ></OrderPopup>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황
@@ -113,7 +120,7 @@ function OrderDetail() {
               <div className="title">{ orderInfo.title }</div>
               <div className="cafenm point">{ orderInfo.cafeNm }</div>
             </div>
-            {isOpen ? <img className="image" src="/src/assets/img/icon_open.png" /> : <img className="image"  src="/src/assets/img/icon_close.png"/>}
+            {isStoreOpen ? <img className="image" src="/src/assets/img/icon_open.png" /> : <img className="image"  src="/src/assets/img/icon_close.png"/>}
           </div>
           <div className="order-time">
             <span className="mgr5"><b>마감시간</b></span> { orderInfo.endDt }
@@ -139,7 +146,7 @@ function OrderDetail() {
                 return (
                   <div key={item.menuId}>
                     <div className="menunm">{item.menuNm}</div>
-                    <div className="count">{item.count}</div>
+                    <div onClick={togglePopup} className="count">{item.count}</div>
                   </div>
                 )
               })
@@ -149,7 +156,7 @@ function OrderDetail() {
 
         <footer id="footer" className="bg_pink">
           <div className="">
-            { isOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
+            { isStoreOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
           </div>
         </footer>
 
