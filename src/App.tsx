@@ -23,6 +23,7 @@ const DesignSaveParty = lazy(() => import('./views_design/party/SaveParty'))
 const DesignOrderDetail = lazy(() => import('./views_design/order/OrderDetail'))
 const DesignOrderPopup = lazy(() => import('./views_design/order/OrderPopup'))
 const DesignOrderMember = lazy(() => import('./views_design/order/OrderMember'))
+const DesignSelectMenuPopup = lazy(() => import('./views_design/order/SelectMenuPopup'))
 const DesignPreviewParty = lazy(() => import('./views_design/party/PreviewParty'))
 const DesignConfirmParty = lazy(() => import('./views_design/party/ConfirmParty'))
 
@@ -103,6 +104,7 @@ function App() {
                   {/*popup은 url이 없지만 화면 확인용으로 임시로 만들어둠*/}
                   <Route path="/:partyNo/popup" element={<DesignOrderPopup />} />
                   <Route path="/:partyNo/member" element={<DesignOrderMember />} />
+                  <Route path="/:partyNo/confirm" element={<DesignSelectMenuPopup/>} />
                 </Routes>
               </NoHeaderLayout>
             }
