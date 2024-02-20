@@ -2,6 +2,10 @@
 // import "./scss/style.scss"
 import '../../assets/css/orderPopup.css'
 import {useEffect, useState} from "react";
+// import '../../assets/css/all.css'
+import '../../assets_design/css/all.css'
+import '../../assets_design/css/style.scss'
+//import {useEffect, useState} from "react";
 
 
 interface orderUserInfo {
