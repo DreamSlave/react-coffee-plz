@@ -6,6 +6,8 @@ import CheckBox from "@/component/CheckBox.tsx"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setSelectPartyMember } from '@/store/party';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 // import ApiUtil from "../../api/api.util";
 // import ApiConfig from "../../api/api.config";
 
@@ -40,7 +42,7 @@ const SelectPartyMember = () => {
       "rank": "프로",
       "c_no": "01058935898",
       "checked":false,
-      "userId": 'ID'+ (~~(Math.random() * 1000))
+      "userId": 'ID111'
     },
     {
       "name": "김세인",
@@ -49,7 +51,7 @@ const SelectPartyMember = () => {
       "rank": "프로",
       "c_no": "01058935898",
       "checked":false,
-      "userId": 'ID'+ (~~(Math.random() * 1000))
+      "userId": 'ID222'
     },
     {
       "name": "조도은",
@@ -58,7 +60,7 @@ const SelectPartyMember = () => {
       "rank": "프로",
       "c_no": "01058935898",
       "checked":false,
-      "userId": 'ID'+ (~~(Math.random() * 1000))
+      "userId": 'ID333'
     },
     {
       "name": "권혜란",
@@ -67,7 +69,7 @@ const SelectPartyMember = () => {
       "rank": "프로",
       "c_no": "01058935898",
       "checked":false,
-      "userId": 'ID'+ (~~(Math.random() * 1000))
+      "userId": 'ID444'
     },
     {
       "name": "정민재",
@@ -76,17 +78,33 @@ const SelectPartyMember = () => {
       "rank": "프로",
       "c_no": "01058935898",
       "checked":false,
-      "userId": 'ID'+ (~~(Math.random() * 1000))
+      "userId": 'ID555'
     }
   ])
 
   useEffect(() => {
     // checked 상태가 변경될 때마다 실행되는 코드
   }, [members]);
-  
 
-  //const [teamList] : String[] = ([...new Set(members.map(item => item.team))]) 
-  
+  const [firstRender, setFirstRender] = useState(true);
+
+  useEffect(() => {
+    if (firstRender) {
+      if(partyInfo.memberList.length !== 0){
+        const result = [...members]
+        result.forEach(element => {
+          if(partyInfo.memberList.some(member => member.userId === element.userId)){
+            element.checked = true
+          }
+        });    
+        setMembers(result);
+
+
+      }
+        setFirstRender(false); 
+    }
+  }, [])
+    
   const [teamList, setTeamList] = useState<TeamProps[]>([...new Set(members.map(item => item.team))].map(mapData => {
     return {
       team : mapData,
@@ -122,6 +140,10 @@ const SelectPartyMember = () => {
     dispatch(setSelectPartyMember(selectMember))
     navigate('/party/save')
   }
+
+  const partyInfo = useSelector((state: RootState) => state.party);
+  console.log(":partyInfo:",partyInfo.memberList.length);
+  
   // const dispatch = useDispatch();
   
   // function getSample() {
