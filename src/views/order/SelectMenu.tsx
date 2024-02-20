@@ -87,7 +87,6 @@ const SelectMenu = () => {
         <span className="point">메뉴를</span><br/>선택해주세요.
       </h1>
       <div className="person-info bg_sub point">
-        {/* 선택한 주문자명 표시(Redux) */}
         {orderer.name} {orderer.rank}({orderer.team})
       </div>
       <div className="form-search mgt25 mgb15">
