@@ -66,6 +66,7 @@ select {
   width: 100%;
   padding: 0 25px 30px 25px;
   box-sizing: border-box;
+  z-index: 9999;
 }
 
 #order {
@@ -320,6 +321,7 @@ h2 {
   background-color: #00000047;
   position: fixed;
   padding-top: 55%;
+  z-index: 999999;
 }
 
 .popup-area {
