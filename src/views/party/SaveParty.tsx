@@ -1,12 +1,14 @@
 // import React from "react";
 // import "./style.css";
-import '../../assets/css/saveParty.css'
+// import '../../assets/css/saveParty.css'
 import DropDown from "@/component/DropDown.tsx"
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import ko from "date-fns/locale/ko";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 const SaveParty = () => {
   const [startDate, setStartDate] = useState<Date| null>(new Date());
@@ -15,6 +17,9 @@ const SaveParty = () => {
     console.log("data",data)
     
   }
+  const partyInfo = useSelector((state: RootState) => state.party);
+  console.log(":partyInfo:",partyInfo);
+  
   return (
     <div>
       <div>
