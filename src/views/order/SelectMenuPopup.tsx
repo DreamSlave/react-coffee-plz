@@ -39,7 +39,7 @@ function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuP
 
     console.log(`submit called ::: param ::: ${JSON.stringify(params)}`)
     
-    navigate(`/order/complete/${orderer.partyNo}`)
+    navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
   }
 
   return (

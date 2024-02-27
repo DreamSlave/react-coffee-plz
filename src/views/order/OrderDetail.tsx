@@ -32,7 +32,7 @@ function getOrderInfo(){
   return{
     title: '드림 슬레이브!',
     cafeNm: '메에가커픠',
-    endDt: '2024/02/23 20:01',
+    endDt: '2024/12/23 20:01',
     orderUserCount: 18 + ~~(Math.random() * 100),
     orderTagerUserCount: 30 + ~~(Math.random() * 100),
     orderDrinkCount: 15 + ~~(Math.random() * 100),

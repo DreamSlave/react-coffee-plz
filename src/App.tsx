@@ -49,7 +49,7 @@ function App() {
                 element={<HeaderLayout><SelectMenu /></HeaderLayout>}
               />
               <Route
-                path="/complete/:partyNo"
+                path="/complete/:partyNo/:encodedMenuNm"
                 element={<HeaderLayout><CompleteMenu /></HeaderLayout>}
               />
               <Route
