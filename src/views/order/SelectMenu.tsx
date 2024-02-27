@@ -82,47 +82,7 @@ const SelectMenu = () => {
   
   return (
 
-    <div id='order' className="element selectmenu">
-      <h1>
-        <span className="point">메뉴를</span><br/>선택해주세요.
-      </h1>
-      <div className="person-info bg_sub point">
-        {orderer.name} {orderer.rank}({orderer.team})
-      </div>
-      <div className="form-search mgt25 mgb15">
-        <div className="input">
-          <input  type="text"
-                  placeholder="검색"
-                  value={searchInputValue}
-                  onChange={onChangeSearchInputValue}
-                  className=""
-          />
-        </div>
-        <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div>
-      </div>
-
-      {/* start : 태그 영역 */}
-      <div className="tag-group">
-        {
-          defaultTagTextList.map((tagText, index) => (
-            <div className="menu-tag bg_pink white" key={index} onClick={() => onClickTagButton(tagText)}>
-              # {tagText}
-            </div>
-          ))
-        }
-      </div>
-      {/* end : 태그 영역 */}
-
-      {/* start : 목록 영역 */}
-      <div className="orderer-list mgt25">
-        {
-          menuList.map((menu) => (
-            <div className="item" key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</div>
-          ))
-        }
-      </div>
-      {/* end : 목록 영역 */}
-
+    <div>
       {/* 선택 메뉴 팝업 */}
       {showPopup && selectedMenu && 
         <SelectMenuPopup
@@ -130,6 +90,48 @@ const SelectMenu = () => {
           menu={selectedMenu}
           orderer={orderer}
           toggleShowPopup={toggleShowPopup} />}
+
+      <div id='order' className="element selectmenu">
+        <h1>
+          <span className="point">메뉴를</span><br/>선택해주세요.
+        </h1>
+        <div className="person-info bg_sub point">
+          {orderer.name} {orderer.rank}({orderer.team})
+        </div>
+        <div className="form-search mgt25 mgb15">
+          <div className="input">
+            <input  type="text"
+                    placeholder="검색"
+                    value={searchInputValue}
+                    onChange={onChangeSearchInputValue}
+                    className=""
+            />
+          </div>
+          <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div>
+        </div>
+
+        {/* start : 태그 영역 */}
+        <div className="tag-group">
+          {
+            defaultTagTextList.map((tagText, index) => (
+              <div className="menu-tag bg_pink white" key={index} onClick={() => onClickTagButton(tagText)}>
+                # {tagText}
+              </div>
+            ))
+          }
+        </div>
+        {/* end : 태그 영역 */}
+
+        {/* start : 목록 영역 */}
+        <div className="orderer-list mgt25">
+          {
+            menuList.map((menu) => (
+              <div className="item" key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</div>
+            ))
+          }
+        </div>
+        {/* end : 목록 영역 */}
+      </div>
     </div>
   );
 };
