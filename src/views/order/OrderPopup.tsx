@@ -50,7 +50,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      { isOpen && <div id="popup">
+      { isOpen && <div id="popup" onClick={onClose}>
         <div className="popup-area">
           <div onClick={onClose} className="close">
             <div className="fr">
