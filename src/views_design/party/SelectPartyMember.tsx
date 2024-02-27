@@ -106,7 +106,7 @@ const SelectPartyMember = () => {
         <span className="point">대상인원을</span><br/>선택해주세요.
       </h1>
 
-      <div className="total_chck">
+      <div className="total_chck mgt20 mgb20">
         {members.filter(item => item.checked).length}명
       </div>
       
@@ -116,7 +116,10 @@ const SelectPartyMember = () => {
             <span key={teamIndex+`_span`}>{teamItem.team}</span>
           </CheckBox>
           <div className="p_2dpth_btn" onClick={() => changeIsView(teamIndex, teamItem.isView)}>
-            &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp;
+            {/* &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp; */}
+            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 12L0 4h15l-7.5 8z" fill="currentColor"></path></svg>
+            {/* 위화살표 svg */}
+            {/* <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 3l7.5 8H0l7.5-8z" fill="currentColor"></path></svg> */}
           </div>
           <div className="p_2dpth" key={teamIndex+`_innder_div`} >
             {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 

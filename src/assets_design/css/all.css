@@ -26,6 +26,8 @@ input::placeholder {
   color: #999;
 }
 
+input
+
 select {
   border: 0;
   border-bottom: 1.5px #000 solid;
@@ -74,11 +76,16 @@ select {
   padding-bottom: 50px;
 }
 
+#party {
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
 .element {
   width: 90%;
   margin: auto;
   padding: 0 5%;
-  padding-top: 40px;
+  padding-top: 50px;
 }
 
 h1 {
@@ -267,6 +274,8 @@ h2 {
 
 .p_2dpth_btn {
   float:right;
+  width: 25px;
+  height: 25px;
 }
 
 /*주문자 대상 선택*/
@@ -443,6 +452,7 @@ h2 {
   padding: 5px 15px;
   font-weight: 500;
   display: inline-block;
+  margin: 0 5px 5px 0;
 }
 
 /*주문자 주문확인 팝업*/
@@ -488,4 +498,28 @@ h2 {
 
 .form-area {
   margin-top: 30px;
+}
+
+/*크리에이터 주문확인*/
+
+.order-list-detail {
+  width: 100%;
+  height: auto;
+  padding: 10px 10px 15px 10px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.order-list-detail .title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.order-list-detail .list ul li {
+  margin-bottom: 10px;
+}
+
+.order-list-detail .list ul li:last-child {
+  margin-bottom: 0px;
 }
