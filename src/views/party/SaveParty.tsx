@@ -2,28 +2,58 @@
 // import "./style.css";
 // import '../../assets/css/saveParty.css'
 import DropDown from "@/component/DropDown.tsx"
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import DatePicker from "react-datepicker";
 import ko from "date-fns/locale/ko";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { setSaveParty } from '@/store/party';
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const SaveParty = () => {
-  const [startDate, setStartDate] = useState<Date| null>(new Date());
-  const [startTime, setStartTime] = useState<Date| null>(new Date());
+  const [endDate, setEndDate] = useState<Date>(new Date());
+  const [endTime, setEndTime] = useState<Date>(new Date());
+  const [partyName, setPartyName] = useState<string>('')
+  const [cafeId, setCafeID] = useState<string>('')
+  
+  const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
+    setPartyName(event.target.value);
+  };
+
   const onChangeDropDown = (data : string) =>{
     console.log("data",data)
+    setCafeID(data)
     
   }
   const partyInfo = useSelector((state: RootState) => state.party);
   console.log(":partyInfo:",partyInfo);
+
+  const navigate  = useNavigate();
+  const dispatch = useDispatch();
+
+  const onClickSaveParty = function(){
+    const yyyymmdd : string = endDate.toLocaleDateString('en-CA').replace(/-/g, '');
+    const HHmm : string = endTime.toLocaleTimeString('en-US', {hour12: false}).slice(0, -3).replace(':', '');
+    dispatch(setSaveParty(partyName, cafeId, yyyymmdd, HHmm))
+    navigate('/party/preview')
+  }
+
+
   
   return (
     <div>
       <div>
-        <input/>
+        <br/>
+        파티명
+        <br/>
+        <input
+          type="text"
+          value={partyName}
+          onChange={onChangePartyName}
+        />
       </div>
       <div>
         <DropDown onChange={(data) => onChangeDropDown(data.id)}
@@ -34,14 +64,14 @@ const SaveParty = () => {
           locale={ko}   
           dateFormat='yyyy/MM/dd' // 날짜 형태 
           shouldCloseOnSelect 
-          selected={startDate} 
+          selected={endDate} 
           minDate={new Date()}
-          onChange={(date: Date ) => setStartDate(date)} />
+          onChange={(date: Date ) => setEndDate(date)} />
       </div>
       <div>
       <DatePicker
-        selected={startTime}
-        onChange={(date: Date ) => setStartTime(date)}
+        selected={endTime}
+        onChange={(date: Date ) => setEndTime(date)}
         showTimeSelect
         showTimeSelectOnly
         timeIntervals={15}
@@ -49,6 +79,12 @@ const SaveParty = () => {
         dateFormat="hh:mm aa"
       />
       </div>
+      <footer id="footer">
+        <div className="large-btn" onClick={onClickSaveParty}>
+            파티생성하기
+        </div>
+      </footer>
+      
     </div>
     // <div className="element">
     //   <div className="div">
