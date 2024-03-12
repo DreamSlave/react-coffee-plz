@@ -1,10 +1,39 @@
 // import './App.css'
 // import "./scss/style.scss"
 // import '../../assets/css/all.css'
+import { useSelector } from 'react-redux';
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
+import { RootState } from '@/store';
+import { useNavigate } from 'react-router-dom';
 
 function PreviewParty() {
+  const partyInfo = useSelector((state: RootState) => state.party);
+  console.log(":partyInfo:",partyInfo);
+
+  const navigate  = useNavigate();
+
+  const onClickPreviewParty = function(){
+    navigate('/party/confirm')
+  }
+
+
+  const formatDate = (dateString : string) => {
+    const year = dateString.substring(0, 4);
+    const month = dateString.substring(4, 6);
+    const day = dateString.substring(6, 8);
+      
+    return `${year}/${month}/${day}`;
+  };
+
+  const formatTime = (timeString : string) => {
+    const hours = timeString.substring(0, 2);
+    const minutes = timeString.substring(2, 4);
+  
+    return `${hours}:${minutes}`;
+  };
+  
+
 
   return (
     <div id='party' className="element pbd50">
@@ -18,32 +47,31 @@ function PreviewParty() {
             </div>
             <div className="order-title">
               <div className="text">
-                <div className="title">파티명</div>
-                <div className="cafenm point">카페이름</div>
+                <div className="title">{partyInfo.partyName}</div>
+                <div className="cafenm point">{partyInfo.cafeNm}</div>
               </div>
               <div className="image">
                 <img src="/src/assets/img/icon_hurry.png" />
               </div>
             </div>
             <div className="order-time">
-              <span className="mgr5"><b>마감시간</b></span> 2023/09/06 12:22
+              <span className="mgr5"><b>마감시간</b></span> {formatDate(partyInfo.endDate)} {formatTime(partyInfo.endTime)}
             </div>
             
             <div className="order-list-detail">
-              <div className="title"><b>파티원 <span className="point">4</span>명</b></div>
+              <div className="title"><b>파티원 <span className="point">{partyInfo.memberList.length}</span>명</b></div>
               <div className="list">
                 <ul>
-                  <li>1. 정민재 프로(UX디자인팀)</li>
-                  <li>2. 정민재 프로(UX디자인팀)</li>
-                  <li>3. 정민재 프로(UX디자인팀)</li>
-                  <li>4. 정민재 프로(UX디자인팀)</li>
+                {partyInfo.memberList.map((item, index) =>
+                  <li>{index+1}. {item.name} {item.rank}({item.team})</li>
+                )}
                 </ul>
               </div>
             </div>
         </div>
         
         <footer id="footer" className="bg_white">
-          <div className="large-btn">
+          <div className="large-btn" onClick={onClickPreviewParty}>
               파티생성
           </div>
         </footer>

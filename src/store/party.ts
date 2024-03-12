@@ -1,5 +1,6 @@
 const SET_PARTY_MEMBER = "SET_PARTY_MEMBER" as const;
 const SET_PARTY = "SET_PARTY" as const;
+const INIT_PARTY = "INIT_PARTY" as const;
 
 
 type PartyInfo = {
@@ -45,15 +46,25 @@ export const setSaveParty = (partyName : string, cafeId : string, cafeNm : strin
   }
 })
 
+export const initParty = () => ({
+  type: INIT_PARTY,
+})
 
-type SelectPartyAction  = ReturnType<typeof setSelectPartyMember> | ReturnType<typeof setSaveParty>
+
+
+type SelectPartyAction  = ReturnType<typeof setSelectPartyMember> | ReturnType<typeof setSaveParty> | ReturnType<typeof initParty>
 
 function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPartyAction ){
-  console.log(partyInfo)
   switch (action.type) {
     case SET_PARTY_MEMBER:
       return {
         memberList: action.payload.memberList,
+        partyName: partyInfo.partyName,
+        cafeId: partyInfo.cafeId,
+        cafeNm: partyInfo.cafeNm,
+        endDate: partyInfo.endDate,
+        endTime: partyInfo.endTime,
+
       };
     case SET_PARTY:
       return {
@@ -64,6 +75,16 @@ function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPart
         endDate: action.payload.endDate,
         endTime: action.payload.endTime,
       };  
+    case INIT_PARTY:
+      return {
+        memberList: [],
+        partyName : '',
+        cafeId : '',
+        cafeNm : '',
+        endDate : '',
+        endTime : ''
+      };
+  
     default:
       return partyInfo;
   }
