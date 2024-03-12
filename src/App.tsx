@@ -32,7 +32,7 @@ function App() {
       <Suspense fallback={<div>Wait a moment...</div>}>
       <Routes>
         <Route
-          path="/*"
+          path="/react-coffee-plz/*"
           element={
             <NoHeaderLayout>
               <Routes>
@@ -41,7 +41,7 @@ function App() {
             </NoHeaderLayout>
           }/>
         <Route
-          path="/order/*"
+          path="/react-coffee-plz/order/*"
           element={
             <Routes>
               <Route
@@ -64,7 +64,7 @@ function App() {
           }
         />
           <Route
-            path="/party/*"
+            path="/react-coffee-plz/party/*"
             element={
               <HeaderLayout>
                 <Routes>

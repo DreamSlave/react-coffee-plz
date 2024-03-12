@@ -52,6 +52,9 @@
 }
 .main_img {
   margin: auto;
+  width: 70%;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 .main_img img {
   width: 100%;

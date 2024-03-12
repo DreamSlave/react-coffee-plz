@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import {setOrderPartyNo} from "@/store/order";
 import {useDispatch} from "react-redux";
 import OrderPopup from "@/views/order/OrderPopup";
+import iconClose from "@/assets/img/icon_close.png"
+import iconOpen from "@/assets/img/icon_open.png"
+import clipImg from "@/assets/img/clip_img.png"
 
 interface orderInfo {
   title : string;
@@ -113,14 +116,14 @@ function OrderDetail() {
 
         <div className="order-list-area">
           <div className="clipimg">
-            <img src="/src/assets/img/clip_img.png" />
+            <img src={clipImg} />
           </div>
           <div className="order-title">
             <div className="text">
               <div className="title">{ orderInfo.title }</div>
               <div className="cafenm point">{ orderInfo.cafeNm }</div>
             </div>
-            {isStoreOpen ? <img className="image" src="/src/assets/img/icon_open.png" /> : <img className="image"  src="/src/assets/img/icon_close.png"/>}
+            {isStoreOpen ? <img className="image" src={iconOpen} /> : <img className="image"  src={iconClose}/>}
           </div>
           <div className="order-time">
             <span className="mgr5"><b>마감시간</b></span> { orderInfo.endDt }
