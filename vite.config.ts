@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: '/react-coffee-plz',
-  plugins: [react(), tsconfigPaths()],
+export default defineConfig(({mode})=> {
+  return {
+    base: mode === 'development' ? '/' :'/react-coffee-plz',
+    plugins: [react(), tsconfigPaths()],
+  }
 })
