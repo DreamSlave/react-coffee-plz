@@ -5,7 +5,7 @@ import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 
 import DropDown from "@/component/DropDown.tsx"
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
 import ko from "date-fns/locale/ko";
 
@@ -16,20 +16,36 @@ import { setSaveParty } from '@/store/party';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
+interface CafeProps {
+  cafeId : string
+  cafeNm : string
+  value : string
+}
+
 const SaveParty = () => {
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [partyName, setPartyName] = useState<string>('')
-  const [cafeId, setCafeID] = useState<string>('')
+  const [cafeId, setCafeId] = useState<string>('')
+  const [cafeNm, setCafeNm] = useState<string>('')
+  const [cafeList] = useState<CafeProps[]>([{value : '메가커피', cafeNm : '메가커피', cafeId : '001'},{value:'컴포즈커피', cafeNm : '컴포즈커피', cafeId:'002'}])
   
+  useEffect(() => {
+    if (cafeId === '' && cafeNm === '') {
+      setCafeNm(cafeList[0].cafeNm);
+      setCafeId(cafeList[0].cafeId);
+    }
+  }, []);
+
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
     setPartyName(event.target.value);
   };
 
   const onChangeDropDown = (data : string) =>{
     console.log("data",data)
-    setCafeID(data)
-    
+    const dataItem = cafeList.find(item => item.value === data)
+    setCafeNm(dataItem?.cafeNm ?? '')
+    setCafeId(dataItem?.cafeId ?? '')
   }
   const partyInfo = useSelector((state: RootState) => state.party);
   console.log(":partyInfo:",partyInfo);
@@ -40,7 +56,8 @@ const SaveParty = () => {
   const onClickSaveParty = function(){
     const yyyymmdd : string = endDate.toLocaleDateString('en-CA').replace(/-/g, '');
     const HHmm : string = endTime.toLocaleTimeString('en-US', {hour12: false}).slice(0, -3).replace(':', '');
-    dispatch(setSaveParty(partyName, cafeId, yyyymmdd, HHmm))
+    
+    dispatch(setSaveParty(partyName, cafeId, cafeNm, yyyymmdd, HHmm))
     navigate('/party/preview')
   }
 
@@ -65,8 +82,8 @@ const SaveParty = () => {
         </div>
         <div>
           <div className="label">카페선택</div>
-          <DropDown onChange={(data) => onChangeDropDown(data.id)}
-            dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}></DropDown>
+          <DropDown onChange={(data) => onChangeDropDown(data.value)}
+            dataItem={cafeList}></DropDown>
         </div>
         <div className="form_date mgb10">
           <div className="label">마감설정</div>
