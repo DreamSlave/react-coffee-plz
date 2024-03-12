@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -8,16 +6,10 @@ import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 
 const CompleteMenu = () => {
-  const orderer = {
-    partyNo: useSelector((state: RootState) => state.order.partyNo),
-    userId: useSelector((state: RootState) => state.order.userId),
-    name: useSelector((state: RootState) => state.order.name),
-    team: useSelector((state: RootState) => state.order.team),
-    rank: useSelector((state: RootState) => state.order.rank),
-  }
   const { encodedMenuNm } = useParams<{ encodedMenuNm: string }>()
   const [ menuNm, setMenuNm ] = useState<string>('')
   const navigate = useNavigate()
+  console.log(menuNm)
 
   useEffect(() => {
     if(encodedMenuNm && encodedMenuNm !== '') {
