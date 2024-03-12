@@ -47,16 +47,14 @@ const SaveParty = () => {
               locale={ko}   
               dateFormat='yyyy/MM/dd' // 날짜 형태 
               shouldCloseOnSelect 
-              className=""
+              className="datepicker"
               selected={startDate} 
               minDate={new Date()}
               onChange={(date: Date ) => setStartDate(date)} />
-              <div className="btn">
-                <img src="/src/assets/img/calendar_ic.png"></img>
-              </div>
         </div>
         <div className="form_date mgb10">
           <DatePicker
+            className="timepicker"
             selected={startTime}
             onChange={(date: Date ) => setStartTime(date)}
             showTimeSelect
@@ -65,9 +63,6 @@ const SaveParty = () => {
             timeCaption="Time"
             dateFormat="hh:mm aa"
           />
-          <div className="btn">
-          <img src="/src/assets/img/clock_ic.png"></img>
-          </div>
         </div>
       </div>
 
