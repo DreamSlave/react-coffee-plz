@@ -43,18 +43,20 @@ select {
   margin-top: 15px;
 }
 
-.react-datepicker-wrapper {
-  width: 90%;
+.datepicker {
+  background: url(/src/assets/img/calendar_ic.png) no-repeat;
+  background-size: 24px;
+  background-position: 96%;
 }
-.form_date .btn {
-  width: 10%;
-  float: right;
-  display: inline-block;
-  border-bottom: 1.5px #000 solid;
-  height: 52px;
-  font-size: 18px;
-  box-sizing: border-box;
-  padding-top: 15px;
+
+.timepicker {
+  background: url(/src/assets/img/clock_ic.png) no-repeat;
+  background-size: 24px;
+  background-position: 96%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
 }
 
 .form_date .btn img {

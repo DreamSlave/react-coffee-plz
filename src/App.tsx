@@ -28,11 +28,11 @@ const DesignConfirmParty = lazy(() => import('./views_design/party/ConfirmParty'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/react-coffee-plz">
       <Suspense fallback={<div>Wait a moment...</div>}>
       <Routes>
         <Route
-          path="/react-coffee-plz/*"
+          path="/*"
           element={
             <NoHeaderLayout>
               <Routes>
@@ -41,7 +41,7 @@ function App() {
             </NoHeaderLayout>
           }/>
         <Route
-          path="/react-coffee-plz/order/*"
+          path="/order/*"
           element={
             <Routes>
               <Route
@@ -64,7 +64,7 @@ function App() {
           }
         />
           <Route
-            path="/react-coffee-plz/party/*"
+            path="/party/*"
             element={
               <HeaderLayout>
                 <Routes>

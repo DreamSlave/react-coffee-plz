@@ -94,7 +94,17 @@ function OrderDetail() {
     const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
     const nowTime: Date = new Date();
     const afterTime: number = endTime.getTime() - nowTime.getTime();
-    setTimeout(closeTime, afterTime);
+
+    const oneDay: number = 1000 * 60 * 60 * 24
+    if(afterTime > oneDay){
+      setTimeout(() => {
+        history.go(0);
+      }, oneDay);
+    }else {
+      setTimeout(() => {
+        closeTime();
+      }, afterTime);
+    }
   }, []);
   function closeTime() {setIsStoreOpen(false)}
 
