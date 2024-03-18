@@ -16,39 +16,59 @@ import { setSaveParty } from '@/store/party';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-interface CafeProps {
-  cafeId : string
-  cafeNm : string
-  value : string
+interface DataItem {
+  [key: string]: string | number; // 각각의 아이템은 string 또는 number 타입의 값을 가질 수 있음
 }
 
 const SaveParty = () => {
+  const [firstRender, setFirstRender] = useState(true);
+
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [partyName, setPartyName] = useState<string>('')
   const [cafeId, setCafeId] = useState<string>('')
   const [cafeNm, setCafeNm] = useState<string>('')
-  const [cafeList] = useState<CafeProps[]>([{value : '메가커피', cafeNm : '메가커피', cafeId : '001'},{value:'컴포즈커피', cafeNm : '컴포즈커피', cafeId:'002'}])
+  const [cafeList] = useState<DataItem[]>([{cafeNm : '메가커피', cafeId : '001'},{cafeNm : '컴포즈커피', cafeId:'002'}])
   
   useEffect(() => {
-    if (cafeId === '' && cafeNm === '') {
-      setCafeNm(cafeList[0].cafeNm);
-      setCafeId(cafeList[0].cafeId);
+    if (firstRender) {
+      if(partyInfo.partyName){
+        setPartyName(partyInfo.partyName)
+      }
+      if(partyInfo.cafeId){
+        setCafeNm(partyInfo.cafeNm);
+        setCafeId(partyInfo.cafeId);
+      }else{
+        if (cafeId === '' && cafeNm === '' && cafeList.length > 0) {
+          setCafeNm(String(cafeList[0].cafeNm));
+          setCafeId(String(cafeList[0].cafeId));
+        }    
+      }
+      if(partyInfo.endDate){
+        setEndDate(stringToDate(partyInfo.endDate))
+      }
+      if(partyInfo.endTime){
+        setEndTime(stringToTime(partyInfo.endTime))
+      }else{
+        setEndTime(nearestQuarterHour())
+      }
+      setFirstRender(false); 
     }
+    
   }, []);
 
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
     setPartyName(event.target.value);
   };
 
-  const onChangeDropDown = (data : string) =>{
+  const onChangeDropDown = (data : DataItem) =>{
     console.log("data",data)
-    const dataItem = cafeList.find(item => item.value === data)
-    setCafeNm(dataItem?.cafeNm ?? '')
-    setCafeId(dataItem?.cafeId ?? '')
+    const dataItem = cafeList.find(item => item.cafeId === data.cafeId);
+    setCafeNm(String(dataItem?.cafeNm) ?? '');
+    setCafeId(String(dataItem?.cafeId) ?? '');
   }
   const partyInfo = useSelector((state: RootState) => state.party);
-  console.log(":partyInfo:",partyInfo);
+  
 
   const navigate  = useNavigate();
   const dispatch = useDispatch();
@@ -60,6 +80,43 @@ const SaveParty = () => {
     dispatch(setSaveParty(partyName, cafeId, cafeNm, yyyymmdd, HHmm))
     navigate('/party/preview')
   }
+
+  function stringToDate(yyyymmdd: string): Date {
+    const year = parseInt(yyyymmdd.substring(0, 4), 10);
+    const month = parseInt(yyyymmdd.substring(4, 6), 10) - 1; // 월은 0부터 시작하므로 1을 빼줌
+    const day = parseInt(yyyymmdd.substring(6, 8), 10);
+    return new Date(year, month, day);
+  }
+
+  function stringToTime(hhmm: string): Date {
+    const newDate = new Date()
+    const hours = parseInt(hhmm.substring(0, 2), 10);
+    const minutes = parseInt(hhmm.substring(2, 4), 10);
+    newDate.setHours(hours);
+    newDate.setMinutes(minutes);
+
+    return newDate;
+  }
+
+  function nearestQuarterHour() {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const roundedMinutes = Math.ceil(minutes / 15) * 15; // 현재 분을 가장 가까운 15분 단위로 올림
+
+    // 만약 현재 분이 15의 배수라면 roundedMinutes는 60이 되므로 다음 시간대로 넘어감
+    if (roundedMinutes === 60) {
+        now.setHours(now.getHours() + 1);
+        now.setMinutes(0);
+    } else {
+        now.setMinutes(roundedMinutes);
+    }
+
+    // 초와 밀리초를 0으로 설정하여 정확한 시간을 반환
+    now.setSeconds(0);
+    now.setMilliseconds(0);
+
+    return now;
+}
 
 
   
@@ -82,8 +139,13 @@ const SaveParty = () => {
         </div>
         <div>
           <div className="label">카페선택</div>
-          <DropDown onChange={(data) => onChangeDropDown(data.value)}
-            dataItem={cafeList}></DropDown>
+          <DropDown
+              onChange={(data) => onChangeDropDown(data)}
+              dataItem={cafeList}
+              itemKey="cafeId" // cafeId를 itemKey로 지정
+              itemValue="cafeNm"
+              defaultValue={cafeId}
+            />
         </div>
         <div className="form_date mgb10">
           <div className="label">마감설정</div>
