@@ -58,10 +58,10 @@ const SaveParty = () => {
     }
 
     //validation 검사
-    if(partyName === '' && cafeId === ''){
-      setIsValid(false)
-    }else{
+    if(partyName !== '' && cafeId !== ''){
       setIsValid(true)
+    }else{
+      setIsValid(false)
     }
     const now: Date = new Date();
 
