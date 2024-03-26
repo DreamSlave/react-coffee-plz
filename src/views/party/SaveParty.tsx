@@ -29,7 +29,9 @@ const SaveParty = () => {
   const [cafeId, setCafeId] = useState<string>('')
   const [cafeNm, setCafeNm] = useState<string>('')
   const [cafeList] = useState<DataItem[]>([{cafeNm : '메가커피', cafeId : '001'},{cafeNm : '컴포즈커피', cafeId:'002'}])
-  
+  const [isValid, setIsValid] = useState<boolean>(true)
+
+
   useEffect(() => {
     if (firstRender) {
       if(partyInfo.partyName){
@@ -54,15 +56,36 @@ const SaveParty = () => {
       }
       setFirstRender(false); 
     }
+
+    //validation 검사
+    if(partyName === '' && cafeId === ''){
+      setIsValid(false)
+    }else{
+      setIsValid(true)
+    }
+    const now: Date = new Date();
+
+    const afterTime: number = endTime.getTime() - now.getTime();
+
+    if(endDate.getTime() > now.getTime()){
+      setIsValid(true)
+    }else{
+      setTimeout(() => {
+        if(endTime.getTime() - now.getTime() > 1000 * 60 * 60){
+          setIsValid(true)
+        }else{
+          setIsValid(false)
+        }
+      }, afterTime);
+    }
     
-  }, []);
+  }, [partyName, cafeId, cafeNm, endDate, endTime, firstRender]);
 
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
     setPartyName(event.target.value);
   };
 
   const onChangeDropDown = (data : DataItem) =>{
-    console.log("data",data)
     const dataItem = cafeList.find(item => item.cafeId === data.cafeId);
     setCafeNm(String(dataItem?.cafeNm) ?? '');
     setCafeId(String(dataItem?.cafeId) ?? '');
@@ -178,54 +201,18 @@ const SaveParty = () => {
       </div>
 
       <footer id="footer">
+      {
+        isValid ?
         <div className="large-btn" onClick={onClickSaveParty}>
             미리보기
+        </div>:
+        <div className="large-btn bg_gray" >
+            미리보기
         </div>
+        }
       </footer>
 
     </div>
-    // <div>
-    //   <div>
-    //     <br/>
-    //     파티명
-    //     <br/>
-    //     <input
-    //       type="text"
-    //       value={partyName}
-    //       onChange={onChangePartyName}
-    //     />
-    //   </div>
-    //   <div>
-    //     <DropDown onChange={(data) => onChangeDropDown(data.id)}
-    //       dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}><span>카페이름</span></DropDown>
-    //   </div>
-    //   <div>
-    //     <DatePicker
-    //       locale={ko}   
-    //       dateFormat='yyyy/MM/dd' // 날짜 형태 
-    //       shouldCloseOnSelect 
-    //       selected={endDate} 
-    //       minDate={new Date()}
-    //       onChange={(date: Date ) => setEndDate(date)} />
-    //   </div>
-    //   <div>
-    //   <DatePicker
-    //     selected={endTime}
-    //     onChange={(date: Date ) => setEndTime(date)}
-    //     showTimeSelect
-    //     showTimeSelectOnly
-    //     timeIntervals={15}
-    //     timeCaption="Time"
-    //     dateFormat="hh:mm aa"
-    //   />
-    //   </div>
-    //   <footer id="footer">
-    //     <div className="large-btn" onClick={onClickSaveParty}>
-    //         파티생성하기
-    //     </div>
-    //   </footer>
-      
-    // </div>
 
   );
 };

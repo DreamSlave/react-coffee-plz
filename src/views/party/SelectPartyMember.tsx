@@ -83,9 +83,15 @@ const SelectPartyMember = () => {
   ])
 
   useEffect(() => {
-    // checked 상태가 변경될 때마다 실행되는 코드
+    //validation 검사
+    if(members.filter(item => item.checked).length < 1){
+      setIsValid(false)
+    }else{
+      setIsValid(true)
+    }
   }, [members]);
 
+  const [isValid, setIsValid] = useState<boolean>(true)
   const [firstRender, setFirstRender] = useState(true);
 
   const partyInfo = useSelector((state: RootState) => state.party);
@@ -239,57 +245,19 @@ const SelectPartyMember = () => {
     )}
 
     <footer id="footer">
-      <div className="large-btn" onClick={onClickSelectPartyMember}>
-          파티생성하기
-      </div>
+      {
+        isValid ?
+        <div className="large-btn" onClick={onClickSelectPartyMember}>
+            파티생성하기
+        </div> :
+        <div className="large-btn bg_gray">
+            파티생성하기
+        </div>
+
+      }
     </footer>
     
   </div>
-
-    // <div className="element">
-    //   <div className="overlap">
-    //     <div className="group">      
-    //     연구소 {count}
-    //     <button className="plusBtn" onClick={onIncrease}>
-    //       +
-    //     </button>
-    //     <button className="minusBtn" onClick={onDecrease}>
-    //       -
-    //     </button>
-    //     </div>
-      
-    //   </div>
-    //   <p className="p">
-    //     <span className="span">대상 인원</span>
-    //     <span className="text-wrapper-2">
-    //       을<br />
-    //       선택해주세요.
-    //     </span>
-    //   </p>
-
-    //   <div className="text-wrapper-3">{members.filter(item => item.checked).length}명</div>
-      
-    //   {teamList.map((teamItem, teamIndex) => 
-    //     <div key={teamIndex}>
-    //       <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={(event) => onCheckTeam(teamItem.team, event.target.checked)}>
-    //         <span key={teamIndex+`_span`}>{teamItem.team}</span>
-    //       </CheckBox>
-    //       <div onClick={() => changeIsView(teamIndex, teamItem.isView)}>
-    //         &nbsp;&nbsp;{teamItem.isView ? '^' : '⌄'} &nbsp;&nbsp;
-    //       </div>
-    //       <div key={teamIndex+`_innder_div`} >
-    //         {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
-    //         <CheckBox key={item.name} checked={item.checked} onChange={(event) => setMembers((prevMembers) => prevMembers.map(prevItem => prevItem.name === item.name ? { ...prevItem, checked: event.target.checked } : prevItem))}>
-    //           <div key={index}>
-                
-    //             <div key={index}>{item.name} {item.rank} ({item.team})</div>
-    //           </div>
-    //         </CheckBox>
-    //         )}
-    //       </div>          
-    //     </div>
-    //   )}
-    // </div>
   );
 };
 
