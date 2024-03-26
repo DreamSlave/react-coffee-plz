@@ -38,8 +38,13 @@ const SaveParty = () => {
         </div>
         <div>
           <div className="label">카페선택</div>
-          <DropDown onChange={(data) => onChangeDropDown(data.id)}
-            dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}></DropDown>
+          <div className="select">
+            <DropDown 
+              onChange={(data) => onChangeDropDown(data.id)}
+              itemKey="id"
+              itemValue="value"
+              dataItem={[{value : '메가커피', id : '001'},{value:'컴포즈커피', id:'002'}]}></DropDown>
+          </div>
         </div>
         <div className="form_date mgb10">
           <div className="label">마감설정</div>

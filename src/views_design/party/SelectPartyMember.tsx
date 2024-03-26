@@ -121,14 +121,13 @@ const SelectPartyMember = () => {
             {/* 위화살표 svg */}
             {/* <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 3l7.5 8H0l7.5-8z" fill="currentColor"></path></svg> */}
           </div>
-          <div className="p_2dpth" key={teamIndex+`_innder_div`} >
+          <div className="p_2dpth mgt10" key={teamIndex+`_innder_div`} >
             {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
-            <CheckBox key={item.name} checked={item.checked} onChange={(event) => setMembers((prevMembers) => prevMembers.map(prevItem => prevItem.name === item.name ? { ...prevItem, checked: event.target.checked } : prevItem))}>
-              <div key={index}>
-                
-                <div key={index}>{item.name} {item.rank} ({item.team})</div>
-              </div>
-            </CheckBox>
+            <div className="checkbox">
+              <CheckBox key={item.name} checked={item.checked} onChange={(event) => setMembers((prevMembers) => prevMembers.map(prevItem => prevItem.name === item.name ? { ...prevItem, checked: event.target.checked } : prevItem))}>
+              <span key={index}>{item.name} {item.rank} ({item.team})</span>
+              </CheckBox>
+            </div>
             )}
           </div>          
         </div>

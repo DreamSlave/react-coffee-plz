@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '@/assets_design/css/all.css'
+import '@/assets_design/css/style.scss'
+import completeImg from '@/assets/img/compelete_img.png'
 
 const CompleteMenu = () => {
   const { encodedMenuNm } = useParams<{ encodedMenuNm: string }>()
@@ -29,7 +30,7 @@ const CompleteMenu = () => {
         주문이 완료되었습니다!
       </h1>
       <div className="order-complete_img">
-        <img src="/src/assets/img/compelete_img.png" />
+        <img src={completeImg} />
       </div>
       <div className="order-complete">
         <div className="person">

@@ -26,9 +26,7 @@ input::placeholder {
   color: #999;
 }
 
-input
-
-select {
+.select {
   border: 0;
   border-bottom: 1.5px #000 solid;
   height: 52px;
@@ -38,10 +36,27 @@ select {
   padding: 0 10px;
 }
 
+.select select {
+  font-size: 18px;
+  width: 100%;
+  padding-top: 15px;
+}
+
 .label {
   color: #999;
   margin-top: 15px;
 }
+.checkbox {
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.checkbox span {
+  margin-top: -1px;
+  line-height: 25px;
+  float: left;
+}
+
 
 .datepicker {
   background: url(/src/assets/img/calendar_ic.png) no-repeat;
@@ -262,7 +277,7 @@ h2 {
   border: 2px #000 solid;
   border-radius: 8px;
   margin-top: 10px;
-  padding: 15px;
+  padding: 15px 15px 10px 15px;
   font-weight: 600;
   font-size: 18px;
 }
@@ -272,6 +287,7 @@ h2 {
   height: 22px;
   margin: 0;
   margin-right: 8px;
+  float: left;
 }
 
 .p_2dpth_btn {
@@ -355,6 +371,12 @@ h2 {
   top: 0;
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
+}
+
+.popup-area .alert_txt {
+  font-size: 18px;
+  text-align: center;
+  margin: -10px 0 40px 0;
 }
 
 .order-item {

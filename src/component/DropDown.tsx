@@ -1,46 +1,65 @@
 import React, { useState, useEffect } from 'react';
 
-
-interface DropDownProps<T> {
-  children? : React.ReactElement
-  dataItem : Array<T>
-  onChange?:(value : T) => void;
+interface DataItem {
+  [key: string]: string | number;
 }
 
+interface DropDownProps<T extends DataItem, K extends keyof T> {
+  children?: React.ReactNode;
+  dataItem: T[]; // Change to T[] as it's more specific than Array<T>
+  onChange?: (value: T) => void;
+  defaultValue?: T[K];
+  itemKey: K;
+  itemValue: K;
+}
 
-const DropDown = <T extends { value: string},>({
+const DropDown = <T extends DataItem, K extends keyof T>({
   children,
   dataItem,
-  onChange
-}: DropDownProps<T>) => {
-  const [showDropDown, setShowDropDown] = useState<boolean>(false);
-
+  onChange,
+  defaultValue,
+  itemKey,
+  itemValue
+}: DropDownProps<T, K>) => {
+  const [selectedValue, setSelectedValue] = useState<T | undefined>(
+    defaultValue ? dataItem.find(item => item[itemKey] === defaultValue) : undefined
+  );
 
   useEffect(() => {
-    setShowDropDown(showDropDown);
-  }, [showDropDown]);
+    if (defaultValue !== undefined && !selectedValue) {
+      const defaultValueItem = dataItem.find(item => item[itemKey] === defaultValue);
+      if (defaultValueItem) {
+        setSelectedValue(defaultValueItem);
+        if (onChange) {
+          onChange(defaultValueItem);
+        }
+      }
+    }
+  }, [defaultValue, selectedValue, onChange, dataItem, itemKey]);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedIndex = event.target.selectedIndex;
     const selectedValue: T = dataItem[selectedIndex];
-  
+
+    setSelectedValue(selectedValue);
+
     if (onChange) {
       onChange(selectedValue);
     }
   };
-  
+
   return (
     <div>
       {children}
-      <select onChange={handleSelectChange}>
+      <select value={selectedValue?.[itemKey]} onChange={handleSelectChange}>
         {dataItem.map((item, index) => (
-          <option key={index} value={item.value}>
-            {item.value}
+          <option key={index} value={item[itemKey]}>
+            {item[itemValue]}
           </option>
         ))}
       </select>
     </div>
   );
-}
+};
 
 export default DropDown;
