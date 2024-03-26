@@ -66,14 +66,12 @@ function App() {
           <Route
             path="/party/*"
             element={
-              <HeaderLayout>
-                <Routes>
-                  <Route path="/select" element={<SelectPartyMember />} />
-                  <Route path="/save" element={<SaveParty />} />
-                  <Route path="/preview" element={<PreviewParty />} />
-                  <Route path="/confirm" element={<ConfirmParty />} />
-                </Routes>
-              </HeaderLayout>
+              <Routes>
+                <Route path="/select" element={<HeaderLayout><SelectPartyMember /></HeaderLayout>} />
+                <Route path="/save" element={<HeaderLayout><SaveParty /></HeaderLayout>} />
+                <Route path="/preview" element={<HeaderLayout><PreviewParty /></HeaderLayout>} />
+                <Route path="/confirm" element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
+              </Routes>
             }
           ></Route>
         </Routes>

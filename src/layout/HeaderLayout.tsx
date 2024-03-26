@@ -20,6 +20,8 @@ function HeaderLayout({ children }: { children: ReactNode}) {
     let goRouterPath = ''
     switch (location.pathname){
       case "/party/select":
+      case "/party/save":
+      case "/party/preview":
         goRouterPath = "/entrance"
         break
       case "/order/member":
