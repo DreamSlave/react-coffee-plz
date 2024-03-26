@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
+import { useParams } from 'react-router-dom';
 
 interface orderUserInfo {
   userNm : string;
@@ -17,7 +18,10 @@ interface orderPopupInfo{
 }
 
 
-function getOrderPopupInfo(){
+function getOrderPopupInfo(partyNo: string, menuId: string){
+
+  console.log(partyNo, menuId, "팝업 조회용 API 호출")
+
   return{
     menuNm: '아메리카노-아이스-연하게',
     menuId: 'IDIDIDID',
@@ -31,10 +35,11 @@ function getOrderPopupInfo(){
 }
 interface PopupProps {
   isOpen: boolean;
+  menuId: string;
   onClose: () => void;
 }
 
-const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuId, onClose }) => {
 
   const [orderPopupInfo, setOrderPopupInfo] = useState<orderPopupInfo>({
     menuNm: '',
@@ -43,10 +48,14 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
     orderUserInfoList: []
   });
 
+  const { partyNo } = useParams();
+
   useEffect(() => {
-    const orderInfo = getOrderPopupInfo()
-    setOrderPopupInfo(orderInfo)
-  }, []);
+    if(isOpen){
+      const orderInfo = getOrderPopupInfo(partyNo ?? '', menuId)
+      setOrderPopupInfo(orderInfo)
+    }
+  }, [isOpen, menuId]);
 
   return (
     <>

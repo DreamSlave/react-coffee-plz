@@ -7,14 +7,18 @@ import { useNavigate } from 'react-router-dom';
 import { Menu } from './MenuInterface'
 import { Orderer } from './OrdererInterface'
 
+import ApiUtil from '@/api/api.util';
+import ApiConfig from '@/api/api.config';
+
 interface SelectMenuPopupProps {
+  partyNo: String;
   cafeId: String;
   menu: Menu;
   orderer: Orderer;
   toggleShowPopup: () => void;
 }
 
-function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuPopupProps) {
+function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: SelectMenuPopupProps) {
   const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
   const navigate = useNavigate()
 
@@ -22,24 +26,46 @@ function SelectMenuPopup({ cafeId, menu, orderer, toggleShowPopup }: SelectMenuP
     setMenuNmInputValue(e.target.value)
   }
 
-  const submit = () => {
+  const submit = async () => {
     let menuNm = menu.menuId === 'MENU9999' ? menuNmInpuValue : menu.menuNm
     
     if(menuNm.trim() === '') {
       alert('메뉴명을 확인해주세요.')
       return false
     }
+   
+    // 직접입력의 경우 메뉴 등록 먼저 진행
+    if(menu.menuId === 'MENU9999') {
+      let { newMenuId } = await saveNewMenu(menuNm)
+      menu.menuId = newMenuId
+    }
+    
 
     let params = {
-      cafeId,
       userId: orderer.userId,
       menuId: menu.menuId,
-      menuNm
+      cafeId,
+      partyId: partyNo
     }
+    ApiUtil.post(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
 
-    console.log(`submit called ::: param ::: ${JSON.stringify(params)}`)
-    
-    navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
+      if(response.ok) {
+        navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
+      }
+    }).catch((error: any) => {
+      console.error('[/order/save] Error occurred ::: ', error);
+    })
+  }
+
+  const saveNewMenu = async (menuNm:string): Promise<any> => {
+
+    await ApiUtil.post(`${ApiConfig.defaultDomain}/menu/save`, { cafeId, menuNm }).then((response: any) => {
+      
+      return (response?.menuId || '')
+
+    }).catch((error: any) => {
+      console.error('[/menu/save] Error occurred ::: ', error);
+    })
   }
 
   return (
