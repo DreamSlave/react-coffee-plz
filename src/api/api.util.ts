@@ -1,15 +1,13 @@
 
-const token = `secret_xv2JxNIKcE6jnTqKJcwlB49264ov3BftEBrpRc3raU6`
 export default {
   async get(url: string){
     try {
       return await fetch(url, {
         method: 'GET',
         headers: {
-          "Notion-Version": "2022-06-28",
           "Accept": "application/json, text/plain, */*",
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": token
+          "Authorization": ""
         },
       });
     } catch (error) {
@@ -21,10 +19,9 @@ export default {
       return await fetch(url, {
         method: 'POST',
         headers: {
-          "Notion-Version": "2022-06-28",
           "Accept": "application/json, text/plain, */*",
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": token
+          "Authorization": ""
         },
         body: JSON.stringify(params),
       });
@@ -37,10 +34,9 @@ export default {
       return await fetch(url, {
         method: 'PATCH',
         headers: {
-          "Notion-Version": "2022-06-28",
           "Accept": "application/json, text/plain, */*",
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": token
+          "Authorization": ""
         },
         body: JSON.stringify(params),
       });
@@ -53,10 +49,9 @@ export default {
       return await fetch(url, {
         method: 'PUT',
         headers: {
-          "Notion-Version": "2022-06-28",
           "Accept": "application/json, text/plain, */*",
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": token
+          "Authorization": ""
         },
         body: JSON.stringify(params),
       });
@@ -69,10 +64,9 @@ export default {
       return await fetch(url, {
         method: 'DELETE',
         headers: {
-          "Notion-Version": "2022-06-28",
           "Accept": "application/json, text/plain, */*",
           "Content-Type": "application/json; charset=utf-8",
-          "Authorization": token
+          "Authorization": ""
         },
         body: JSON.stringify(params),
       });
