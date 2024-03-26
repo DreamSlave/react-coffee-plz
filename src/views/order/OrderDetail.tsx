@@ -82,9 +82,11 @@ function OrderDetail() {
 
 
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-  const togglePopup = () => {
-    setPopupOpen(!isPopupOpen);
-  };
+  const [selectedMenuId, setSelectedMenuId] = useState<string>('');
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  }
 
   useEffect(() => {
     const orderInfoData = getOrderInfo()
@@ -118,7 +120,7 @@ function OrderDetail() {
   }
   return (
     <>
-      <OrderPopup isOpen={isPopupOpen} onClose={togglePopup} ></OrderPopup>
+      <OrderPopup isOpen={isPopupOpen} menuId={selectedMenuId} onClose={closePopup} ></OrderPopup>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황
@@ -156,10 +158,14 @@ function OrderDetail() {
             <div className="title"><b>주문 취합 리스트</b></div>
             {
               menuList.map((item)=>{
+                const openPopup = () => {
+                  setPopupOpen(!isPopupOpen);
+                  setSelectedMenuId(item.menuId)
+                };
                 return (
                   <div key={item.menuId}>
                     <div className="menunm">{item.menuNm}</div>
-                    <div onClick={togglePopup} className="count">{item.count}</div>
+                    <div onClick={openPopup} className="count">{item.count}</div>
                   </div>
                 )
               })
