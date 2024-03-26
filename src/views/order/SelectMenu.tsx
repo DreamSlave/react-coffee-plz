@@ -86,6 +86,7 @@ const SelectMenu = () => {
       {/* 선택 메뉴 팝업 */}
       {showPopup && selectedMenu && 
         <SelectMenuPopup
+          partyNo={orderer.partyNo}
           cafeId={cafeId}
           menu={selectedMenu}
           orderer={orderer}
