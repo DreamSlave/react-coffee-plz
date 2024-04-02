@@ -1,5 +1,5 @@
 
-const defaultDomain = 'http://13.209.91.193'
+const defaultDomain = 'http://13.209.0.85'
 export default {
   defaultDomain
 }
