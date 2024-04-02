@@ -40,7 +40,6 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
       menu.menuId = newMenuId
     }
     
-
     let params = {
       userId: orderer.userId,
       menuId: menu.menuId,
@@ -49,7 +48,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
     }
     ApiUtil.post(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
 
-      if(response.ok) {
+      if(response && response.ok) {
         navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
       }
     }).catch((error: any) => {
