@@ -9,6 +9,9 @@ import { RootState } from "@/store";
 import { Menu } from './MenuInterface'
 import SelectMenuPopup from "./SelectMenuPopup";
 
+import ApiUtil from '@/api/api.util';
+import ApiConfig from '@/api/api.config';
+
 const SelectMenu = () => {
   const orderer = {
     partyNo: useSelector((state: RootState) => state.order.partyNo),
@@ -52,7 +55,21 @@ const SelectMenu = () => {
   const fetchMenuList = () => {
     console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
 
-    // TODO: API call
+    let params = {
+      partyId: orderer.partyNo,
+      searchName: menuSearchText
+    }
+    ApiUtil.post(`${ApiConfig.defaultDomain}/menu/info`, params).then((response: any) => {
+
+      if(response && response.ok) {
+        setMenuList(response.menuList)
+        setCafeId(response.cafeId)
+      }
+    }).catch((error: any) => {
+      console.error('[/order/save] Error occurred ::: ', error);
+    })
+
+    //test
     let response = {
       cafeId: 'CAFE0001',
       menuList: [
@@ -66,7 +83,6 @@ const SelectMenu = () => {
         { menuId: 'MENU9999', menuNm: '직접입력' },
       ]
     }
-
     setMenuList(response.menuList)
     setCafeId(response.cafeId)
   }
