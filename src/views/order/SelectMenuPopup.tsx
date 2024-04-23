@@ -3,6 +3,7 @@ import '@/assets_design/css/style.scss'
 
 import { useState, ChangeEvent } from "react";
 import { useNavigate } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group'
 
 import { Menu } from './MenuInterface'
 import { Orderer } from './OrdererInterface'
@@ -68,41 +69,43 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
   }
 
   return (
-    <div id="popup">
-      <div className='pop_confirm'>
-        <h2>선택한 메뉴를 확인해주세요.</h2>
-        <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
+    <CSSTransition in={true} appear={true} timeout={3000} classNames="popup">
+      <div id="popup" className="popup">
+        <div className='pop_confirm'>
+          <h2>선택한 메뉴를 확인해주세요.</h2>
+          <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
 
-        {
-          menu.menuId === 'MENU9999' ?
-            <div>
-              <input  type="text"
-                      placeholder="메뉴명 입력"
-                      value={menuNmInpuValue}
-                      onChange={onChangeMenuNmInputValue}
-                      className="mgt10 mgb5"
-              />
-              <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
-            </div> :
-            <div className='menunm'>{menu.menuNm}</div>
-        }
-        <div className='btn-area'>
-          <ul>
-            <li>
-              <div className="large-btn bg_sub point" onClick={toggleShowPopup}>
-                재선택
-              </div>
-            </li>
-            <li>
-              <div className="large-btn" onClick={submit}>
-                확인
-              </div>
-            </li>
-          </ul>
+          {
+            menu.menuId === 'MENU9999' ?
+              <div>
+                <input  type="text"
+                        placeholder="메뉴명 입력"
+                        value={menuNmInpuValue}
+                        onChange={onChangeMenuNmInputValue}
+                        className="mgt10 mgb5"
+                />
+                <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
+              </div> :
+              <div className='menunm'>{menu.menuNm}</div>
+          }
+          <div className='btn-area'>
+            <ul>
+              <li>
+                <div className="large-btn bg_sub point" onClick={toggleShowPopup}>
+                  재선택
+                </div>
+              </li>
+              <li>
+                <div className="large-btn" onClick={submit}>
+                  확인
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
-
       </div>
-    </div>
+    </CSSTransition>
   );
 }
 
