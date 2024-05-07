@@ -20,6 +20,7 @@ input {
   width: 100%;
   box-sizing: border-box;
   padding: 0 10px;
+  border-radius: 0;
 }
 
 input::placeholder {
@@ -47,6 +48,7 @@ input::placeholder {
   margin-top: 15px;
 }
 .checkbox {
+  width: 100%;
   margin: 10px 0;
   display: inline-block;
 }
@@ -628,3 +630,4 @@ h2 {
   line-height: 66px;
   font-size: 24px;
 }
+
