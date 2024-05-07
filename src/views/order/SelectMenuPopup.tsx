@@ -69,7 +69,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
   }
 
   return (
-    <CSSTransition in={true} appear={true} timeout={3000} classNames="popup">
+    <CSSTransition in={true} timeout={3000} classNames="fade">
       <div id="popup" className="popup">
         <div className='pop_confirm'>
           <h2>선택한 메뉴를 확인해주세요.</h2>
