@@ -17,6 +17,11 @@ function HeaderLayout({ children }: { children: ReactNode}) {
   };
 
   const onClickClose = () => {
+    const confirmResult = window.confirm('진행 중인 내용이 모두 사라집니다!\n종료하시겠습니까?')
+    if(!confirmResult) {
+      return
+    }
+
     let goRouterPath = ''
     switch (location.pathname){
       case "/party/select":
