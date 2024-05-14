@@ -30,41 +30,40 @@ function App() {
   return (
     <Router basename="/react-coffee-plz">
       <Suspense fallback={<div>Wait a moment...</div>}>
-      <Routes>
-        <Route path="/" element={<Navigate to="/entrance" />} />
-
-        <Route
-          path="/*"
-          element={
-            <NoHeaderLayout>
+        <Routes>
+          <Route path="/" element={<Navigate to="/entrance" />} />
+          <Route
+            path="/*"
+            element={
+              <NoHeaderLayout>
+                <Routes>
+                  <Route path="/entrance" element={<Entrance />} />
+                </Routes>
+              </NoHeaderLayout>
+            }/>
+          <Route
+            path="/order/*"
+            element={
               <Routes>
-                <Route path="/entrance" element={<Entrance />} />
+                <Route
+                  path="/menu"
+                  element={<HeaderLayout><SelectMenu /></HeaderLayout>}
+                />
+                <Route
+                  path="/complete/:partyNo/:encodedMenuNm"
+                  element={<HeaderLayout><CompleteMenu /></HeaderLayout>}
+                />
+                <Route
+                  path="/member"
+                  element={<HeaderLayout><OrderMember /></HeaderLayout>}
+                />
+                <Route
+                  path="/:partyNo"
+                  element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>}
+                />
               </Routes>
-            </NoHeaderLayout>
-          }/>
-        <Route
-          path="/order/*"
-          element={
-            <Routes>
-              <Route
-                path="/menu"
-                element={<HeaderLayout><SelectMenu /></HeaderLayout>}
-              />
-              <Route
-                path="/complete/:partyNo/:encodedMenuNm"
-                element={<HeaderLayout><CompleteMenu /></HeaderLayout>}
-              />
-              <Route
-                path="/member"
-                element={<HeaderLayout><OrderMember /></HeaderLayout>}
-              />
-              <Route
-                path="/:partyNo"
-                element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>}
-              />
-            </Routes>
-          }
-        />
+            }
+          />
           <Route
             path="/party/*"
             element={
@@ -76,6 +75,7 @@ function App() {
               </Routes>
             }
           ></Route>
+          <Route path="" element={<NotFoundPage/>} />
         </Routes>
         <Routes>
           //퍼블리싱 화면
@@ -121,5 +121,15 @@ function App() {
     </Router>
   )
 }
+
+const NotFoundPage = () => {
+  return (
+    <div>
+      <h1>404 - Not Found</h1>
+      <p>Sorry, the page you are looking for does not exist.</p>
+      {/* 이동할 수 있는 링크나 다른 내용 추가 */}
+    </div>
+  );
+};
 
 export default App
