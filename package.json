@@ -8,6 +8,7 @@
     "serve": "vite",
     "build": "tsc && vite build",
     "buildforpages": "tsc && vite build && mv dist/* docs/",
+    "buildforpages_window": "tsc && vite build && move dist docs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

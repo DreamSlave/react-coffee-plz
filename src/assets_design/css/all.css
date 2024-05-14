@@ -38,9 +38,17 @@ input::placeholder {
 }
 
 .select select {
+  appearance: none; 
   font-size: 18px;
   width: 100%;
   padding-top: 15px;
+}
+
+.select::after {
+  content: url(/src/assets/img/arr.png); /* 드롭다운 화살표 GIF 이미지 경로 */
+  position: absolute;
+  right: 30px;
+  transform: translateY(-80%);
 }
 
 .label {

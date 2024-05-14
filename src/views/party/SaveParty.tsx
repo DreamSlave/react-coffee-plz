@@ -157,18 +157,20 @@ const SaveParty = () => {
                   className=""
                   value={partyName}
                   onChange={onChangePartyName}
-
           />
         </div>
         <div>
           <div className="label">카페선택</div>
-          <DropDown
+          <div className="select">
+            <DropDown
               onChange={(data) => onChangeDropDown(data)}
               dataItem={cafeList}
               itemKey="cafeId" // cafeId를 itemKey로 지정
               itemValue="cafeNm"
               defaultValue={cafeId}
             />
+          </div>
+          
         </div>
         <div className="form_date mgb10">
           <div className="label">마감설정</div>
@@ -176,16 +178,15 @@ const SaveParty = () => {
               locale={ko}   
               dateFormat='yyyy/MM/dd' // 날짜 형태 
               shouldCloseOnSelect 
-              className=""
+              className="datepicker"
               selected={endDate} 
               minDate={new Date()}
               onChange={(date: Date ) => setEndDate(date)} />
-              <div className="btn">
-                <img src="/src/assets/img/calendar_ic.png"></img>
-              </div>
+              
         </div>
         <div className="form_date mgb10">
           <DatePicker
+            className="timepicker"
             selected={endTime}
             onChange={(date: Date ) => setEndTime(date)}
             showTimeSelect
@@ -194,9 +195,6 @@ const SaveParty = () => {
             timeCaption="Time"
             dateFormat="hh:mm aa"
           />
-          <div className="btn">
-          <img src="/src/assets/img/clock_ic.png"></img>
-          </div>
         </div>
       </div>
 
