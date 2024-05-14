@@ -351,6 +351,8 @@ h2 {
   position: fixed;
   padding-top: 55%;
   z-index: 999999;
+  /*opacity: 0;*/
+  /*display: none;*/
 }
 
 .popup-area {
@@ -631,3 +633,52 @@ h2 {
   font-size: 24px;
 }
 
+.sein-none {
+  display: none;
+}
+
+.sein-enter{
+  display: block;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+.sein-enter-done {
+  display: block;
+  opacity: 1;
+}
+
+.sein-exit-active{
+  display: block;
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+.sein-exit-done{
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in forwards;
+  z-index: 999999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    /*opacity: 1;*/
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}

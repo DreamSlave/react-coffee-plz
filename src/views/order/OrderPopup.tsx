@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 import { useParams } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group'
 
 interface orderUserInfo {
   userNm : string;
@@ -56,10 +57,12 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuId, onClose }) => {
       setOrderPopupInfo(orderInfo)
     }
   }, [isOpen, menuId]);
-
+  // { <div id="popup" onClick={onClose} className={isOpen ? 'fade-in' : 'fade-out'}>
   return (
+
+    <CSSTransition in={isOpen} timeout={3000} classNames="sein">
     <>
-      { isOpen && <div id="popup" onClick={onClose}>
+      { <div id="popup" className="sein-none" onClick={onClose} >
         <div className="popup-area">
           <div onClick={onClose} className="close">
             <div className="fr">
@@ -99,6 +102,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuId, onClose }) => {
         </div>
       </div>}
     </>
+    </CSSTransition>
   )
 }
 
