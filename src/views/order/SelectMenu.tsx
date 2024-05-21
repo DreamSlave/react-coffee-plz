@@ -53,9 +53,9 @@ const SelectMenu = () => {
 
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
-    console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
-
-    let params = {
+    
+    //real
+    /* let params = {
       partyId: orderer.partyNo,
       searchName: menuSearchText
     }
@@ -67,7 +67,7 @@ const SelectMenu = () => {
       }
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
-    })
+    }) */
 
     //test
     let response = {
@@ -106,6 +106,7 @@ const SelectMenu = () => {
           cafeId={cafeId}
           menu={selectedMenu}
           orderer={orderer}
+          show={showPopup}
           toggleShowPopup={toggleShowPopup} />}
 
       <div id='order' className="element selectmenu">

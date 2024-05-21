@@ -16,10 +16,11 @@ interface SelectMenuPopupProps {
   cafeId: String;
   menu: Menu;
   orderer: Orderer;
+  show: Boolean;
   toggleShowPopup: () => void;
 }
 
-function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: SelectMenuPopupProps) {
+function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup }: SelectMenuPopupProps) {
   const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
   const navigate = useNavigate()
 
@@ -49,6 +50,9 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
     }
     ApiUtil.post(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
 
+      //test
+      console.log(`[/order/save] response ::: `, response)
+
       if(response && response.ok) {
         navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
       }
@@ -60,6 +64,9 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
   const saveNewMenu = async (menuNm:string): Promise<any> => {
 
     await ApiUtil.post(`${ApiConfig.defaultDomain}/menu/save`, { cafeId, menuNm }).then((response: any) => {
+
+      //test
+      console.log(`[/menu/save] response ::: `, response)
       
       return (response?.menuId || '')
 
@@ -69,7 +76,50 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
   }
 
   return (
-    <CSSTransition in={true} timeout={3000} classNames="fade">
+    // @ts-ignore
+    <CSSTransition in={show} timeout={5000} className="fade">
+      <div>
+        <div id="popup" className="popup">
+          <div className='pop_confirm'>
+            <h2>선택한 메뉴를 확인해주세요.</h2>
+            <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
+
+            {
+              menu.menuId === 'MENU9999' ?
+                <div>
+                  <input  type="text"
+                          placeholder="메뉴명 입력"
+                          value={menuNmInpuValue}
+                          onChange={onChangeMenuNmInputValue}
+                          className="mgt10 mgb5"
+                  />
+                  <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
+                </div> :
+                <div className='menunm'>{menu.menuNm}</div>
+            }
+            <div className='btn-area'>
+              <ul>
+                <li>
+                  <div className="large-btn bg_sub point" onClick={toggleShowPopup}>
+                    재선택
+                  </div>
+                </li>
+                <li>
+                  <div className="large-btn" onClick={submit}>
+                    확인
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </CSSTransition>
+  );
+}
+
+/* <CSSTransition in={true} timeout={3000} classNames="fade">
       <div id="popup" className="popup">
         <div className='pop_confirm'>
           <h2>선택한 메뉴를 확인해주세요.</h2>
@@ -105,8 +155,6 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, toggleShowPopup }: Se
 
         </div>
       </div>
-    </CSSTransition>
-  );
-}
+    </CSSTransition> */
 
 export default SelectMenuPopup
