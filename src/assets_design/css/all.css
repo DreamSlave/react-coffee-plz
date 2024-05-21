@@ -533,8 +533,9 @@ h2 {
 /*주문자 주문완료 확인*/
 
 .order-complete_img {
-  width: 66%;
+  width: 80%;
   margin-left: 17%;
+  margin-top: 45px;
 }
 
 .order-complete_img img {
