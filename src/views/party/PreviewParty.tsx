@@ -6,6 +6,9 @@ import '../../assets_design/css/all.css'
 import '../../assets_design/css/style.scss'
 import { RootState } from '@/store';
 import { useNavigate } from 'react-router-dom';
+import clipImg from '@/assets/img/clip_img.png'
+import iconHurry from '@/assets/img/icon_hurry.png'
+
 
 function PreviewParty() {
   const partyInfo = useSelector((state: RootState) => state.party);
@@ -43,7 +46,7 @@ function PreviewParty() {
 
         <div className="order-list-area mgt30">
             <div className="clipimg">
-              <img src="/src/assets/img/clip_img.png" />
+              <img alt="clip" src={clipImg} />
             </div>
             <div className="order-title">
               <div className="text">
@@ -51,7 +54,7 @@ function PreviewParty() {
                 <div className="cafenm point">{partyInfo.cafeNm}</div>
               </div>
               <div className="image">
-                <img src="/src/assets/img/icon_hurry.png" />
+                <img alt="hurry" src={iconHurry} />
               </div>
             </div>
             <div className="order-time">
@@ -63,7 +66,7 @@ function PreviewParty() {
               <div className="list">
                 <ul>
                 {partyInfo.memberList.map((item, index) =>
-                  <li>{index+1}. {item.name} {item.rank}({item.team})</li>
+                  <li key={index+1}>{index+1}. {item.name} {item.rank}({item.team})</li>
                 )}
                 </ul>
               </div>
