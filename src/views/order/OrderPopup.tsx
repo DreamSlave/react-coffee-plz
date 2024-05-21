@@ -60,9 +60,9 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuId, onClose }) => {
   // { <div id="popup" onClick={onClose} className={isOpen ? 'fade-in' : 'fade-out'}>
   return (
 
-    <CSSTransition in={isOpen} timeout={3000} classNames="sein">
+    <CSSTransition in={isOpen} timeout={3000} classNames="order-popup">
     <>
-      { <div id="popup" className="sein-none" onClick={onClose} >
+      { <div id="popup" className="dis_n" onClick={onClose} >
         <div className="popup-area">
           <div onClick={onClose} className="close">
             <div className="fr">

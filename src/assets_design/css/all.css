@@ -641,25 +641,25 @@ h2 {
   font-size: 24px;
 }
 
-.sein-none {
+.dis_n {
   display: none;
 }
 
-.sein-enter{
+.order-popup-enter{
   display: block;
   animation: fadeIn 0.3s ease-in forwards;
 }
-.sein-enter-done {
+.order-popup-enter-done {
   display: block;
   opacity: 1;
 }
 
-.sein-exit-active{
+.order-popup-exit-active{
   display: block;
   animation: fadeOut 0.3s ease-in forwards;
 }
 
-.sein-exit-done{
+.order-popup-exit-done{
   opacity: 0;
 }
 
