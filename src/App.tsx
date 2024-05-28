@@ -1,9 +1,12 @@
 import '@/App.css'
 import "@/assets/css/style.scss"
+import '@/assets_design/css/all.css'
+import '@/assets_design/css/style.scss'
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
+import notfoundImg from '@/assets/img/notfound_img.png'
 
 const Entrance = lazy(() => import('./views/Entrance'))
 const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
@@ -28,9 +31,12 @@ const DesignConfirmParty = lazy(() => import('./views_design/party/ConfirmParty'
 
 const NotFoundPage = () => {
   return (
-    <div>
-      <h1>제공되지 않는 URL입니다.</h1>
-      <p>다시 시도해주세요!</p>
+    <div className='notfound'>
+      <img src={notfoundImg} />
+      <div className='notfound_box'>
+        <h1>제공되지 않는<br/><span className='point'>URL</span>입니다.</h1>
+        <p className='mgt10'>다시 시도해주세요!</p>
+      </div>
     </div>
   )
 }
