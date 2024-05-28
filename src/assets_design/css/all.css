@@ -533,7 +533,7 @@ h2 {
 /*주문자 주문완료 확인*/
 
 .order-complete_img {
-  width: 80%;
+  width: 70%;
   margin-left: 17%;
   margin-top: 45px;
 }
@@ -717,4 +717,23 @@ h2 {
 .pop_confirm {
   /* position: relative; */
   animation: fadeInUp 0.5s;
+}
+
+.notfound {
+  margin-top: 180px;
+  text-align: center;
+}
+.notfound img {
+  width: 65%;
+}
+
+.notfound_box {
+  border: 2px #000 solid;
+  padding: 15px 0;
+  width: 90%;
+  margin: 0 5%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: -7px;
+  font-size: 20px;
 }
