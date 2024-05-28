@@ -55,17 +55,16 @@ const SelectMenu = () => {
   const fetchMenuList = () => {
     
     ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
-
-      const emptyMenuList = [{ menuId: 'MENU9999', menuNm: '직접입력' }]
-
-      if(response && response.ok) {
-        setCafeId(response.cafeId)
-        setMenuList(response.menuList ?? emptyMenuList)
-      } else {
-
+      if(!response || !response.ok) {
         //test
-        setMenuList(emptyMenuList)
+        setMenuList([{ menuId: 'MENU9999', menuNm: '직접입력' }])
+        
+        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
+        return
       }
+
+      setCafeId(response.cafeId)
+      setMenuList(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])
 
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
