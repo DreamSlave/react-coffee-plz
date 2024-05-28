@@ -1,9 +1,12 @@
 import '@/App.css'
 import "@/assets/css/style.scss"
+import '@/assets_design/css/all.css'
+import '@/assets_design/css/style.scss'
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
+import notfoundImg from '@/assets/img/notfound_img.png'
 
 const Entrance = lazy(() => import('./views/Entrance'))
 const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
@@ -26,110 +29,56 @@ const DesignSelectMenuPopup = lazy(() => import('./views_design/order/SelectMenu
 const DesignPreviewParty = lazy(() => import('./views_design/party/PreviewParty'))
 const DesignConfirmParty = lazy(() => import('./views_design/party/ConfirmParty'))
 
+const NotFoundPage = () => {
+  return (
+    <div className='notfound'>
+      <img src={notfoundImg} />
+      <div className='notfound_box'>
+        <h1>제공되지 않는<br/><span className='point'>URL</span>입니다.</h1>
+        <p className='mgt10'>다시 시도해주세요!</p>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   return (
     <Router basename="/react-coffee-plz">
       <Suspense fallback={<div>Wait a moment...</div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/entrance" />} />
-          <Route
-            path="/*"
-            element={
-              <NoHeaderLayout>
-                <Routes>
-                  <Route path="/entrance" element={<Entrance />} />
-                </Routes>
-              </NoHeaderLayout>
-            }/>
-          <Route
-            path="/order/*"
-            element={
-              <Routes>
-                <Route
-                  path="/menu"
-                  element={<HeaderLayout><SelectMenu /></HeaderLayout>}
-                />
-                <Route
-                  path="/complete/:partyNo/:encodedMenuNm"
-                  element={<HeaderLayout><CompleteMenu /></HeaderLayout>}
-                />
-                <Route
-                  path="/member"
-                  element={<HeaderLayout><OrderMember /></HeaderLayout>}
-                />
-                <Route
-                  path="/:partyNo"
-                  element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>}
-                />
-              </Routes>
-            }
-          />
-          <Route
-            path="/party/*"
-            element={
-              <Routes>
-                <Route path="/select" element={<HeaderLayout><SelectPartyMember /></HeaderLayout>} />
-                <Route path="/save" element={<HeaderLayout><SaveParty /></HeaderLayout>} />
-                <Route path="/preview" element={<HeaderLayout><PreviewParty /></HeaderLayout>} />
-                <Route path="/confirm" element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
-              </Routes>
-            }
-          ></Route>
-          <Route path="" element={<NotFoundPage/>} />
-        </Routes>
-        <Routes>
-          //퍼블리싱 화면
-        <Route
-          path="design/*"
-          element={
-            <NoHeaderLayout>
-              <Routes>
-                <Route path="/entrance" element={<DesignEntrance />} />
-              </Routes>
-            </NoHeaderLayout>
-          } />
-          <Route
-            path="design/order/*"
-            element={
-              <NoHeaderLayout>
-                <Routes>
-                  <Route path="/menu" element={<DesignSelectMenu/>}></Route>
-                  <Route path="/:partyNo" element={<DesignOrderDetail />} />
-                  {/*popup은 url이 없지만 화면 확인용으로 임시로 만들어둠*/}
-                  <Route path="/:partyNo/popup" element={<DesignOrderPopup />} />
-                  <Route path="/:partyNo/member" element={<DesignOrderMember />} />
-                  <Route path="/:partyNo/confirm" element={<DesignSelectMenuPopup/>} />
-                </Routes>
-              </NoHeaderLayout>
-            }
-          ></Route>
-          <Route
-            path="design/party/*"
-            element={
-              <NoHeaderLayout>
-                <Routes>
-                  <Route path="/select" element={<DesignSelectPartyMember />} />
-                  <Route path="/save" element={<DesignSaveParty />} />
-                  <Route path="/preview" element={<DesignPreviewParty />} />
-                  <Route path="/confirm" element={<DesignConfirmParty />} />
-                </Routes>
-              </NoHeaderLayout>
-            }
-          ></Route>
+          
+          {/* Main routes */}
+          <Route path="/entrance" element={<NoHeaderLayout><Entrance /></NoHeaderLayout>} />
+
+          <Route path="/order/menu"                             element={<HeaderLayout><SelectMenu /></HeaderLayout>} />
+          <Route path="/order/complete/:partyNo/:encodedMenuNm" element={<HeaderLayout><CompleteMenu /></HeaderLayout>} />
+          <Route path="/order/member"                           element={<HeaderLayout><OrderMember /></HeaderLayout>} />
+          <Route path="/order/:partyNo"                         element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>} />
+
+          <Route path="/party/select"   element={<HeaderLayout><SelectPartyMember /></HeaderLayout>} />
+          <Route path="/party/save"     element={<HeaderLayout><SaveParty /></HeaderLayout>} />
+          <Route path="/party/preview"  element={<HeaderLayout><PreviewParty /></HeaderLayout>} />
+          <Route path="/party/confirm"  element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
+
+          {/* Design routes */}
+          <Route path="/design/entrance"                element={<NoHeaderLayout><DesignEntrance /></NoHeaderLayout>} />
+          <Route path="/design/order/menu"              element={<NoHeaderLayout><DesignSelectMenu /></NoHeaderLayout>} />
+          <Route path="/design/order/:partyNo"          element={<NoHeaderLayout><DesignOrderDetail /></NoHeaderLayout>} />
+          <Route path="/design/order/:partyNo/popup"    element={<NoHeaderLayout><DesignOrderPopup /></NoHeaderLayout>} />
+          <Route path="/design/order/:partyNo/member"   element={<NoHeaderLayout><DesignOrderMember /></NoHeaderLayout>} />
+          <Route path="/design/order/:partyNo/confirm"  element={<NoHeaderLayout><DesignSelectMenuPopup /></NoHeaderLayout>} />
+          <Route path="/design/party/select"            element={<NoHeaderLayout><DesignSelectPartyMember /></NoHeaderLayout>} />
+          <Route path="/design/party/save"              element={<NoHeaderLayout><DesignSaveParty /></NoHeaderLayout>} />
+          <Route path="/design/party/preview"           element={<NoHeaderLayout><DesignPreviewParty /></NoHeaderLayout>} />
+          <Route path="/design/party/confirm"           element={<NoHeaderLayout><DesignConfirmParty /></NoHeaderLayout>} />
+
+          {/* Not Found Route */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>
   )
 }
-
-const NotFoundPage = () => {
-  return (
-    <div>
-      <h1>404 - Not Found</h1>
-      <p>Sorry, the page you are looking for does not exist.</p>
-      {/* 이동할 수 있는 링크나 다른 내용 추가 */}
-    </div>
-  );
-};
 
 export default App

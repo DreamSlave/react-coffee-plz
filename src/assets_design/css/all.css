@@ -533,8 +533,9 @@ h2 {
 /*주문자 주문완료 확인*/
 
 .order-complete_img {
-  width: 66%;
+  width: 70%;
   margin-left: 17%;
+  margin-top: 45px;
 }
 
 .order-complete_img img {
@@ -689,4 +690,50 @@ h2 {
     opacity: 0;
     display: none;
   }
+}
+
+
+@keyframes fadeInDown {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+} 
+.pop_confirm {
+  /* position: relative; */
+  animation: fadeInUp 0.5s;
+}
+
+.notfound {
+  margin-top: 180px;
+  text-align: center;
+}
+.notfound img {
+  width: 65%;
+}
+
+.notfound_box {
+  border: 2px #000 solid;
+  padding: 15px 0;
+  width: 90%;
+  margin: 0 5%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: -7px;
+  font-size: 20px;
 }
