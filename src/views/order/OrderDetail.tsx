@@ -12,6 +12,8 @@ import OrderPopup from "@/views/order/OrderPopup";
 import iconClose from "@/assets/img/icon_close.png"
 import iconOpen from "@/assets/img/icon_open.png"
 import clipImg from "@/assets/img/clip_img.png"
+import ApiUtil from "@/api/api.util.ts";
+import ApiConfig from "@/api/api.config.ts";
 
 interface orderInfo {
   title : string;
@@ -31,28 +33,31 @@ interface orderMenuInfo{
   menuId: string;
 }
 
-function getOrderInfo(){
-  return{
-    title: '드림 슬레이브!',
-    cafeNm: '메에가커픠',
-    endDt: '2024/12/23 20:01',
-    orderUserCount: 18 + ~~(Math.random() * 100),
-    orderTagerUserCount: 30 + ~~(Math.random() * 100),
-    orderDrinkCount: 15 + ~~(Math.random() * 100),
-    orderTagerDrinkCount: 30 + ~~(Math.random() * 100),
-    orderState: '01',
-    orderMenuInfoList: [
-      {menuNm: '아메리카노-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '아메리카노-아이스-연하게', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '아메리카노-핫', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '카페라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '카페라떼-아이스-BIG', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '초코라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '바닐라라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '(직접입력)자두에이드', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-      {menuNm: '괜찮습니다.', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-    ]
-  }
+const getOrderInfo = async (partyNo: string): Promise<orderInfo> => {
+  const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/party/info/${partyNo}`);
+  // return (await response.json()).data[0]
+  console.log(response)
+    return {
+      title: '드림 슬레이브!',
+      cafeNm: '메에가커픠',
+      endDt: '2024/12/23 20:01',
+      orderUserCount: 18 + ~~(Math.random() * 100),
+      orderTagerUserCount: 30 + ~~(Math.random() * 100),
+      orderDrinkCount: 15 + ~~(Math.random() * 100),
+      orderTagerDrinkCount: 30 + ~~(Math.random() * 100),
+      orderState: '01',
+      orderMenuInfoList: [
+        {menuNm: '아메리카노-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '아메리카노-아이스-연하게', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '아메리카노-핫', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '카페라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '카페라떼-아이스-BIG', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '초코라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '바닐라라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '(직접입력)자두에이드', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        {menuNm: '괜찮습니다.', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+      ]
+    }
 }
 
 function OrderDetail() {
@@ -81,6 +86,7 @@ function OrderDetail() {
   }
 
 
+
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
   const [selectedMenuId, setSelectedMenuId] = useState<string>('');
 
@@ -89,25 +95,29 @@ function OrderDetail() {
   }
 
   useEffect(() => {
-    const orderInfoData = getOrderInfo()
-    setOrderInfo(orderInfoData)
-    setMenuList(orderInfoData.orderMenuInfoList)
+    async function fetchAndSetUser() {
+      if (partyNo != null) {
+        const orderInfoData = await getOrderInfo(partyNo);
+        setOrderInfo(orderInfoData)
+        setMenuList(orderInfoData.orderMenuInfoList)
+        const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
+        const nowTime: Date = new Date();
+        const afterTime: number = endTime.getTime() - nowTime.getTime();
 
-    const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
-    const nowTime: Date = new Date();
-    const afterTime: number = endTime.getTime() - nowTime.getTime();
-
-    const oneDay: number = 1000 * 60 * 60 * 24
-    if(afterTime > oneDay){
-      setTimeout(() => {
-        history.go(0);
-      }, oneDay);
-    }else {
-      setTimeout(() => {
-        closeTime();
-      }, afterTime);
+        const oneDay: number = 1000 * 60 * 60 * 24
+        if(afterTime > oneDay){
+          setTimeout(() => {
+            history.go(0);
+          }, oneDay);
+        }else {
+          setTimeout(() => {
+            closeTime();
+          }, afterTime);
+        }
+      }
     }
-  }, []);
+    fetchAndSetUser()
+  }, [partyNo]);
   function closeTime() {setIsStoreOpen(false)}
 
   function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI: string): Date {
