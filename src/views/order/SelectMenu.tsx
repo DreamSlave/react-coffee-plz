@@ -53,38 +53,22 @@ const SelectMenu = () => {
 
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
-    console.log(`fetchMenuList called ::: param ::: ${menuSearchText}`)
-
-    let params = {
-      partyId: orderer.partyNo,
-      searchName: menuSearchText
-    }
-    ApiUtil.post(`${ApiConfig.defaultDomain}/menu/info`, params).then((response: any) => {
-
-      if(response && response.ok) {
-        setMenuList(response.menuList)
-        setCafeId(response.cafeId)
+    
+    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
+      if(!response || !response.ok) {
+        //test
+        setMenuList([{ menuId: 'MENU9999', menuNm: '직접입력' }])
+        
+        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
+        return
       }
+
+      setCafeId(response.cafeId)
+      setMenuList(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])
+
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
     })
-
-    //test
-    let response = {
-      cafeId: 'CAFE0001',
-      menuList: [
-        { menuId: 'MENU0001', menuNm: '아메리카노(ICE)' },
-        { menuId: 'MENU0002', menuNm: '아메리카노(ICE) 연하게' },
-        { menuId: 'MENU0003', menuNm: '아메리카노(HOT)' },
-        { menuId: 'MENU0004', menuNm: '아메리카노(HOT) 연하게' },
-        { menuId: 'MENU0005', menuNm: '카페라떼(ICE)' },
-        { menuId: 'MENU0006', menuNm: '카페라떼(ICE) 연하게' },
-        { menuId: 'MENU0007', menuNm: '카페라떼(HOT)' },
-        { menuId: 'MENU9999', menuNm: '직접입력' },
-      ]
-    }
-    setMenuList(response.menuList)
-    setCafeId(response.cafeId)
   }
 
   const toggleShowPopup = () => {
@@ -106,6 +90,7 @@ const SelectMenu = () => {
           cafeId={cafeId}
           menu={selectedMenu}
           orderer={orderer}
+          show={showPopup}
           toggleShowPopup={toggleShowPopup} />}
 
       <div id='order' className="element selectmenu">
