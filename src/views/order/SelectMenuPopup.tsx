@@ -49,13 +49,13 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       partyId: partyNo
     }
     ApiUtil.post(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
-
-      //test
-      console.log(`[/order/save] response ::: `, response)
-
-      if(response && response.ok) {
-        navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
+      if(!response || !response.ok) {
+        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
+        return
       }
+
+      navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
+      
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
     })
@@ -64,11 +64,12 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
   const saveNewMenu = async (menuNm:string): Promise<any> => {
 
     await ApiUtil.post(`${ApiConfig.defaultDomain}/menu/save`, { cafeId, menuNm }).then((response: any) => {
+      if(!response || !response.ok) {
+        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
+        return ''
+      }
 
-      //test
-      console.log(`[/menu/save] response ::: `, response)
-      
-      return (response?.menuId || '')
+      return response.menuId
 
     }).catch((error: any) => {
       console.error('[/menu/save] Error occurred ::: ', error);
