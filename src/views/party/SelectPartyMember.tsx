@@ -8,8 +8,8 @@ import { useDispatch } from 'react-redux';
 import { setSelectPartyMember } from '@/store/party';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
-// import ApiUtil from "../../api/api.util";
-// import ApiConfig from "../../api/api.config";
+import ApiUtil from "../../api/api.util";
+import ApiConfig from "../../api/api.config";
 
 
 interface MemberProps {
@@ -30,57 +30,12 @@ interface TeamProps {
 
 
 const SelectPartyMember = () => {
-  // getSample()
-  // getSample2()
+  
+  const [members, setMembers] = useState<MemberProps[]>([])
+  const [teamList, setTeamList] = useState<TeamProps[]>([])
+  const [isValid, setIsValid] = useState<boolean>(true)
+  const [firstRender, setFirstRender] = useState(true);
 
-
-  const [members, setMembers] = useState<MemberProps[]>([
-    {
-      "name": "김진미",
-      "team": "PD팀",
-      "department": "기업부설연구소",
-      "rank": "프로",
-      "c_no": "01058935898",
-      "checked":false,
-      "userId": 'ID111'
-    },
-    {
-      "name": "김세인",
-      "team": "PD팀",
-      "department": "기업부설연구소",
-      "rank": "프로",
-      "c_no": "01058935898",
-      "checked":false,
-      "userId": 'ID222'
-    },
-    {
-      "name": "조도은",
-      "team": "PD팀",
-      "department": "기업부설연구소",
-      "rank": "프로",
-      "c_no": "01058935898",
-      "checked":false,
-      "userId": 'ID333'
-    },
-    {
-      "name": "권혜란",
-      "team": "PD팀",
-      "department": "기업부설연구소",
-      "rank": "프로",
-      "c_no": "01058935898",
-      "checked":false,
-      "userId": 'ID444'
-    },
-    {
-      "name": "정민재",
-      "team": "UX디자인팀",
-      "department": "기업부설연구소",
-      "rank": "프로",
-      "c_no": "01058935898",
-      "checked":false,
-      "userId": 'ID555'
-    }
-  ])
 
   useEffect(() => {
     //validation 검사
@@ -91,54 +46,47 @@ const SelectPartyMember = () => {
     }
   }, [members]);
 
-  const [isValid, setIsValid] = useState<boolean>(true)
-  const [firstRender, setFirstRender] = useState(true);
-
   const partyInfo = useSelector((state: RootState) => state.party);
-  console.log(":partyInfo:",partyInfo.memberList.length);
 
   useEffect(() => {
-    const result = [...members]
-    if (firstRender) {
-      if(partyInfo.memberList.length !== 0){
-        
-        result.forEach(element => {
-          if(partyInfo.memberList.some(member => member.userId === element.userId)){
-            element.checked = true
-          }
-        });    
-        setMembers(result);
-        onChangeTeam()
+    const fetchMemberList = async () => {
+      try {
+        const result = await getMemberList();
 
+        if (firstRender && partyInfo.memberList.length !== 0) {
+          //member 세팅
+          const updatedMembers = result.map((element) => {
+            const isChecked = partyInfo.memberList.some((member) => member.userId === element.userId);
+            return { ...element, checked: isChecked };
+          });
+          
+          //team 세팅
+          const uniqueTeams: string[] = [...new Set( result.map(item => {return item.team;}))] as string[];
+          const updatedTeam :TeamProps[] = uniqueTeams.map(mapData => {
+            return {
+              team : mapData,
+              checked : updatedMembers.filter(item => item.team === mapData).every(item => item.checked === true),
+              isView : false,
+            }
+          })
+
+          setMembers(updatedMembers);
+          setTeamList(updatedTeam)
+          setFirstRender(false);
+        }
+      } catch (error) {
+        console.error('Error fetching member list:', error);
       }
-      setFirstRender(false); 
-    }
-  }, [])
+    };
+    fetchMemberList();
+  }, []);
     
-  const [teamList, setTeamList] = useState<TeamProps[]>([...new Set(members.map(item => item.team))].map(mapData => {
-    return {
-      team : mapData,
-      checked : false,
-      isView : false,
-    }
-  }))
 
   const changeIsView = (index: number, data: boolean) => {
     const result = [...teamList]
     result[index].isView = !data;
     setTeamList(result);
   };
-  
-  const onChangeTeam = () => {
-    const result = [...teamList]
-
-    result.forEach(element => {
-      if(members.filter(item => item.team === element.team).every(item => item.checked === true)){
-        element.checked = true
-      }
-    })
-    setTeamList(result);
-  }
 
   const onChangeMember = (type : string, param: string, checked: boolean) => {
     const result = [...members]
@@ -161,7 +109,7 @@ const SelectPartyMember = () => {
         break;
       }
     setMembers(result);
-    onChangeTeam();
+    
   }
 
 
@@ -177,41 +125,16 @@ const SelectPartyMember = () => {
   }
 
   
-  // const dispatch = useDispatch();
   
-  // function getSample() {
-  //   ApiUtil.get(`${ApiConfig.defaultDomain}/6a1b7083a78540c891016615926385fb`)
-  //       .then(function (response) {
-  //           console.log(response);
-  //       })
+  function getMemberList() {
+    return ApiUtil.get(`${ApiConfig.defaultDomain}/users`)
+    .then(response => response.json())
+    .then(json => {
+     const resultData = json.data
+     return resultData
+    })
         
-  // }
-  // function getSample2(){
-  //   const params = {
-  //     title : [{text: {content: '제모오오옥'}}]
-  //   }
-  //   ApiUtil.patch(`${ApiConfig.defaultDomain}/v1/databases/6a1b7083a78540c891016615926385fb`,params)
-  //       .then(function (response) {
-  //         console.log(response);
-  //       })
-  // }
-
-
-
-  // const count = useSelector((state: RootState) => state.counter.count);
-  // const dispatch = useDispatch();
-  
-  // const onIncrease = () => {
-  //   dispatch(increase())
-  // };
-  
-  // const onDecrease = () => {
-  //   dispatch(decrease())
-  // };
-  
-
-
-
+  }
 
   return (
     <div id='party' className="element">
