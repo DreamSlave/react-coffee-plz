@@ -15,6 +15,9 @@ import { RootState } from '@/store';
 import { setSaveParty } from '@/store/party';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import ApiUtil from "../../api/api.util";
+import ApiConfig from "../../api/api.config";
+
 
 interface DataItem {
   [key: string]: string | number; // 각각의 아이템은 string 또는 number 타입의 값을 가질 수 있음
@@ -28,58 +31,73 @@ const SaveParty = () => {
   const [partyName, setPartyName] = useState<string>('')
   const [cafeId, setCafeId] = useState<string>('')
   const [cafeNm, setCafeNm] = useState<string>('')
-  const [cafeList] = useState<DataItem[]>([{cafeNm : '메가커피', cafeId : '001'},{cafeNm : '컴포즈커피', cafeId:'002'}])
+  const [cafeList, setCafeList] = useState<DataItem[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
 
 
   useEffect(() => {
-    if (firstRender) {
-      if(partyInfo.partyName){
-        setPartyName(partyInfo.partyName)
-      }
-      if(partyInfo.cafeId){
-        setCafeNm(partyInfo.cafeNm);
-        setCafeId(partyInfo.cafeId);
-      }else{
-        if (cafeId === '' && cafeNm === '' && cafeList.length > 0) {
-          setCafeNm(String(cafeList[0].cafeNm));
-          setCafeId(String(cafeList[0].cafeId));
-        }    
-      }
-      if(partyInfo.endDate){
-        setEndDate(stringToDate(partyInfo.endDate))
-      }
-      if(partyInfo.endTime){
-        setEndTime(stringToTime(partyInfo.endTime))
-      }else{
-        setEndTime(nearestQuarterHour())
-      }
-      setFirstRender(false); 
-    }
-
-    //validation 검사
-    if(partyName !== '' && cafeId !== ''){
-      setIsValid(true)
-    }else{
-      setIsValid(false)
-    }
-    const now: Date = new Date();
-
-    const afterTime: number = endTime.getTime() - now.getTime();
-
-    if(endDate.getTime() > now.getTime()){
-      setIsValid(true)
-    }else{
-      setTimeout(() => {
-        if(endTime.getTime() - now.getTime() > 1000 * 60 * 60){
-          setIsValid(true)
-        }else{
-          setIsValid(false)
+    const fetchPartyInfo = async () => {      
+      if (firstRender) {
+        const result = await getCafeList();
+        setCafeList(result)
+        if(partyInfo.partyName){
+          setPartyName(partyInfo.partyName)
         }
-      }, afterTime);
+        if(partyInfo.cafeId){
+          setCafeNm(partyInfo.cafeNm);
+          setCafeId(partyInfo.cafeId);
+        }else{
+          if (cafeId === '' && cafeNm === '' && cafeList.length > 0) {
+            setCafeNm(String(cafeList[0].cafeNm));
+            setCafeId(String(cafeList[0].userId));
+          }    
+        }
+        if(partyInfo.endDate){
+          setEndDate(stringToDate(partyInfo.endDate))
+        }
+        if(partyInfo.endTime){
+          setEndTime(stringToTime(partyInfo.endTime))
+        }else{
+          setEndTime(nearestQuarterHour())
+        }
+        setFirstRender(false); 
+      }
+
+      //validation 검사
+      if(partyName !== '' && cafeId !== ''){
+        setIsValid(true)
+      }else{
+        setIsValid(false)
+      }
+      const now: Date = new Date();
+
+      const afterTime: number = endTime.getTime() - now.getTime();
+
+      if(endDate.getTime() > now.getTime()){
+        setIsValid(true)
+      }else{
+        setTimeout(() => {
+          if(endTime.getTime() - now.getTime() > 1000 * 60 * 60){
+            setIsValid(true)
+          }else{
+            setIsValid(false)
+          }
+        }, afterTime);
+      }
     }
+    fetchPartyInfo()
     
   }, [partyName, cafeId, cafeNm, endDate, endTime, firstRender]);
+
+  function getCafeList() {
+    return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
+    .then(response => response.json())
+    .then(json => {
+     const resultData = json.data
+     return resultData
+    })
+        
+  }
 
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
     setPartyName(event.target.value);
