@@ -8,6 +8,9 @@ import { RootState } from '@/store';
 import { useNavigate } from 'react-router-dom';
 import clipImg from '@/assets/img/clip_img.png'
 import iconHurry from '@/assets/img/icon_hurry.png'
+import ApiUtil from "@/api/api.util.ts";
+import ApiConfig from "@/api/api.config.ts";
+
 
 
 function PreviewParty() {
@@ -17,7 +20,26 @@ function PreviewParty() {
   const navigate  = useNavigate();
 
   const onClickPreviewParty = function(){
-    navigate('/party/confirm')
+    const params = {
+      userList : partyInfo.memberList.map(item => item.userId),
+      partyName : partyInfo.partyName,
+      cafeId : partyInfo.cafeId,
+      endDate : partyInfo.endDate,
+      endTime : partyInfo.endTime
+    }
+    ApiUtil.post(`${ApiConfig.defaultDomain}/party/save`, params).then((response: any) => {
+      if(!response || !response.ok) {
+        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
+        return
+      }
+
+      navigate(`/party/confirm/${response.data.partyId}`)
+      
+    }).catch((error: any) => {
+      console.error('[/order/save] Error occurred ::: ', error);
+    })
+    
+    
   }
 
 

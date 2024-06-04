@@ -59,7 +59,7 @@ function App() {
           <Route path="/party/select"   element={<HeaderLayout><SelectPartyMember /></HeaderLayout>} />
           <Route path="/party/save"     element={<HeaderLayout><SaveParty /></HeaderLayout>} />
           <Route path="/party/preview"  element={<HeaderLayout><PreviewParty /></HeaderLayout>} />
-          <Route path="/party/confirm"  element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
+          <Route path="/party/confirm/:partyId"  element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
 
           {/* Design routes */}
           <Route path="/design/entrance"                element={<NoHeaderLayout><DesignEntrance /></NoHeaderLayout>} />
