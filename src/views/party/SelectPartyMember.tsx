@@ -51,9 +51,8 @@ const SelectPartyMember = () => {
   useEffect(() => {
     const fetchMemberList = async () => {
       try {
-        const result = await getMemberList();
-
-        if (firstRender && partyInfo.memberList.length !== 0) {
+        const result = await getMemberList();        
+        if (firstRender) {
           //member 세팅
           const updatedMembers = result.map((element) => {
             const isChecked = partyInfo.memberList.some((member) => member.userId === element.userId);
