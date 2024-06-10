@@ -1,8 +1,8 @@
 // import React from "react";
 // import "./style.css";
 // import '../../assets/css/saveParty.css'
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 
 import DropDown from "@/component/DropDown.tsx"
 import { ChangeEvent, useEffect, useState } from 'react';

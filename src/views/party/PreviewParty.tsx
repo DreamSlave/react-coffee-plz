@@ -2,8 +2,8 @@
 // import "./scss/style.scss"
 // import '../../assets/css/all.css'
 import { useSelector } from 'react-redux';
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 import { RootState } from '@/store';
 import { useNavigate } from 'react-router-dom';
 import clipImg from '@/assets/img/clip_img.png'
@@ -19,7 +19,7 @@ function PreviewParty() {
 
   const navigate  = useNavigate();
 
-  const onClickPreviewParty = function(){
+  const onClickPreviewParty = async function(){
     const params = {
       userList : partyInfo.memberList.map(item => item.userId),
       partyName : partyInfo.partyName,
@@ -27,17 +27,19 @@ function PreviewParty() {
       endDate : partyInfo.endDate,
       endTime : partyInfo.endTime
     }
-    ApiUtil.post(`${ApiConfig.defaultDomain}/party/save`, params).then((response: any) => {
-      if(!response || !response.ok) {
-        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
-        return
-      }
-
-      navigate(`/party/confirm/${response.data.partyId}`)
-      
-    }).catch((error: any) => {
+    const result = await ApiUtil.post(`${ApiConfig.defaultDomain}/party/save`, params)
+    .then(response => response.json())
+    .then(json => {
+     const resultData = json.data
+     return resultData
+    })
+    .catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
     })
+
+    navigate(`/party/confirm/${result.partyId}`)
+     
+
     
     
   }

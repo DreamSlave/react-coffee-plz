@@ -1,5 +1,5 @@
-import '@/assets_design/css/all.css'
-import '@/assets_design/css/style.scss'
+import '@/assets/css/all.css'
+import '@/assets/css/style.scss'
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
 
 import { useEffect, useState, ChangeEvent } from "react";
@@ -57,7 +57,8 @@ const SelectMenu = () => {
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
     
-    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
+    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/1`).then((response: any) => {
+    // ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
       if(!response || !response.ok) {
         //test
         setMenuList([{ menuId: 'MENU9999', menuNm: '직접입력' }])

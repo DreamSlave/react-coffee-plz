@@ -1,5 +1,5 @@
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 import {useEffect, useState} from "react";
 import { setSelectOrderer } from "@/store/order";
 import OrdererItem from "@/views/order/OrdererItem";

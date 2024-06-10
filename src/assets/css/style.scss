@@ -1,7 +1,80 @@
+
+/*색상정의*/
+
+$main-color: #ff5cc3;
+$sub-color: #ffe7fa;
+$basic-color01: #000000;
+$basic-color02: #ffffff;
+$basic-color03: #aaaaaa;
+$text_01: #000000;
+$text_02: #1e1e1e;
+$text_03: #999999;
+$text_04: #ffffff;
+$text_point: #ff5cc3;
+
+/*색상지정*/
+
+body {
+    color: $text_02;
+}
+
+h1 {
+    color: $text_01;
+}
+
+.main_tit {
+    color: $text_01;
+}
+
+.point {
+    color: $text_point !important;
+}
+
+.gray {
+    color: $text_03 !important;
+}
+
+.white {
+    color: $text_04 !important;
+}
+
+.bg_black {
+    background-color: $basic-color01 !important;
+}
+
+.bg_white {
+    background-color: $basic-color02 !important;
+}
+
+.bg_gray {
+    background-color: $basic-color03 !important;
+}
+
+.bg_pink {
+    background-color: $main-color !important;
+}
+
+.bg_sub {
+    background-color: $sub-color !important;
+}
+
+#order {
+    background-color: $basic-color02;
+}
+
+.fl {
+    float: left !important;
+}
+
+.fr {
+    float: right !important;
+}
+
+
 $len  : 20;
 
 @for $i from 1 through $len {
-    .w#{$i * 5} {width : $i * 5 + '%';}
+    .w#{$i * 5} {width : $i * 5% !important;}
 
     .pd#{$i * 5}  { padding: $i * 5 + px; }
     .pdl#{$i * 5} { padding-left: $i * 5 + px;}

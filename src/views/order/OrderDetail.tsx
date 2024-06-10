@@ -1,8 +1,8 @@
 // import './App.css'
 // import "./scss/style.scss"
 // import '../../assets/css/orderdetail.css'
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';

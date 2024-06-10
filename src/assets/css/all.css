@@ -1,7 +1,117 @@
 
-:root {
-  --pointcolor: rgba(245, 84, 190, 1);
-  --variable-collection-sub: rgba(255, 231, 250, 1);
+/* :root {
+  --pointcolor: #f554be;
+  --variable-collection-sub: #ffe7fa;
+} */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+li {
+  list-style: none;
+}
+
+input {
+  border: 0;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border-radius: 0;
+}
+
+input::placeholder {
+  color: #999;
+}
+
+.select {
+  border: 0;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.select select {
+  appearance: none; 
+  font-size: 18px;
+  width: 100%;
+  padding-top: 15px;
+}
+
+.select::after {
+  content: url(/src/assets/img/arr.png); /* 드롭다운 화살표 GIF 이미지 경로 */
+  position: absolute;
+  right: 30px;
+  transform: translateY(-80%);
+}
+
+.label {
+  color: #999;
+  margin-top: 15px;
+}
+.checkbox {
+  width: 100%;
+  margin: 10px 0;
+  display: inline-block;
+}
+.p_2dpth .checkbox {
+  width: 100%;
+  margin: 10px 0;
+  display: inline-block;
+  padding-left: 27px;
+  font-weight: 300;
+}
+.checkbox span {
+  margin-top: -1px;
+  line-height: 25px;
+  float: left;
+}
+
+
+.datepicker {
+  background: url(/src/assets/img/calendar_ic.png) no-repeat;
+  background-size: 24px;
+  background-position: 96%;
+}
+
+.timepicker {
+  background: url(/src/assets/img/clock_ic.png) no-repeat;
+  background-size: 24px;
+  background-position: 96%;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.form_date .btn img {
+  width: 22px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0 25px 30px 25px;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+#order {
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
+#party {
+  min-height: 100vh;
+  padding-bottom: 50px;
 }
 
 .element {
@@ -10,38 +120,628 @@
   padding: 0 5%;
   padding-top: 50px;
 }
+
 h1 {
   font-size: 32px;
-  color: #000000;
   font-family: "LOTTERIA CHAB-Regular", Helvetica;
   letter-spacing: 0;
   text-align: center;
+  font-weight: 400;
+  line-height: 1.2;
 }
+
+h2 {
+  font-size: 24px;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  letter-spacing: 0;
+  text-align: center;
+  font-weight: 400;
+}
+
+.large-btn {
+  height: 52px;
+  width: 100%;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  background-color: #ff5cc3;
+  border-radius: 8px;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.5px;
+  font-size: 22px;
+  line-height: 52px;
+}
+
 .main_tit {
-  color: #000000;
   font-family: "LOTTERIA CHAB-Regular", Helvetica;
   font-size: 45px;
+  margin-bottom: 25px;
   letter-spacing: 0;
   line-height: 54px;
   text-align: center;
+  word-break: keep-all;
 }
 
+/*주문자 주문현황*/
+
 .order-list-area {
-  width: 90%;
-  margin: 0 5%;
-  background-color: #eee;
+  width: 80%;
+  margin: 0 auto;
+  padding: 30px 5%;
+  background-color: #fff;
   border: 2px #000 solid;
   border-radius: 10px;
 }
 
-#footer {
-  background-color: aliceblue;
+.order-list-area .clipimg {
+  position: absolute;
+}
+
+.order-list-area .clipimg img {
+  position: relative;
+  left: 0;
+  top: -42px;
+  width: 35px;
+}
+
+.order-title {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  border-bottom: 1.5px #000 solid;
+  padding-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.order-title .text {
+  width: 75%;
+  float: left;
+}
+
+.order-title .text .title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.order-title .text .cafenm {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.order-title .image {
+  float: right;
+  width: 25%;
+  max-width: 75px;
+}
+
+.order-title .image img {
+  width: 100%;
+}
+
+.order-time {
+  width: 100%;
+  border-bottom: 2px #ccc dotted;
+  font-size: 18px;
+  padding: 10px 0 15px 10px;
+  box-sizing: border-box;
+}
+
+.order-total {
+  width: 100%;
+  display: inline-block;
+  border-bottom: 2px #000 dotted;
+  padding: 20px 0;
+}
+
+.order-total .detail {
+  width: 50%;
+  text-align: center;
+  float: left;
+}
+
+.order-total .detail .title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.order-total .detail .count {
+  font-size: 30px;
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  letter-spacing: -1px;
+}
+
+.order-total .detail .all {
+  font-size: 15px;
+}
+
+.order-list-sum {
+  width: 100%;
+  height: auto;
+  padding: 10px 10px 15px 10px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.order-list-sum .title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.order-list-sum .menunm {
+  font-size: 16px;
+  width: 85%;
+  float: left;
+  margin-bottom: 15px;
+}
+
+.order-list-sum .count {
+  width: 15%;
+  float: right;
+  text-align: right;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+/*크리에이터 파티원선택*/
+.total_chck {
+  font-size: 28px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.chck_person {
+  border: 2px #000 solid;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 20px 15px 10px 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.chck_person label input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  margin-right: 8px;
+  float: left;
+}
+
+.p_2dpth_btn {
+  float:right;
+  width: 25px;
+  height: 25px;
+}
+
+/*주문자 대상 선택*/
+
+.orderer {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.orderer-list {
+  margin-top: 50px;
+}
+
+.orderer-list .item {
+  width: 100%;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-bottom: 1px #ccc dashed;
+  font-size: 18px;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.orderer-list .item:last-child {
+  border-bottom: none;
+}
+
+.orderer-list .item .name {
+  width: 70%;
+  float: left;
+}
+
+.orderer-list .item .done-label {
+  display: inline-block;
+  float: right;
+  width: 30%;
+  color: #aaa;
+  background: #eee;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 3px 0;
+  max-width: 72px;
+}
+
+/*전화걸기 팝업*/
+
+#popup {
+  width: 100%;
+  height: 100vh;
+  background-color: #00000047;
+  position: fixed;
+  padding-top: 55%;
+  z-index: 999999;
+  /*opacity: 0;*/
+  /*display: none;*/
+}
+
+.popup-area {
+  width: 90%;
+  display: inline-block;
+  margin: 0 5%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 65px 25px 25px 25px;
+  position: relative;
+}
+
+.popup-area .close {
+  width: 100%;
+  background: #eee;
+  padding: 15px 15px 9px 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+}
+
+.popup-area .alert_txt {
+  font-size: 18px;
+  text-align: center;
+  margin: -10px 0 40px 0;
+}
+
+.order-item {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px #333 dashed;
+  font-size: 18px;
+}
+
+.order-item .menunm {
+  width: 85%;
+  float: left;
+  font-weight: 500;
+}
+
+.order-item .count {
+  width: 15%;
+  float: right;
+  text-align: right;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.order-person-detail .person-info {
+  float: left;
+  width: 70%;
+  margin-bottom: 15px;
+}
+
+.order-person-detail .person-info svg {
+  /* color: #FFE7FA */
+}
+
+.order-person-detail .call-btn {
+  float:right;
+  width: 30%;
+  text-align: center;
+  background-color: #FFBDF2;
+  border-radius: 15px;
+  padding: 2px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/*주문자 메뉴 선택*/
+
+.selectmenu {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.selectmenu .person-info {
+  text-align: center;
+  padding: 8px 20px;
+  display: inline-block;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 70%;
+  margin: 0 15%;
+  margin-top: 15px;
+  box-sizing: border-box;
+}
+
+.form-search {
+  width: 90%;
+  margin: 0 5%;
+  display: inline-block;
+}
+
+.form-search .input {
+  width: 90%;
+  float: left;
+}
+
+.form-search .btn {
+  width: 10%;
+  float: right;
+  text-align: right;
+  display: inline-block;
+  border-bottom: 1.5px #000 solid;
+  height: 52px;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+.tag-group {
+  width: 90%;
+  margin: 0 5%;
+}
+
+.tag-group .menu-tag {
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0 5px 5px 0;
+}
+
+/*주문자 주문확인 팝업*/
+
+.pop_confirm {
+  width: 100%;
+  background-color: #fff;
   position: fixed;
   bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 0 25px 30px 25px;
+  border-radius: 25px 25px 0 0;  
   box-sizing: border-box;
+  padding: 35px 25px;
+  text-align: center;
+}
+
+.pop_confirm .person-info {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.pop_confirm .menunm {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.btn-area {
+
+}
+
+.btn-area li {
+  float: left;
+  width: 48%;
+  margin-right: 2%;
+}
+
+.btn-area li:last-child {
+  margin-right: 0%;
+}
+
+/*주문자 주문완료 확인*/
+
+.order-complete_img {
+  width: 70%;
+  margin-left: 17%;
+  margin-top: 45px;
+}
+
+.order-complete_img img {
+  width: 100%;
+}
+
+.order-complete {
+  width: 100%;
+  border: 1.5px #000 solid;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 18px;
+  box-sizing: border-box;
+  padding: 10px 5% 0 5%;
+  background-color: #fff;
+  margin-top: -8px;
+}
+.order-complete .person {
+  padding: 15px 0;
+  border-bottom: 1px #ddd dashed;
+  font-weight: 500;
+  box-sizing: border-box;
+}
+
+.order-complete .menu {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 20px 0;
+}
+
+/*크리에이터 파티생성*/
+
+.form-area {
+  margin-top: 30px;
+}
+
+/*크리에이터 주문확인*/
+
+.order-list-detail {
+  width: 100%;
+  height: auto;
+  padding: 10px 10px 15px 10px;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.order-list-detail .title {
+  width: 100%;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.order-list-detail .list ul li {
+  margin-bottom: 10px;
+}
+
+.order-list-detail .list ul li:last-child {
+  margin-bottom: 0px;
+}
+
+/*크리에이터 최종확인*/
+
+.confirm-area .mainimg {
+  width: 50%;
+  margin: 50px 21% 0px 29%;
+}
+
+.confirm-area .mainimg img {
+  width: 100%;
+}
+.confirm-area .link_copy {
+  width: 100%;
+  height: 52px;
+  line-height: 52px;
+  border-bottom: 1.5px #000 solid;
+}
+
+.confirm-area .link_copy .link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 85%;
+  font-size: 18px;
+  float: left;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
+.confirm-area .link_copy .copy {
+  width: 35px;
+  height: 35px;
+  padding-top: 9px;
+  float: right;
+}
+
+.confirm-area .go_order {
+  font-family: "LOTTERIA CHAB-Regular", Helvetica;
+  background: url(/src/assets/img/go_bg_img.png) no-repeat center/188px 66px;
+  height: 66px;
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+  line-height: 66px;
+  font-size: 24px;
+}
+
+.dis_n {
+  display: none;
+}
+
+.order-popup-enter{
+  display: block;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+.order-popup-enter-done {
+  display: block;
+  opacity: 1;
+}
+
+.order-popup-exit-active{
+  display: block;
+  animation: fadeOut 0.3s ease-in forwards;
+}
+
+.order-popup-exit-done{
+  opacity: 0;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in forwards;
+  z-index: 999999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    /*opacity: 1;*/
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+
+
+@keyframes fadeInDown {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translate3d(0, 100%, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+} 
+.pop_confirm {
+  /* position: relative; */
+  animation: fadeInUp 0.5s;
+}
+
+.notfound {
+  margin-top: 180px;
+  text-align: center;
+}
+.notfound img {
+  width: 65%;
+}
+
+.notfound_box {
+  border: 2px #000 solid;
+  padding: 15px 0;
+  width: 90%;
+  margin: 0 5%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: -7px;
+  font-size: 20px;
 }
 
 /* 메뉴선택팝업 애니메이션 css */
