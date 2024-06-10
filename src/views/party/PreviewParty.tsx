@@ -2,8 +2,8 @@
 // import "./scss/style.scss"
 // import '../../assets/css/all.css'
 import { useSelector } from 'react-redux';
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 import { RootState } from '@/store';
 import { useNavigate } from 'react-router-dom';
 import clipImg from '@/assets/img/clip_img.png'
