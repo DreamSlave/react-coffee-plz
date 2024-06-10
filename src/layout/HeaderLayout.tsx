@@ -29,10 +29,10 @@ function HeaderLayout({ children }: { children: ReactNode}) {
 
   return (
     <div>
+      {isConfirmOccur && <ConfirmForClose onClose={handleConfirmOccur}></ConfirmForClose>}
       <div id="header">
         { !isHiddenBackbtn ? <img onClick={onClickBack} className="back_ic" src={backIcon} /> : ''}
         <img onClick={onClickClose} className="x_ic" src={xIcon} />
-        {isConfirmOccur && <ConfirmForClose onClose={handleConfirmOccur}></ConfirmForClose>}
       </div>
       {children}
     </div>
