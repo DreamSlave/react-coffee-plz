@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 
 import CheckBox from "@/component/CheckBox.tsx"
 import { useNavigate } from 'react-router-dom';

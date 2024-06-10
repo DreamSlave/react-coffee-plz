@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import '../../assets_design/css/all.css'
-import '../../assets_design/css/style.scss'
+import '../../assets/css/all.css'
+import '../../assets/css/style.scss'
 import { useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group'
 
