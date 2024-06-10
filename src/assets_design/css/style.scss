@@ -74,7 +74,7 @@ h1 {
 $len  : 20;
 
 @for $i from 1 through $len {
-    .w#{$i * 5} {width : $i * 5 + '%';}
+    .w#{$i * 5} {width : $i * 5% !important;}
 
     .pd#{$i * 5}  { padding: $i * 5 + px; }
     .pdl#{$i * 5} { padding-left: $i * 5 + px;}
