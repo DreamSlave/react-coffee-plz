@@ -8,6 +8,7 @@ import { RootState } from "@/store";
 
 import { Menu } from './MenuInterface'
 import SelectMenuPopup from "./SelectMenuPopup";
+import { useGlobalUI } from '@/contexts/GlobalUIContext'; // useGlobalUI 훅의 경로
 
 import ApiUtil from '@/api/api.util';
 import ApiConfig from '@/api/api.config';
@@ -28,6 +29,9 @@ const SelectMenu = () => {
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
 
+
+  const { showAlert } = useGlobalUI();
+
   useEffect(() => {
     fetchMenuList()
   }, [menuSearchText])
@@ -45,7 +49,6 @@ const SelectMenu = () => {
 
   // 태그 버튼 클릭 이벤트 핸들링
   const onClickTagButton = (tagText: string) => {
-
     // TODO: 이렇게 해야만할까..
     setSearchInputValue(tagText)
     setMenuSearchText(tagText)
@@ -109,7 +112,8 @@ const SelectMenu = () => {
                     className=""
             />
           </div>
-          <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div>
+          <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={() => showAlert("This is an alert!")} /></div>
+          {/* <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div> */}
         </div>
 
         {/* start : 태그 영역 */}
@@ -117,7 +121,7 @@ const SelectMenu = () => {
           {
             defaultTagTextList.map((tagText, index) => (
               <div className="menu-tag bg_pink white" key={index} onClick={() => onClickTagButton(tagText)}>
-                # {tagText}
+              # {tagText}
               </div>
             ))
           }
