@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode, FunctionComponent } from 'react';
+import Alert from "@/component/Alert";
 
 // Context 타입 정의
 interface GlobalUIContextType {
@@ -32,10 +33,6 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const showAlert = (message: string) => {
-    
-    //test
-    console.log(`showAlert !!!`)
-
     setAlert({ isVisible: true, message });
   };
 
@@ -58,7 +55,7 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   return (
     <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, showLoading, hideLoading }}>
       {children}
-      {alert.isVisible && <AlertDialog message={alert.message} onClose={closeAlert} />}
+      {alert.isVisible && <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>}
       {confirm.isVisible && <ConfirmDialog message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />}
       {isLoading && <LoadingBar />}
     </GlobalUIContext.Provider>
@@ -66,12 +63,12 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
 };
 
 // Alert Dialog Component
-const AlertDialog: FunctionComponent<{ message: string; onClose: () => void }> = ({ message, onClose }) => (
-  <div className="alert-dialog">
-    <p>{message}</p>
-    <button onClick={onClose}>Close</button>
-  </div>
-);
+// const AlertDialog: FunctionComponent<{ message: string; onClose: () => void }> = ({ message, onClose }) => (
+//   <div className="alert-dialog">
+//     <p>{message}</p>
+//     <button onClick={onClose}>Close</button>
+//   </div>
+// );
 
 // Confirm Dialog Component
 const ConfirmDialog: FunctionComponent<{ message: string; onConfirm: () => void; onCancel: () => void }> = ({ message, onConfirm, onCancel }) => (

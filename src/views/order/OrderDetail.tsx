@@ -14,6 +14,7 @@ import iconOpen from "@/assets/img/icon_open.png"
 import clipImg from "@/assets/img/clip_img.png"
 import ApiUtil from "@/api/api.util.ts";
 import ApiConfig from "@/api/api.config.ts";
+import {useGlobalUI} from "@/contexts/GlobalUIContext";
 
 interface orderInfo {
   title : string;
@@ -128,6 +129,12 @@ function OrderDetail() {
     const mi = parseInt(stringYYYYMMDDHHMI.substring(10, 12), 10);
     return new Date(yyyy, mm, dd, hh, mi, 0);
   }
+
+  const { showAlert } = useGlobalUI();
+
+  const handleClick = () => {
+    showAlert('This is an alert message!');
+  };
   return (
     <>
       <OrderPopup isOpen={isPopupOpen} menuId={selectedMenuId} onClose={closePopup} ></OrderPopup>
@@ -185,7 +192,7 @@ function OrderDetail() {
 
         <footer id="footer" className="bg_pink">
           <div className="">
-            { isStoreOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
+            { isStoreOpen ? <div onClick={handleClick} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
           </div>
         </footer>
 
