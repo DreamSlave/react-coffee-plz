@@ -63,7 +63,7 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
     <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, showLoading, hideLoading }}>
       {children}
       {ReactDOM.createPortal(
-        alert.isVisible && <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>,
+        <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>,
         document.getElementById('global_layer') as HTMLElement
       )}
       {ReactDOM.createPortal(
