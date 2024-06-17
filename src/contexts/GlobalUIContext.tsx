@@ -41,6 +41,9 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   };
 
   const requestConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
+    //test
+    console.log(`abc`)
+
     setConfirm({ isVisible: true, message, onConfirm, onCancel });
   };
 
