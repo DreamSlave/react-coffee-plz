@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React, { createContext, useContext, useState, ReactNode, FunctionComponent } from 'react';
 import Alert from "@/component/Alert";
 
@@ -58,12 +59,22 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   return (
     <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, showLoading, hideLoading }}>
       {children}
-      {alert.isVisible && <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>}
-      {confirm.isVisible && <ConfirmDialog message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />}
-      {isLoading && <LoadingBar />}
+      {ReactDOM.createPortal(
+        alert.isVisible && <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>,
+        document.getElementById('global_layer') as HTMLElement
+      )}
+      {ReactDOM.createPortal(
+        confirm.isVisible && <ConfirmDialog message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />,
+        document.getElementById('global_layer') as HTMLElement
+      )}
+      {ReactDOM.createPortal(
+        isLoading && <LoadingBar />,
+        document.getElementById('global_layer') as HTMLElement
+      )}
     </GlobalUIContext.Provider>
   );
 };
+
 
 // Alert Dialog Component
 // const AlertDialog: FunctionComponent<{ message: string; onClose: () => void }> = ({ message, onClose }) => (
