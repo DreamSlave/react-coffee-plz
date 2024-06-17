@@ -57,7 +57,9 @@ const SelectMenu = () => {
   // 메뉴 리스트 조회 API call
   const fetchMenuList = () => {
     
+    //test
     ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/1`).then((response: any) => {
+    //real
     // ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
       if(!response || !response.ok) {
         //test
@@ -113,7 +115,9 @@ const SelectMenu = () => {
                     className=""
             />
           </div>
+          {/* //test (showAlert 예제) */}
           <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={() => showAlert("This is an alert!")} /></div>
+          {/* //real */}
           {/* <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div> */}
         </div>
 
