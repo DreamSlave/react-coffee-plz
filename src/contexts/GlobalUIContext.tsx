@@ -3,7 +3,7 @@ import Alert from "@/component/Alert";
 
 // Context 타입 정의
 interface GlobalUIContextType {
-  showAlert: (message: string) => void;
+  showAlert: (message: string, onCallBack?: () => void) => void;
   closeAlert: () => void;
   requestConfirm: (message: string, onConfirm: () => void, onCancel: () => void) => void;
   showLoading: () => void;
@@ -28,16 +28,19 @@ interface GlobalUIProviderProps {
 }
 
 export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ children }) => {
-  const [alert, setAlert] = useState<{ isVisible: boolean; message: string }>({ isVisible: false, message: "" });
+  const [alert, setAlert] = useState<{ isVisible: boolean; message: string; onCallBack: ()=> void }>({ isVisible: false, message: "", onCallBack: () => {} });
   const [confirm, setConfirm] = useState<{ isVisible: boolean; message: string; onConfirm: () => void; onCancel: () => void }>({ isVisible: false, message: "", onConfirm: () => {}, onCancel: () => {} });
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const showAlert = (message: string) => {
-    setAlert({ isVisible: true, message });
+  const showAlert = (message: string, onCallBack?: ()=> void) => {
+    setAlert({ isVisible: true, message, onCallBack });
   };
 
   const closeAlert = () => {
-    setAlert({ isVisible: false, message: "" });
+    setAlert(prevState => ({
+      ...prevState,
+      isVisible: false
+    }))
   };
 
   const requestConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
