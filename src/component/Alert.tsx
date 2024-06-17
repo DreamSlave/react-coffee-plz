@@ -17,14 +17,14 @@ const Alert : React.FC<AlertProps> = ({ isOpen, message, onClose }) =>  {
   return (
     <CSSTransition in={isOpen} timeout={3000} classNames="order-popup">
     <>
-      {<div id="popup">
+      {<div id="popup" className={"dis_n"}>
         <div className="popup-area">
           <div className="alert_txt">
             {message}
           </div>
           <div className='btn-area'>
             <ul>
-              <li>
+              <li className={'w100'}>
                 <div className="large-btn w100" onClick={onClose}>
                   확인
                 </div>
