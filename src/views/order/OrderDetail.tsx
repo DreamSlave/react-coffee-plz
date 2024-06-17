@@ -192,7 +192,7 @@ function OrderDetail() {
 
         <footer id="footer" className="bg_pink">
           <div className="">
-            { isStoreOpen ? <div onClick={handleClick} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
+            { isStoreOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
           </div>
         </footer>
 
