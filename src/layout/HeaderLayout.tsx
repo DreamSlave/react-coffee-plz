@@ -24,7 +24,7 @@ function HeaderLayout({ children }: { children: ReactNode}) {
       <div id="header">
         { !isHiddenBackbtn ? <img onClick={onClickBack} className="back_ic" src={backIcon} /> : ''}
         <img className="x_ic" src={xIcon}
-          onClick={() => requestConfirm("Are you sure?", () => console.log("Confirmed!"), () => console.log("Cancelled!"))}/>
+          onClick={() => requestConfirm("진행중인 내용이 모두 사라집니다!<br>종료하시겠습니까?", () => console.log("Confirmed!"), () => console.log("Cancelled!"))}/>
       </div>
       {children}
     </div>

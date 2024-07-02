@@ -1,6 +1,7 @@
 // import { useLocation, useNavigate } from 'react-router-dom';
 // import { RootState } from "@/store";
 // import { useSelector} from "react-redux";
+import parse from 'html-react-parser'
 
 function Confirm({ message, onConfirm, onCancel }) {
   // const userInfo = useSelector((state: RootState) => state.order);
@@ -30,7 +31,7 @@ function Confirm({ message, onConfirm, onCancel }) {
     <div id="popup">
       <div className="popup-area">
         <div className="alert_txt">
-          {message}
+          {parse(message)}
         </div>
         <div className='btn-area'>
           <ul>
