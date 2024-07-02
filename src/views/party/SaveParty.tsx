@@ -5,7 +5,7 @@ import '../../assets/css/all.css'
 import '../../assets/css/style.scss'
 
 import DropDown from "@/component/DropDown.tsx"
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, useRef} from 'react';
 import DatePicker from "react-datepicker";
 import ko from "date-fns/locale/ko";
 
@@ -24,7 +24,7 @@ interface DataItem {
 }
 
 const SaveParty = () => {
-  const [firstRender, setFirstRender] = useState(true);
+  const firstRender = useRef(true); // useRef로 변경하여 상태를 추적
 
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
@@ -36,58 +36,65 @@ const SaveParty = () => {
 
 
   useEffect(() => {
-    const fetchPartyInfo = async () => {      
-      if (firstRender) {
-        const result = await getCafeList();
-        setCafeList(result)
-        if(partyInfo.partyName){
-          setPartyName(partyInfo.partyName)
+    const fetchPartyInfo = async () => {
+      if (firstRender.current) {
+        try {
+          const result = await getCafeList();
+          setCafeList(result);
+          
+          if (partyInfo.partyName) {
+            setPartyName(partyInfo.partyName);
+          }
+          
+          if (partyInfo.cafeId) {
+            setCafeNm(partyInfo.cafeNm);
+            setCafeId(partyInfo.cafeId);
+          } else {
+            if (result.length > 0) {
+              setCafeNm(result[0].name);
+              setCafeId(result[0].id);
+            }
+          }
+          
+          if (partyInfo.endDate) {
+            setEndDate(stringToDate(partyInfo.endDate));
+          }
+          
+          if (partyInfo.endTime) {
+            setEndTime(stringToTime(partyInfo.endTime));
+          } else {
+            setEndTime(nearestQuarterHour());
+          }
+
+        } catch (error) {
+          console.error('Error fetching cafe list:', error);
         }
-        if(partyInfo.cafeId){
-          setCafeNm(partyInfo.cafeNm);
-          setCafeId(partyInfo.cafeId);
-        }else{
-          if (cafeId === '' && cafeNm === '' && cafeList.length > 0) {
-            setCafeNm(String(cafeList[0].cafeNm));
-            setCafeId(String(cafeList[0].userId));
-          }    
-        }
-        if(partyInfo.endDate){
-          setEndDate(stringToDate(partyInfo.endDate))
-        }
-        if(partyInfo.endTime){
-          setEndTime(stringToTime(partyInfo.endTime))
-        }else{
-          setEndTime(nearestQuarterHour())
-        }
-        setFirstRender(false); 
+      }
+      // validation 검사
+      if (partyName !== '' && cafeId !== '') {
+        setIsValid(true);
+      } else {
+        setIsValid(false);
       }
 
-      //validation 검사
-      if(partyName !== '' && cafeId !== ''){
-        setIsValid(true)
-      }else{
-        setIsValid(false)
-      }
-      const now: Date = new Date();
+      const now = new Date();
+      const afterTime = endTime.getTime() - now.getTime();
 
-      const afterTime: number = endTime.getTime() - now.getTime();
-
-      if(endDate.getTime() > now.getTime()){
-        setIsValid(true)
-      }else{
+      if (endDate.getTime() > now.getTime()) {
+        setIsValid(true);
+      } else {
         setTimeout(() => {
-          if(endTime.getTime() - now.getTime() > 1000 * 60 * 60){
-            setIsValid(true)
-          }else{
-            setIsValid(false)
+          if (endTime.getTime() - now.getTime() > 1000 * 60 * 60) {
+            setIsValid(true);
+          } else {
+            setIsValid(false);
           }
         }, afterTime);
       }
-    }
-    fetchPartyInfo()
-    
-  }, [partyName, cafeId, cafeNm, endDate, endTime, firstRender]);
+    };
+
+    fetchPartyInfo();
+  }, [partyName, cafeId, cafeNm, endDate, endTime]);
 
   function getCafeList() {
     return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
@@ -100,13 +107,13 @@ const SaveParty = () => {
   }
 
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
-    setPartyName(event.target.value);
+    setPartyName(event.target.value);        
   };
 
   const onChangeDropDown = (data : DataItem) =>{
     const dataItem = cafeList.find(item => item.cafeId === data.cafeId);
-    setCafeNm(String(dataItem?.cafeNm) ?? '');
-    setCafeId(String(dataItem?.cafeId) ?? '');
+    setCafeNm(String(dataItem?.name) ?? '');
+    setCafeId(String(dataItem?.id) ?? '');
   }
   const partyInfo = useSelector((state: RootState) => state.party);
   
@@ -183,8 +190,8 @@ const SaveParty = () => {
             <DropDown
               onChange={(data) => onChangeDropDown(data)}
               dataItem={cafeList}
-              itemKey="cafeId" // cafeId를 itemKey로 지정
-              itemValue="cafeNm"
+              itemKey="id" // cafeId를 itemKey로 지정
+              itemValue="name"
               defaultValue={cafeId}
             />
           </div>
@@ -218,7 +225,7 @@ const SaveParty = () => {
 
       <footer id="footer">
       {
-        isValid ?
+        isValid ?   
         <div className="large-btn" onClick={onClickSaveParty}>
             미리보기
         </div>:
