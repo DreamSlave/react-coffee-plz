@@ -1,6 +1,8 @@
 import ReactDOM from 'react-dom';
 import React, { createContext, useContext, useState, ReactNode, FunctionComponent } from 'react';
 import Alert from "@/component/Alert";
+import Confirm from '@/component/Confirm';
+import Loading from '@/component/Loading';
 
 // Context 타입 정의
 interface GlobalUIContextType {
@@ -97,11 +99,11 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
           )
       )}
       {ReactDOM.createPortal(
-        confirm.isVisible && <ConfirmDialog message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />,
+        confirm.isVisible && <Confirm message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />,
         document.getElementById('global_layer') as HTMLElement
       )}
       {ReactDOM.createPortal(
-        isLoading && <LoadingBar />,
+        <Loading isShow={isLoading}/>,
         document.getElementById('global_layer') as HTMLElement
       )}
     </GlobalUIContext.Provider>
@@ -118,15 +120,15 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
 // );
 
 // Confirm Dialog Component
-const ConfirmDialog: FunctionComponent<{ message: string; onConfirm: () => void; onCancel: () => void }> = ({ message, onConfirm, onCancel }) => (
+/* const ConfirmDialog: FunctionComponent<{ message: string; onConfirm: () => void; onCancel: () => void }> = ({ message, onConfirm, onCancel }) => (
   <div className="confirm-dialog">
     <p>{message}</p>
     <button onClick={onConfirm}>Confirm</button>
     <button onClick={onCancel}>Cancel</button>
   </div>
-);
+); */
 
 // Loading Bar Component
-const LoadingBar: FunctionComponent = () => (
-  <div className="loading-bar">Loading...</div>
-);
+// const LoadingBar: FunctionComponent = () => (
+//   <div className="loading-bar">Loading...</div>
+//);
