@@ -91,7 +91,7 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   };
 
   return (
-    <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, closeConfirm, showLoading, hideLoading }}>
+    <GlobalUIContext.Provider value={{ showAlert, addAlert, closeAlert, requestConfirm, closeConfirm, showLoading, hideLoading }}>
       {children}
       {alerts.map((alert) =>
           ReactDOM.createPortal(
