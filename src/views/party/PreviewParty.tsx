@@ -10,12 +10,14 @@ import clipImg from '@/assets/img/clip_img.png'
 import iconHurry from '@/assets/img/icon_hurry.png'
 import ApiUtil from "@/api/api.util.ts";
 import ApiConfig from "@/api/api.config.ts";
+import { useGlobalUI } from '@/contexts/GlobalUIContext'; // useGlobalUI 훅의 경로
 
 
 
 function PreviewParty() {
   const partyInfo = useSelector((state: RootState) => state.party);
   console.log(":partyInfo:",partyInfo);
+  const { showLoading, hideLoading } = useGlobalUI();
 
   const navigate  = useNavigate();
 
@@ -27,6 +29,7 @@ function PreviewParty() {
       endDate : partyInfo.endDate,
       endTime : partyInfo.endTime
     }
+    showLoading()
     const result = await ApiUtil.post(`${ApiConfig.defaultDomain}/party/save`, params)
     .then(response => response.json())
     .then(json => {
@@ -35,6 +38,9 @@ function PreviewParty() {
     })
     .catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
+    })
+    .finally(() => {
+      hideLoading();
     })
 
     navigate(`/party/confirm/${result.partyId}`)
