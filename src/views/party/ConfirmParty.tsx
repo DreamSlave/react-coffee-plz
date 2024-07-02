@@ -1,21 +1,14 @@
-import { useSelector } from 'react-redux';
 import '../../assets/css/all.css'
 import '../../assets/css/style.scss'
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { RootState } from '@/store'
 import { useState } from 'react';
 
 
 
 const ConfirmParty = () => {
   const { partyId } = useParams<{ partyId: string }>()
-  //console.log(":partyId:",partyId);
-  console.log("????")
   const navigate  = useNavigate();
-
-  const partyInfo = useSelector((state: RootState) => state.party);
-  console.log(":partyInfo:",partyInfo);
   const [orderUrl] = useState<string>(`https://dreamslave.github.io/react-coffee-plz/order/${partyId}`)
   
   function copyOrderUrl(){

@@ -16,7 +16,6 @@ import { useGlobalUI } from '@/contexts/GlobalUIContext'; // useGlobalUI 훅의 
 
 function PreviewParty() {
   const partyInfo = useSelector((state: RootState) => state.party);
-  console.log(":partyInfo:",partyInfo);
   const { showLoading, hideLoading } = useGlobalUI();
 
   const navigate  = useNavigate();
