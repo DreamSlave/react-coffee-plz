@@ -130,10 +130,10 @@ function OrderDetail() {
     return new Date(yyyy, mm, dd, hh, mi, 0);
   }
 
-  const { showAlert } = useGlobalUI();
+  const { addAlert } = useGlobalUI();
 
   const handleClick = () => {
-    showAlert('This is an alert message!');
+    addAlert('ex) API 네트워크 통신 실패');
   };
   return (
     <>
