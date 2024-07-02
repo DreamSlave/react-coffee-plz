@@ -34,6 +34,7 @@ const SaveParty = () => {
   const [cafeList, setCafeList] = useState<DataItem[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
 
+  const partyInfo = useSelector((state: RootState) => state.party);
 
   useEffect(() => {
     const fetchPartyInfo = async () => {
@@ -41,36 +42,34 @@ const SaveParty = () => {
         try {
           const result = await getCafeList();
           setCafeList(result);
-          
+
           if (partyInfo.partyName) {
             setPartyName(partyInfo.partyName);
           }
-          
+
           if (partyInfo.cafeId) {
             setCafeNm(partyInfo.cafeNm);
             setCafeId(partyInfo.cafeId);
-          } else {
-            if (result.length > 0) {
-              setCafeNm(result[0].name);
-              setCafeId(result[0].id);
-            }
+          } else if (result.length > 0) {
+            setCafeNm(result[0].name);
+            setCafeId(result[0].id);
           }
-          
+
           if (partyInfo.endDate) {
             setEndDate(stringToDate(partyInfo.endDate));
           }
-          
           if (partyInfo.endTime) {
             setEndTime(stringToTime(partyInfo.endTime));
           } else {
             setEndTime(nearestQuarterHour());
           }
 
+          firstRender.current = false;
         } catch (error) {
-          console.error('Error fetching cafe list:', error);
+          console.error(error);
         }
       }
-      // validation 검사
+      // validation 검사      
       if (partyName !== '' && cafeId !== '') {
         setIsValid(true);
       } else {
@@ -84,7 +83,7 @@ const SaveParty = () => {
         setIsValid(true);
       } else {
         setTimeout(() => {
-          if (endTime.getTime() - now.getTime() > 1000 * 60 * 60) {
+          if (endTime.getTime() - now.getTime() > 1000 * 60 ) {
             setIsValid(true);
           } else {
             setIsValid(false);
@@ -94,7 +93,7 @@ const SaveParty = () => {
     };
 
     fetchPartyInfo();
-  }, [partyName, cafeId, cafeNm, endDate, endTime]);
+  }, [partyInfo, partyName, cafeId, cafeNm, endDate, endTime, isValid]);
 
   function getCafeList() {
     return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
@@ -115,7 +114,6 @@ const SaveParty = () => {
     setCafeNm(String(dataItem?.name) ?? '');
     setCafeId(String(dataItem?.id) ?? '');
   }
-  const partyInfo = useSelector((state: RootState) => state.party);
   
 
   const navigate  = useNavigate();
