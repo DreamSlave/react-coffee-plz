@@ -2,9 +2,15 @@ import { useNavigate } from 'react-router-dom'
 import "@/assets/temp-entrance/entrance.css";
 import hurryImg from '@/assets/temp-entrance/entrance1.png'
 import logoImg from '@/assets/temp-entrance/entrance2.png'
+import { initParty } from '@/store/party';
+import { useDispatch } from 'react-redux';
+
 
 const Entrance = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
+  dispatch(initParty())
+
 
   return (
     <div className="element main_pd">

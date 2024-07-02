@@ -17,7 +17,7 @@ const Alert : React.FC<AlertProps> = ({ isOpen, message, onClose }) =>  {
   return (
     <CSSTransition in={isOpen} timeout={3000} classNames="order-popup">
     <>
-      {<div id="popup" className={"dis_n"}>
+      {<div id="popup" className={""}>
         <div className="popup-area">
           <div className="alert_txt">
             {message}

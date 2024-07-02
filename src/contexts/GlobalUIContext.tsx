@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { createContext, useContext, useState, ReactNode, FunctionComponent } from 'react';
 import Alert from "@/component/Alert";
 import Confirm from '@/component/Confirm';
+import Loading from '@/component/Loading';
 
 // Context 타입 정의
 interface GlobalUIContextType {
@@ -11,7 +12,14 @@ interface GlobalUIContextType {
   closeConfirm: () => void;
   showLoading: () => void;
   hideLoading: () => void;
+  addAlert: (message: string, onCallBack?: () => void) => void;
 }
+type AlertType = {
+  id: string;
+  message: string;
+  onCallBack?: () => void;
+  isVisible: boolean;
+};
 
 // 기본 컨텍스트 값 설정
 const defaultState: GlobalUIContextType = {
@@ -20,7 +28,8 @@ const defaultState: GlobalUIContextType = {
   requestConfirm: () => {},
   closeConfirm:() => {},
   showLoading: () => {},
-  hideLoading: () => {}
+  hideLoading: () => {},
+  addAlert: () => {}
 };
 
 const GlobalUIContext = createContext<GlobalUIContextType>(defaultState);
@@ -32,6 +41,7 @@ interface GlobalUIProviderProps {
 }
 
 export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ children }) => {
+  const [alerts, setAlerts] = useState<AlertType[]>([]);
   const [alert, setAlert] = useState<{ isVisible: boolean; message: string; onCallBack: ()=> void }>({ isVisible: false, message: "", onCallBack: () => {} });
   const [confirm, setConfirm] = useState<{ isVisible: boolean; message: string; onConfirm: () => void; onCancel: () => void }>({ isVisible: false, message: "", onConfirm: () => {}, onCancel: () => {} });
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,6 +49,20 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   const showAlert = (message: string, onCallBack?: ()=> void) => {
     setAlert({ isVisible: true, message, onCallBack });
   };
+
+  const addAlert = (message: string, onCallBack?: ()=> void) => {
+    const newAlert: AlertType = {
+      id: (~~Math.random()*100) + '',
+      message,
+      onCallBack,
+      isVisible: true
+    };
+    setAlerts((prevAlerts) => [...prevAlerts, newAlert]);
+  }
+  const deleteAlert = (id: string) => {
+    setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
+  };
+
 
   const closeAlert = () => {
     setAlert(prevState => ({
@@ -69,16 +93,23 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   return (
     <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, closeConfirm, showLoading, hideLoading }}>
       {children}
-      {ReactDOM.createPortal(
-        <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>,
-        document.getElementById('global_layer') as HTMLElement
+      {alerts.map((alert) =>
+          ReactDOM.createPortal(
+              <Alert
+                  key={alert.id}
+                  message={alert.message}
+                  onClose={() => deleteAlert(alert.id)}
+                  isOpen={alert.isVisible}
+              />,
+              document.getElementById('global_layer') as HTMLElement
+          )
       )}
       {ReactDOM.createPortal(
         confirm.isVisible && <Confirm message={confirm.message} onConfirm={confirm.onConfirm} onCancel={confirm.onCancel} />,
         document.getElementById('global_layer') as HTMLElement
       )}
       {ReactDOM.createPortal(
-        isLoading && <LoadingBar />,
+        <Loading isShow={isLoading}/>,
         document.getElementById('global_layer') as HTMLElement
       )}
     </GlobalUIContext.Provider>
@@ -104,6 +135,6 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
 ); */
 
 // Loading Bar Component
-const LoadingBar: FunctionComponent = () => (
-  <div className="loading-bar">Loading...</div>
-);
+// const LoadingBar: FunctionComponent = () => (
+//   <div className="loading-bar">Loading...</div>
+//);
