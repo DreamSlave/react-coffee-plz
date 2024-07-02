@@ -4,8 +4,6 @@ import '../../assets/css/style.scss'
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { RootState } from '@/store'
-import { initParty } from '@/store/party';
-import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
 
@@ -15,8 +13,6 @@ const ConfirmParty = () => {
   //console.log(":partyId:",partyId);
   console.log("????")
   const navigate  = useNavigate();
-  const dispatch = useDispatch();
-  dispatch(initParty())
 
   const partyInfo = useSelector((state: RootState) => state.party);
   console.log(":partyInfo:",partyInfo);

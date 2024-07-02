@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { createContext, useContext, useState, ReactNode, FunctionComponent } from 'react';
 import Alert from "@/component/Alert";
 import Confirm from '@/component/Confirm';
+import Loading from '@/component/Loading';
 
 // Context 타입 정의
 interface GlobalUIContextType {
@@ -72,7 +73,7 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
         document.getElementById('global_layer') as HTMLElement
       )}
       {ReactDOM.createPortal(
-        isLoading && <LoadingBar />,
+        <Loading isShow={isLoading}/>,
         document.getElementById('global_layer') as HTMLElement
       )}
     </GlobalUIContext.Provider>
@@ -98,6 +99,6 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
 ); */
 
 // Loading Bar Component
-const LoadingBar: FunctionComponent = () => (
-  <div className="loading-bar">Loading...</div>
-);
+// const LoadingBar: FunctionComponent = () => (
+//   <div className="loading-bar">Loading...</div>
+//);

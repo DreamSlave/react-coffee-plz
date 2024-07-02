@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import ApiUtil from "../../api/api.util";
 import ApiConfig from "../../api/api.config";
+import { useGlobalUI } from '@/contexts/GlobalUIContext'; // useGlobalUI 훅의 경로
+
 
 
 interface MemberProps {
@@ -35,6 +37,7 @@ const SelectPartyMember = () => {
   const [teamList, setTeamList] = useState<TeamProps[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
   const [firstRender, setFirstRender] = useState(true);
+  const { showLoading, hideLoading } = useGlobalUI();
 
 
   useEffect(() => {
@@ -125,15 +128,20 @@ const SelectPartyMember = () => {
 
   
   
-  function getMemberList() {
-    return ApiUtil.get(`${ApiConfig.defaultDomain}/users`)
-    .then(response => response.json())
-    .then(json => {
-     const resultData = json.data
-     return resultData
-    })
-        
-  }
+  const getMemberList = async () => {
+    showLoading();
+    try {
+      const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/users`);
+      const json = await response.json();
+      const resultData = json.data;
+      return resultData;
+    } catch (error) {
+      console.error(error);
+      throw error; // 오류를 기록한 후 다시 throw
+    } finally {
+      //hideLoading();
+    }
+  };
 
   return (
     <div id='party' className="element">
