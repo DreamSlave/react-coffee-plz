@@ -8,6 +8,7 @@ interface GlobalUIContextType {
   showAlert: (message: string, onCallBack?: () => void) => void;
   closeAlert: () => void;
   requestConfirm: (message: string, onConfirm: () => void, onCancel: () => void) => void;
+  closeConfirm: () => void;
   showLoading: () => void;
   hideLoading: () => void;
 }
@@ -17,6 +18,7 @@ const defaultState: GlobalUIContextType = {
   showAlert: () => {},
   closeAlert: () => {},
   requestConfirm: () => {},
+  closeConfirm:() => {},
   showLoading: () => {},
   hideLoading: () => {}
 };
@@ -46,11 +48,15 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   };
 
   const requestConfirm = (message: string, onConfirm: () => void, onCancel: () => void) => {
-    //test
-    console.log(`abc`)
-
     setConfirm({ isVisible: true, message, onConfirm, onCancel });
   };
+
+  const closeConfirm = () => {
+    setConfirm(prevState => ({
+      ...prevState,
+      isVisible: false
+    }))
+  }
 
   const showLoading = () => {
     setIsLoading(true);
@@ -61,7 +67,7 @@ export const GlobalUIProvider: FunctionComponent<GlobalUIProviderProps> = ({ chi
   };
 
   return (
-    <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, showLoading, hideLoading }}>
+    <GlobalUIContext.Provider value={{ showAlert, closeAlert, requestConfirm, closeConfirm, showLoading, hideLoading }}>
       {children}
       {ReactDOM.createPortal(
         <Alert message={alert.message} onClose={closeAlert}  isOpen={alert.isVisible}/>,
