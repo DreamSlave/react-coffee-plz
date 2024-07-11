@@ -139,7 +139,7 @@ const SelectPartyMember = () => {
       console.error(error);
       throw error; // 오류를 기록한 후 다시 throw
     } finally {
-      //hideLoading();
+      hideLoading();
     }
   };
 

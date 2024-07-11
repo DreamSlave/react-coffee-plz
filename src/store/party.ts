@@ -7,7 +7,7 @@ type PartyInfo = {
   memberList : Array<Member>
   partyName : string
   cafeId : string
-  cafeNm : string
+  cafeName : string
   endDate : string
   endTime : string
 };
@@ -23,7 +23,7 @@ const initialPartyInfo: PartyInfo = {
   memberList: [],
   partyName : '',
   cafeId : '',
-  cafeNm : '',
+  cafeName : '',
   endDate : '',
   endTime : ''
 };
@@ -35,12 +35,12 @@ export const setSelectPartyMember = (memberList : Array<Member>) => ({
   }
 })
 
-export const setSaveParty = (partyName : string, cafeId : string, cafeNm : string, endDate : string, endTime :  string) => ({
+export const setSaveParty = (partyName : string, cafeId : string, cafeName : string, endDate : string, endTime :  string) => ({
   type: SET_PARTY,
   payload: {
     partyName: partyName,
     cafeId: cafeId,
-    cafeNm: cafeNm,
+    cafeName: cafeName,
     endDate: endDate,
     endTime: endTime
   }
@@ -61,7 +61,7 @@ function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPart
         memberList: action.payload.memberList,
         partyName: partyInfo.partyName,
         cafeId: partyInfo.cafeId,
-        cafeNm: partyInfo.cafeNm,
+        cafeName: partyInfo.cafeName,
         endDate: partyInfo.endDate,
         endTime: partyInfo.endTime,
 
@@ -71,7 +71,7 @@ function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPart
         memberList : partyInfo.memberList,
         partyName: action.payload.partyName,
         cafeId: action.payload.cafeId,
-        cafeNm: action.payload.cafeNm,
+        cafeName: action.payload.cafeName,
         endDate: action.payload.endDate,
         endTime: action.payload.endTime,
       };  
@@ -80,7 +80,7 @@ function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPart
         memberList: [],
         partyName : '',
         cafeId : '',
-        cafeNm : '',
+        cafeName : '',
         endDate : '',
         endTime : ''
       };
