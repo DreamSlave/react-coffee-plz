@@ -30,7 +30,7 @@ const SaveParty = () => {
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [partyName, setPartyName] = useState<string>('')
   const [cafeId, setCafeId] = useState<string>('')
-  const [cafeNm, setCafeNm] = useState<string>('')
+  const [cafeName, setCafeName] = useState<string>('')
   const [cafeList, setCafeList] = useState<DataItem[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
 
@@ -48,11 +48,11 @@ const SaveParty = () => {
           }
 
           if (partyInfo.cafeId) {
-            setCafeNm(partyInfo.cafeNm);
+            setCafeName(partyInfo.cafeName);
             setCafeId(partyInfo.cafeId);
           } else if (result.length > 0) {
-            setCafeNm(result[0].name);
-            setCafeId(result[0].id);
+            setCafeName(result[0].cafeName);
+            setCafeId(result[0].cafeId);
           }
 
           if (partyInfo.endDate) {
@@ -93,7 +93,7 @@ const SaveParty = () => {
     };
 
     fetchPartyInfo();
-  }, [partyInfo, partyName, cafeId, cafeNm, endDate, endTime, isValid]);
+  }, [partyInfo, partyName, cafeId, cafeName, endDate, endTime, isValid]);
 
   function getCafeList() {
     return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
@@ -111,8 +111,8 @@ const SaveParty = () => {
 
   const onChangeDropDown = (data : DataItem) =>{
     const dataItem = cafeList.find(item => item.cafeId === data.cafeId);
-    setCafeNm(String(dataItem?.name) ?? '');
-    setCafeId(String(dataItem?.id) ?? '');
+    setCafeName(String(dataItem?.cafeName) ?? '');
+    setCafeId(String(dataItem?.cafeId) ?? '');
   }
   
 
@@ -123,7 +123,7 @@ const SaveParty = () => {
     const yyyymmdd : string = endDate.toLocaleDateString('en-CA').replace(/-/g, '');
     const HHmm : string = endTime.toLocaleTimeString('en-US', {hour12: false}).slice(0, -3).replace(':', '');
     
-    dispatch(setSaveParty(partyName, cafeId, cafeNm, yyyymmdd, HHmm))
+    dispatch(setSaveParty(partyName, cafeId, cafeName, yyyymmdd, HHmm))
     navigate('/party/preview')
   }
 
@@ -188,8 +188,8 @@ const SaveParty = () => {
             <DropDown
               onChange={(data) => onChangeDropDown(data)}
               dataItem={cafeList}
-              itemKey="id" // cafeId를 itemKey로 지정
-              itemValue="name"
+              itemKey="cafeId" // cafeId를 itemKey로 지정
+              itemValue="cafeName"
               defaultValue={cafeId}
             />
           </div>

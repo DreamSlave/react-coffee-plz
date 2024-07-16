@@ -80,7 +80,7 @@ function PreviewParty() {
             <div className="order-title">
               <div className="text">
                 <div className="title">{partyInfo.partyName}</div>
-                <div className="cafenm point">{partyInfo.cafeNm}</div>
+                <div className="cafenm point">{partyInfo.cafeName}</div>
               </div>
               <div className="image">
                 <img alt="hurry" src={iconHurry} />
