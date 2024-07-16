@@ -17,46 +17,43 @@ import ApiConfig from "@/api/api.config.ts";
 import {useGlobalUI} from "@/contexts/GlobalUIContext";
 
 interface orderInfo {
-  title : string;
+  partyName : string;
   cafeNm : string;
   endDt : string;
-  orderUserCount : number;
-  orderTagerUserCount : number;
-  orderDrinkCount : number;
-  orderTagerDrinkCount : number;
-  orderState : string;
+  // 대상자 30명 중 응답자 18명, 그 안에서 미주문자 3명이라고 할때
+  orderUserCount : number;        // 주문한 인원 EX: 18명
+  orderTargetUserCount : number;  // 전체 주문(응답을 해야하는)해야하는 사람의 수 EX: 30명
+  orderDrinkCount : number;       // 주문된 음료 수 EX: 15잔
+  orderTargetDrinkCount : number; // 주문해야하는 음료의 수 EX: 27장
   orderMenuInfoList : orderMenuInfo[];
 }
 
+// interface
+
 interface orderMenuInfo{
   menuNm: string;
-  count: number;
+  orderCount: number;
   menuId: string;
 }
 
-const getOrderInfo = async (partyNo: string): Promise<orderInfo> => {
-  const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/party/info/${partyNo}`);
+const getOrderInfo = async (partyNo: string): Promise<{ orderTargetDrinkCount: number; orderMenuInfoList: { ordererList: any[]; orderCount: number; menuId: string; menuNm: string }[]; orderDrinkCount: number; partyName: string; endDt: string; cafeNm: string; orderTargetUserCount: number; orderUserCount: number }> => {
+  const response = await ApiUtil.post(`${ApiConfig.defaultDomain}/order/status/${partyNo}`, {});
   // return (await response.json()).data[0]
   console.log(response)
     return {
-      title: '드림 슬레이브!',
-      cafeNm: '메에가커픠',
+      partyName: '커주 데뷔 기념',
+      cafeNm: '크리미',
       endDt: '2024/12/23 20:01',
-      orderUserCount: 18 + ~~(Math.random() * 100),
-      orderTagerUserCount: 30 + ~~(Math.random() * 100),
-      orderDrinkCount: 15 + ~~(Math.random() * 100),
-      orderTagerDrinkCount: 30 + ~~(Math.random() * 100),
-      orderState: '01',
+      orderUserCount: 18,
+      orderTargetUserCount: 30,
+      orderDrinkCount: 15,
+      orderTargetDrinkCount: 27,
       orderMenuInfoList: [
-        {menuNm: '아메리카노-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '아메리카노-아이스-연하게', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '아메리카노-핫', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '카페라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '카페라떼-아이스-BIG', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '초코라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '바닐라라떼-아이스', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '(직접입력)자두에이드', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
-        {menuNm: '괜찮습니다.', count: ~~(Math.random() * 100), menuId: 'ID' + ~~(Math.random() * 10000)},
+        { menuNm: '아메리카노-아이스',
+          orderCount: ~~(Math.random() * 100),
+          menuId: 'ID' + ~~(Math.random() * 10000),
+          ordererList: []
+        }
       ]
     }
 }
@@ -70,13 +67,12 @@ function OrderDetail() {
   const [orderInfo, setOrderInfo] = useState<orderInfo>({
     cafeNm: "",
     endDt: "",
-    orderDrinkCount: 0,
     orderMenuInfoList: [],
-    orderState: "",
-    orderTagerDrinkCount: 0,
-    orderTagerUserCount: 0,
+    orderDrinkCount: 0,
+    orderTargetDrinkCount: 0,
+    orderTargetUserCount: 0,
     orderUserCount: 0,
-    title: ""
+    partyName: ""
   });
   const [isStoreOpen, setIsStoreOpen] = useState<boolean>(true)
 
@@ -149,7 +145,7 @@ function OrderDetail() {
           </div>
           <div className="order-title">
             <div className="text">
-              <div className="title">{ orderInfo.title }</div>
+              <div className="title">{ orderInfo.partyName }</div>
               <div className="cafenm point">{ orderInfo.cafeNm }</div>
             </div>
             {isStoreOpen ? <img className="image" src={iconOpen} /> : <img className="image"  src={iconClose}/>}
@@ -162,12 +158,12 @@ function OrderDetail() {
             <div className="detail">
               <div className="title">주문한 인원</div>
               <div className="count">{ orderInfo.orderUserCount } 명</div>
-              <div className="all gray">총 { orderInfo.orderTagerUserCount }명</div>
+              <div className="all gray">총 { orderInfo.orderTargetUserCount }명</div>
             </div>
             <div className="detail">
               <div className="title">주문된 음료</div>
               <div className="count">{ orderInfo.orderDrinkCount } 잔</div>
-              <div className="all gray">총 { orderInfo.orderTagerDrinkCount } 잔</div>
+              <div className="all gray">총 { orderInfo.orderTargetDrinkCount } 잔</div>
             </div>
           </div>
 
@@ -182,7 +178,7 @@ function OrderDetail() {
                 return (
                   <div key={item.menuId}>
                     <div className="menunm">{item.menuNm}</div>
-                    <div onClick={openPopup} className="count">{item.count}</div>
+                    <div onClick={openPopup} className="count">{item.orderCount}</div>
                   </div>
                 )
               })
