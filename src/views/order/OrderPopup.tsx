@@ -15,50 +15,35 @@ interface orderUserInfo {
 
 interface orderPopupInfo{
   menuNm: string;
-  menuId: string;
   count: number;
   orderUserInfoList: orderUserInfo[];
 }
 
-
-function getOrderPopupInfo(partyNo: string, menuId: string){
-
-  console.log(partyNo, menuId, "팝업 조회용 API 호출")
-
-  return{
-    menuNm: '아메리카노-아이스-연하게',
-    menuId: 'IDIDIDID',
-    count: 30,
-    orderUserInfoList: [
-      {name: '김진미 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-      {name: '김세인 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-      {name: '조도은 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-    ]
-  }
-}
 interface PopupProps {
   isOpen: boolean;
-  menuId: string;
+  menuNm: string;
+  count: number;
+  orderUserInfoList: orderUserInfo[]
   onClose: () => void;
 }
 
-const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuId, onClose }) => {
+const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, orderUserInfoList, onClose }) => {
 
-  const [orderPopupInfo, setOrderPopupInfo] = useState<orderPopupInfo>({
-    menuNm: '',
-    menuId: '',
-    count: 0,
-    orderUserInfoList: []
+  const [orderPopupInfo, setOrderPopupInfo ] = useState<orderPopupInfo>({
+    menuNm: menuNm,
+    count: count,
+    orderUserInfoList: orderUserInfoList
   });
-
-  const { partyNo } = useParams();
 
   useEffect(() => {
     if(isOpen){
-      const orderInfo = getOrderPopupInfo(partyNo ?? '', menuId)
-      setOrderPopupInfo(orderInfo)
+      setOrderPopupInfo({
+        menuNm: menuNm,
+        count: count,
+        orderUserInfoList: orderUserInfoList
+      })
     }
-  }, [isOpen, menuId]);
+  }, [count, isOpen, menuNm, orderUserInfoList]);
   // { <div id="popup" onClick={onClose} className={isOpen ? 'fade-in' : 'fade-out'}>
   return (
 

@@ -34,16 +34,35 @@ interface orderMenuInfo{
   menuNm: string;
   orderCount: number;
   menuId: string;
+  orderUserInfoList: orderUserInfo[];
 }
 
-const getOrderInfo = async (partyNo: string): Promise<{ orderTargetDrinkCount: number; orderMenuInfoList: { ordererList: any[]; orderCount: number; menuId: string; menuNm: string }[]; orderDrinkCount: number; partyName: string; endDt: string; cafeNm: string; orderTargetUserCount: number; orderUserCount: number }> => {
+interface orderUserInfo {
+  name : string;
+  userId: string;
+  team: string;
+  department: string;
+  rank: string;
+  telNo: string;
+}
+
+const getOrderInfo = async (partyNo: string): Promise<{
+  orderTargetDrinkCount: number;
+  orderMenuInfoList: orderMenuInfo[];
+  orderDrinkCount: number;
+  partyName: string;
+  endDt: string;
+  cafeNm: string;
+  orderTargetUserCount: number;
+  orderUserCount: number
+}> => {
   const response = await ApiUtil.post(`${ApiConfig.defaultDomain}/order/status/${partyNo}`, {});
   // return (await response.json()).data[0]
   console.log(response)
-    return {
-      partyName: '커주 데뷔 기념',
-      cafeNm: '크리미',
-      endDt: '2024/12/23 20:01',
+  return {
+    partyName: '커주 데뷔 기념',
+    cafeNm: '크리미',
+    endDt: '2024/12/23 20:01',
       orderUserCount: 18,
       orderTargetUserCount: 30,
       orderDrinkCount: 15,
@@ -52,7 +71,11 @@ const getOrderInfo = async (partyNo: string): Promise<{ orderTargetDrinkCount: n
         { menuNm: '아메리카노-아이스',
           orderCount: ~~(Math.random() * 100),
           menuId: 'ID' + ~~(Math.random() * 10000),
-          ordererList: []
+          orderUserInfoList:[
+            {name: '김진미 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+            {name: '김세인 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+            {name: '조도은 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+          ]
         }
       ]
     }
@@ -85,7 +108,9 @@ function OrderDetail() {
 
 
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
-  const [selectedMenuId, setSelectedMenuId] = useState<string>('');
+  const [selectedMenuInfo, setSelectedMenuInfo] = useState<orderMenuInfo>({
+    menuId: "", menuNm: "", orderCount: 0, orderUserInfoList: []
+  });
 
   const closePopup = () => {
     setPopupOpen(false);
@@ -133,7 +158,11 @@ function OrderDetail() {
   };
   return (
     <>
-      <OrderPopup isOpen={isPopupOpen} menuId={selectedMenuId} onClose={closePopup} ></OrderPopup>
+      <OrderPopup isOpen={isPopupOpen}
+                  onClose={closePopup}
+                  menuNm={selectedMenuInfo.menuNm}
+                  count={selectedMenuInfo.orderCount}
+                  orderUserInfoList={selectedMenuInfo.orderUserInfoList}></OrderPopup>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황
@@ -173,7 +202,7 @@ function OrderDetail() {
               menuList.map((item)=>{
                 const openPopup = () => {
                   setPopupOpen(!isPopupOpen);
-                  setSelectedMenuId(item.menuId)
+                  setSelectedMenuInfo(item)
                 };
                 return (
                   <div key={item.menuId}>
