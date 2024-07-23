@@ -34,7 +34,7 @@ interface orderMenuInfo{
   menuNm: string;
   orderCount: number;
   menuId: string;
-  orderUserInfoList: orderUserInfo[];
+  ordererList: orderUserInfo[];
 }
 
 interface orderUserInfo {
@@ -56,29 +56,29 @@ const getOrderInfo = async (partyNo: string): Promise<{
   orderTargetUserCount: number;
   orderUserCount: number
 }> => {
-  const response = await ApiUtil.post(`${ApiConfig.defaultDomain}/order/status/${partyNo}`, {});
-  // return (await response.json()).data[0]
-  console.log(response)
-  return {
-    partyName: '커주 데뷔 기념',
-    cafeNm: '크리미',
-    endDt: '2024/12/23 20:01',
-      orderUserCount: 18,
-      orderTargetUserCount: 30,
-      orderDrinkCount: 15,
-      orderTargetDrinkCount: 27,
-      orderMenuInfoList: [
-        { menuNm: '아메리카노-아이스',
-          orderCount: ~~(Math.random() * 100),
-          menuId: 'ID' + ~~(Math.random() * 10000),
-          orderUserInfoList:[
-            {name: '김진미 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-            {name: '김세인 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-            {name: '조도은 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-          ]
-        }
-      ]
-    }
+  const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/status/${partyNo}`);
+  return (await response.json()).data
+  // console.log(response)
+  // return {
+  //   partyName: '커주 데뷔 기념',
+  //   cafeNm: '크리미',
+  //   endDt: '2024/12/23 20:01',
+  //     orderUserCount: 18,
+  //     orderTargetUserCount: 30,
+  //     orderDrinkCount: 15,
+  //     orderTargetDrinkCount: 27,
+  //     orderMenuInfoList: [
+  //       { menuNm: '아메리카노-아이스',
+  //         orderCount: ~~(Math.random() * 100),
+  //         menuId: 'ID' + ~~(Math.random() * 10000),
+  //         ordererList:[
+  //           {name: '김진미 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+  //           {name: '김세인 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+  //           {name: '조도은 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
+  //         ]
+  //       }
+  //     ]
+  //   }
 }
 
 function OrderDetail() {
@@ -109,7 +109,7 @@ function OrderDetail() {
 
   const [isPopupOpen, setPopupOpen] = useState<boolean>(false);
   const [selectedMenuInfo, setSelectedMenuInfo] = useState<orderMenuInfo>({
-    menuId: "", menuNm: "", orderCount: 0, orderUserInfoList: []
+    menuId: "", menuNm: "", orderCount: 0, ordererList: []
   });
 
   const closePopup = () => {
@@ -162,7 +162,7 @@ function OrderDetail() {
                   onClose={closePopup}
                   menuNm={selectedMenuInfo.menuNm}
                   count={selectedMenuInfo.orderCount}
-                  orderUserInfoList={selectedMenuInfo.orderUserInfoList}></OrderPopup>
+                  ordererList={selectedMenuInfo.ordererList}></OrderPopup>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황

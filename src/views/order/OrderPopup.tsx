@@ -16,23 +16,23 @@ interface orderUserInfo {
 interface orderPopupInfo{
   menuNm: string;
   count: number;
-  orderUserInfoList: orderUserInfo[];
+  ordererList: orderUserInfo[];
 }
 
 interface PopupProps {
   isOpen: boolean;
   menuNm: string;
   count: number;
-  orderUserInfoList: orderUserInfo[]
+  ordererList: orderUserInfo[]
   onClose: () => void;
 }
 
-const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, orderUserInfoList, onClose }) => {
+const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, ordererList, onClose }) => {
 
   const [orderPopupInfo, setOrderPopupInfo ] = useState<orderPopupInfo>({
     menuNm: menuNm,
     count: count,
-    orderUserInfoList: orderUserInfoList
+    ordererList: ordererList
   });
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, orderUserInf
       setOrderPopupInfo({
         menuNm: menuNm,
         count: count,
-        orderUserInfoList: orderUserInfoList
+        ordererList: ordererList
       })
     }
-  }, [count, isOpen, menuNm, orderUserInfoList]);
+  }, [count, isOpen, menuNm, ordererList]);
   // { <div id="popup" onClick={onClose} className={isOpen ? 'fade-in' : 'fade-out'}>
   return (
 
@@ -65,7 +65,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, orderUserInf
           </div>
           <div className="order-person-detail">
             {
-              orderPopupInfo.orderUserInfoList.map((item, index) => {
+              orderPopupInfo.ordererList.map((item, index) => {
                 const className = 'list-' + (index + 1)
                 return (
                   <div key={item.userId} className={className}>
