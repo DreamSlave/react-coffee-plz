@@ -2,7 +2,7 @@ import '@/assets/css/all.css'
 import '@/assets/css/style.scss'
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
 
-import { useEffect, useState, ChangeEvent } from "react";
+import { useEffect, useState, ChangeEvent, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
@@ -28,13 +28,17 @@ const SelectMenu = () => {
   const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
+  const [pageNo, setPageNo] = useState(1)
+  const [pageLoading, setPageLoading] = useState(false)
 
+  const observer = useRef<IntersectionObserver | null>(null)
+  const lastMenuElemRef = useRef<HTMLDivElement | null>(null)
 
   const { showAlert } = useGlobalUI();
 
   useEffect(() => {
-    fetchMenuList()
-  }, [menuSearchText])
+    fetchMenuList(pageNo)
+  }, [menuSearchText, pageNo])
 
 
   // 검색어 change 이벤트 핸들링
@@ -45,6 +49,8 @@ const SelectMenu = () => {
   // 검색 실행 함수
   const doSearch = () => {
     setMenuSearchText(searchInputValue)
+    setPageNo(1)
+    setMenuList([])
   }
 
   // 태그 버튼 클릭 이벤트 핸들링
@@ -55,25 +61,80 @@ const SelectMenu = () => {
   }
 
   // 메뉴 리스트 조회 API call
-  const fetchMenuList = () => {
+  const fetchMenuList = (pageNo: number) => {
     
-    //test
-    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/1`).then((response: any) => {
-    //real
-    // ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}`).then((response: any) => {
-      if(!response || !response.ok) {
-        //test
-        setMenuList([{ menuId: 'MENU9999', menuNm: '직접입력' }])
-        
+    setPageLoading(true)
+
+    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}?page=${pageNo}`).then((response: any) => {
+      //real
+      /* if(!response || !response.ok) {
         alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
         return
+      } */
+
+      //test
+      response = {
+        menuList: [
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+          {
+            "menuId": 11,
+            "cafeId": 7,
+            "menuNm": `${pageNo}가나다커피`
+          },
+        ]
       }
 
       setCafeId(response.cafeId)
-      setMenuList(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])
+      setMenuList(prev => [...prev, ...(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])])
+      setPageLoading(false)
 
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
+      setPageLoading(false)
     })
   }
 
@@ -85,6 +146,17 @@ const SelectMenu = () => {
     toggleShowPopup()
     setSelectedMenu(menu)
   }
+
+  const lastMenuElemCallback = useCallback((node: HTMLDivElement) => {
+    if(pageLoading) return
+    if(observer.current) { observer.current.disconnect() }
+    observer.current = new IntersectionObserver(entries => {
+      if(entries[0].isIntersecting) {
+        setPageNo(prev => prev + 1)
+      }
+    })
+    if(node) { observer.current.observe(node) }
+  }, [pageLoading])
   
   return (
 
@@ -140,6 +212,8 @@ const SelectMenu = () => {
               <div className="item" key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</div>
             ))
           }
+          { pageLoading && <div>...Page Loading is up...</div>}
+          <div ref={lastMenuElemCallback}></div>
         </div>
         {/* end : 목록 영역 */}
       </div>
