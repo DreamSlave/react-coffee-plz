@@ -9,7 +9,7 @@ export default {
           "Content-Type": "application/json; charset=utf-8",
           "Authorization": ""
         },
-      });
+      }).then(response => response.json())
     } catch (error) {
       console.error('Error:', error);
     }
