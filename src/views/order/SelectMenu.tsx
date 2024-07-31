@@ -65,80 +65,14 @@ const SelectMenu = () => {
     
     setPageLoading(true)
 
-    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}?page=${pageNo}`).then((response: any) => {
-      //real
-      /* if(!response || !response.ok) {
-        alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
-        return
-      } */
+    ApiUtil.get(`${ApiConfig.defaultDomain}/menu/info/${orderer.partyNo}?page=${pageNo}&searchTag=${menuSearchText}`)
+      .then(json => {
+        const resultData = json.data
 
-      //test
-      response = {
-        menuList: [
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-          {
-            "menuId": 11,
-            "cafeId": 7,
-            "menuNm": `${pageNo}가나다커피`
-          },
-        ]
-      }
-
-      //test (setTimeout만)
-      setTimeout(() => {
-        setCafeId(response.cafeId)
-        setMenuList(prev => [...prev, ...(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])])
+        setCafeId(resultData.content[0].cafeId)
+        setMenuList(prev => [...prev, ...(resultData.content ?? [{ id: 99, name: '괜찮습니다.' }])])
         setPageLoading(false)
-      }, 1000)
-
-    }).catch((error: any) => {
-      console.error('[/order/save] Error occurred ::: ', error);
-      setPageLoading(false)
-    })
+      })
   }
 
   const toggleShowPopup = () => {
@@ -212,7 +146,7 @@ const SelectMenu = () => {
         <div className="orderer-list mgt25">
           {
             menuList.map((menu) => (
-              <div className="item" key={menu.menuId} onClick={() => onClickMenu(menu)}>{menu.menuNm}</div>
+              <div className="item" key={menu.id} onClick={() => onClickMenu(menu)}>{menu.name}</div>
             ))
           }
           { pageLoading && <div>...Page Loading is up...</div>}

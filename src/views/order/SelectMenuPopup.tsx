@@ -12,12 +12,12 @@ import ApiUtil from '@/api/api.util';
 import ApiConfig from '@/api/api.config';
 
 interface SelectMenuPopupProps {
-  partyNo: String;
-  cafeId: String;
-  menu: Menu;
-  orderer: Orderer;
-  show: Boolean;
-  toggleShowPopup: () => void;
+  partyNo: string
+  cafeId: string
+  menu: Menu
+  orderer: Orderer
+  show: boolean
+  toggleShowPopup: () => void
 }
 
 function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup }: SelectMenuPopupProps) {
@@ -29,7 +29,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
   }
 
   const submit = async () => {
-    let menuNm = menu.menuId === 'MENU9999' ? menuNmInpuValue : menu.menuNm
+    let menuNm = menu.id === 99 ? menuNmInpuValue : menu.name
     
     if(menuNm.trim() === '') {
       alert('메뉴명을 확인해주세요.')
@@ -37,14 +37,14 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     }
    
     // 직접입력의 경우 메뉴 등록 먼저 진행
-    if(menu.menuId === 'MENU9999') {
+    if(menu.id === 99) {
       let { newMenuId } = await saveNewMenu(menuNm)
-      menu.menuId = newMenuId
+      menu.id = newMenuId
     }
     
     let params = {
       userId: orderer.userId,
-      menuId: menu.menuId,
+      menuId: menu.id,
       cafeId,
       partyId: partyNo
     }
@@ -69,7 +69,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
         return ''
       }
 
-      return response.menuId
+      return response.id
 
     }).catch((error: any) => {
       console.error('[/menu/save] Error occurred ::: ', error);
@@ -86,7 +86,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
             <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
 
             {
-              menu.menuId === 'MENU9999' ?
+              menu.id === 99 ?
                 <div>
                   <input  type="text"
                           placeholder="메뉴명 입력"
@@ -96,7 +96,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
                   />
                   <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
                 </div> :
-                <div className='menunm'>{menu.menuNm}</div>
+                <div className='menunm'>{menu.name}</div>
             }
             <div className='btn-area'>
               <ul>
