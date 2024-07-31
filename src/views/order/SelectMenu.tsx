@@ -128,9 +128,12 @@ const SelectMenu = () => {
         ]
       }
 
-      setCafeId(response.cafeId)
-      setMenuList(prev => [...prev, ...(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])])
-      setPageLoading(false)
+      //test (setTimeout만)
+      setTimeout(() => {
+        setCafeId(response.cafeId)
+        setMenuList(prev => [...prev, ...(response.menuList ?? [{ menuId: 'MENU9999', menuNm: '직접입력' }])])
+        setPageLoading(false)
+      }, 1000)
 
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
