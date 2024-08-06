@@ -125,15 +125,12 @@ const SelectPartyMember = () => {
     dispatch(setSelectPartyMember(selectMember))
     navigate('/party/save')
   }
-
-  
   
   const getMemberList = async () => {
     showLoading();
     try {
       const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/users`);
-      const json = await response.json();
-      const resultData = json.data;
+      const resultData = response.data;
       return resultData;
     } catch (error) {
       console.error(error);
