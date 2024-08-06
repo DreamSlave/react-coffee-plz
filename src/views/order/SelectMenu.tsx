@@ -1,6 +1,7 @@
 import '@/assets/css/all.css'
 import '@/assets/css/style.scss'
 import searchIcSvg from '@/assets/temp-selectmenu/search-ic.svg'
+import ListLoading from '@/assets/img/listloading.gif'
 
 import { useEffect, useState, ChangeEvent, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -149,7 +150,10 @@ const SelectMenu = () => {
               <div className="item" key={menu.id} onClick={() => onClickMenu(menu)}>{menu.name}</div>
             ))
           }
-          { pageLoading && <div>...Page Loading is up...</div>}
+          { pageLoading && 
+          <div className="listloading">
+            <img className="loading" alt="loading" src={ListLoading} />
+          </div>}
           <div ref={lastMenuElemCallback}></div>
         </div>
         {/* end : 목록 영역 */}
