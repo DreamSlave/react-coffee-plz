@@ -29,7 +29,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
   }
 
   const submit = async () => {
-    let menuNm = menu.id === 99 ? menuNmInpuValue : menu.name
+    let menuNm = menu.id === 100 ? menuNmInpuValue : menu.name
     
     if(menuNm.trim() === '') {
       alert('메뉴명을 확인해주세요.')
@@ -44,7 +44,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     
     let params = {
       userId: orderer.userId,
-      menuId: menu.id,
+      menuId: menu.id === 100 ? '' : menu.id,
       menuNm,
       cafeId,
       partyId: partyNo
@@ -87,7 +87,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
             <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
 
             {
-              menu.id === 99 ?
+              menu.id === 100 ?
                 <div>
                   <input  type="text"
                           placeholder="메뉴명 입력"
