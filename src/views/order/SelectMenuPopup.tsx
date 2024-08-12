@@ -37,14 +37,15 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     }
    
     // 직접입력의 경우 메뉴 등록 먼저 진행
-    if(menu.id === 99) {
+    /* if(menu.id === 99) {
       let { newMenuId } = await saveNewMenu(menuNm)
       menu.id = newMenuId
-    }
+    } */
     
     let params = {
       userId: orderer.userId,
       menuId: menu.id,
+      menuNm,
       cafeId,
       partyId: partyNo
     }
