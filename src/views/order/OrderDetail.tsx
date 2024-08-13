@@ -57,7 +57,7 @@ const getOrderInfo = async (partyNo: string): Promise<{
   orderUserCount: number
 }> => {
   const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/status/${partyNo}`);
-  return (await response.json()).data
+  return (await response).data
   // console.log(response)
   // return {
   //   partyName: '커주 데뷔 기념',
