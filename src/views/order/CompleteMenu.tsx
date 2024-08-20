@@ -34,12 +34,12 @@ const CompleteMenu = () => {
       </div>
       <div className="order-complete">
         <div className="person">
-          {/* {orderer.name} {orderer.rank}({orderer.team}) */}
+            {/*// TODO: */}
+           {/*{orderer.name} {orderer.rank}({orderer.team})*/}
           정민재 프로(UX디자인팀)
         </div>
         <div className="menu point">
-          {/* {menuNm} */}
-          초코라떼 아이스
+           {menuNm}
         </div>
       </div>
 
