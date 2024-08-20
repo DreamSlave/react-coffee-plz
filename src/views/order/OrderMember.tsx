@@ -20,7 +20,7 @@ interface memberInfo {
 const getMemberList = async (partyNo: string): Promise<memberInfo[]> => {
 
   const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/users/${partyNo}`);
-  return (await response.json()).data[0].userList
+  return (await response).data[0].userList
   // return [
   //   {name: '김진미', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', orderComplete : true},
   //   {name: '김세인', rank: '프로', userId: 'ID'+ (~~(Math.random() * 1000)), team: 'PD팀', orderComplete : true},
