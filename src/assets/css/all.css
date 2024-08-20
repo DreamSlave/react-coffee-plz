@@ -3,11 +3,13 @@
   --pointcolor: #f554be;
   --variable-collection-sub: #ffe7fa;
 } */
+
 * {
   margin: 0;
   padding: 0;
   border: 0;
 }
+
 li {
   list-style: none;
 }
@@ -97,8 +99,10 @@ input::placeholder {
 #footer {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
   width: 100%;
+  max-width: 650px;
   padding: 0 25px 30px 25px;
   box-sizing: border-box;
   z-index: 9999;
@@ -360,6 +364,7 @@ h2 {
 
 #popup {
   width: 100%;
+  max-width: 650px;
   height: 100vh;
   background-color: #00000047;
   position: fixed;
@@ -761,4 +766,13 @@ h2 {
 .fade-exit-active {
   opacity: 0;
   transition: opacity 0.3s ease-out;
+}
+
+.listloading {
+  width: 80px;
+  height: 80px;
+  margin: auto;
+}
+.listloading img {
+  width: 100%;
 }

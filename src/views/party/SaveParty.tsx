@@ -97,7 +97,6 @@ const SaveParty = () => {
 
   function getCafeList() {
     return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
-    .then(response => response.json())
     .then(json => {
      const resultData = json.data
      return resultData
