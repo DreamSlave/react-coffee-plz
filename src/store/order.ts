@@ -5,13 +5,13 @@ const SET_ORDERER = "SET_ORDERER" as const;
 
 const initialOrdererInfo: Orderer = {
   partyNo: '',
-  userId: '',
+  userId: 0,
   name: '',
   team: '',
   rank: '',
 };
 
-export const setSelectOrderer = (userId : string, name : string, team : string, rank : string) => ({
+export const setSelectOrderer = (userId : number, name : string, team : string, rank : string) => ({
   type: SET_ORDERER,
   payload: {
     userId: userId,

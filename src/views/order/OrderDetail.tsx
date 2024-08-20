@@ -39,7 +39,7 @@ interface orderMenuInfo{
 
 interface orderUserInfo {
   name : string;
-  userId: string;
+  userId: number;
   team: string;
   department: string;
   rank: string;
@@ -58,27 +58,6 @@ const getOrderInfo = async (partyNo: string): Promise<{
 }> => {
   const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/status/${partyNo}`);
   return (await response.json()).data
-  // console.log(response)
-  // return {
-  //   partyName: '커주 데뷔 기념',
-  //   cafeNm: '크리미',
-  //   endDt: '2024/12/23 20:01',
-  //     orderUserCount: 18,
-  //     orderTargetUserCount: 30,
-  //     orderDrinkCount: 15,
-  //     orderTargetDrinkCount: 27,
-  //     orderMenuInfoList: [
-  //       { menuNm: '아메리카노-아이스',
-  //         orderCount: ~~(Math.random() * 100),
-  //         menuId: 'ID' + ~~(Math.random() * 10000),
-  //         ordererList:[
-  //           {name: '김진미 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-  //           {name: '김세인 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-  //           {name: '조도은 프로(PD팀)', userId: 'ID'+ (~~(Math.random() * 10)), telNo: '010-3722-8040', team: '', department: '', rank: '' },
-  //         ]
-  //       }
-  //     ]
-  //   }
 }
 
 function OrderDetail() {

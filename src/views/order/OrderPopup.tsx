@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 
 interface orderUserInfo {
   name : string;
-  userId: string;
+  userId: number;
   team: string;
   department: string;
   rank: string;

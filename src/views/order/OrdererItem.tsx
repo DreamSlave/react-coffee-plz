@@ -1,11 +1,11 @@
 type OrdererProps = {
   userInfo: UserInfo
   isOrderComplete: boolean
-  selectOrderer: (userId: string, name: string, team: string, rank: string) => void;
+  selectOrderer: (userId: number, name: string, team: string, rank: string) => void;
 };
 
 type UserInfo = {
-  userId: string
+  userId: number
   name: string
   team: string
   rank: string

@@ -1,6 +1,6 @@
 export interface Orderer {
   partyNo: string
-  userId: string
+  userId: number
   name: string
   team: string
   rank: string
