@@ -29,7 +29,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
   }
 
   const submit = async () => {
-    let menuNm = menu.id === 100 ? menuNmInpuValue : menu.name
+    let menuNm = menu.id === 0 ? menuNmInpuValue : menu.name
     
     if(menuNm.trim() === '') {
       alert('메뉴명을 확인해주세요.')
@@ -44,12 +44,12 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     
     let params = {
       userId: orderer.userId,
-      menuId: menu.id === 100 ? '' : menu.id,
+      menuId: menu.id === 0 ? '' : menu.id,
       menuNm,
       cafeId,
       partyId: partyNo
     }
-    ApiUtil.post(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
+    ApiUtil.put(`${ApiConfig.defaultDomain}/order/save`, params).then((response: any) => {
       if(!response || !response.ok) {
         alert('처리 실패하였습니다.\n관리자에게 문의해주세요.')
         return
@@ -87,7 +87,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
             <div className='person-info'>{orderer.name} {orderer.rank}({orderer.team})</div>
 
             {
-              menu.id === 100 ?
+              menu.id === 0 ?
                 <div>
                   <input  type="text"
                           placeholder="메뉴명 입력"

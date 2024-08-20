@@ -71,7 +71,7 @@ const SelectMenu = () => {
         const resultData = json.data
 
         setCafeId(resultData.content[0].cafeId)
-        setMenuList(prev => [...prev, ...(pageNo === 1 ? [{ id: 100, name: '직접입력' }, { id: 99, name: '괜찮습니다.' }] : []), ...resultData.content])
+        setMenuList(prev => [...prev, ...(pageNo === 1 ? [{ id: 0, name: '직접입력' }, { id: 99, name: '괜찮습니다.' }] : []), ...resultData.content])
         setPageLoading(false)
       })
   }
