@@ -106,7 +106,9 @@ function OrderDetail() {
         const afterTime: number = endTime.getTime() - nowTime.getTime();
 
         const oneDay: number = 1000 * 60 * 60 * 24
-        if(afterTime > oneDay){
+        if(endTime < nowTime){
+          closeTime();
+        }if(afterTime > oneDay){
           setTimeout(() => {
             history.go(0);
           }, oneDay);
