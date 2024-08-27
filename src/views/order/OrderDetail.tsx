@@ -56,8 +56,26 @@ const getOrderInfo = async (partyNo: string): Promise<{
   orderTargetUserCount: number;
   orderUserCount: number
 }> => {
-  const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/status/${partyNo}`);
-  return (await response).data
+  try {
+    const response = await ApiUtil.get(`${ApiConfig.defaultDomain}/order/status/${partyNo}`);
+    const ressult = (await response)
+    if(ressult.data) return ressult.data
+    else {
+      return {
+        orderTargetDrinkCount: 0,
+        orderMenuInfoList: [],
+        orderDrinkCount: 0,
+        partyName: '',
+        endDt: '',
+        cafeNm: '',
+        orderTargetUserCount: 0,
+        orderUserCount: 0,
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    throw error; // 오류를 기록한 후 다시 throw
+  }
 }
 
 function OrderDetail() {
