@@ -119,6 +119,10 @@ function OrderDetail() {
         const orderInfoData = await getOrderInfo(partyNo);
         setOrderInfo(orderInfoData)
         setMenuList(orderInfoData.orderMenuInfoList)
+
+        if(orderInfoData.endDt === '') {
+          navigate(`/notfound/order`)
+        }
         const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
         const nowTime: Date = new Date();
         const afterTime: number = endTime.getTime() - nowTime.getTime();

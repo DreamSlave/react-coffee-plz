@@ -3,7 +3,7 @@ import "@/assets/css/style.scss"
 import '@/assets/css/all.css'
 import '@/assets/css/style.scss'
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
 import notfoundImg from '@/assets/img/notfound_img.png'
@@ -40,11 +40,27 @@ const NotFoundPage = () => {
     </div>
   )
 }
+const NotFoundOrderPage = () => {
+  const navigate = useNavigate();
+  return (
+      <div className='notfound'>
+          <img src={notfoundImg}/>
+          <div className='notfound_box'>
+              <h1>존재하지 않는<br/><span className='point'>주문화면</span>입니다.</h1>
+          </div>
+          <div className="confirm-area mgt30">
+              <div className="go_order" onClick={() => navigate(`/entrance`)}>
+                  메인으로
+              </div>
+          </div>
+      </div>
+  )
+}
 
 function App() {
-  return (
-    <Router basename="/react-coffee-plz">
-      <Suspense fallback={<div>Wait a moment...</div>}>
+    return (
+        <Router basename="/react-coffee-plz">
+            <Suspense fallback={<div>Wait a moment...</div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/entrance" />} />
           
@@ -75,6 +91,7 @@ function App() {
 
           {/* Not Found Route */}
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/notfound/order"           element={<NotFoundOrderPage />} />
         </Routes>
       </Suspense>
     </Router>
