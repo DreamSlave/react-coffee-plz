@@ -7,20 +7,35 @@ import '@/assets/css/style.scss'
 import completeImg from '@/assets/img/compelete_img.png'
 
 const CompleteMenu = () => {
+  const { partyNo } = useParams<{ partyNo: string }>()
   const { encodedMenuNm } = useParams<{ encodedMenuNm: string }>()
+  const { encodedName } = useParams<{ encodedName: string }>()
+  const { encodedTeam } = useParams<{ encodedTeam: string }>()
+  const { encodedRank } = useParams<{ encodedRank: string }>()
   const [ menuNm, setMenuNm ] = useState<string>('')
+  const [ name, setName ] = useState<string>('')
+  const [ team, setTeam ] = useState<string>('')
+  const [ rank, setRank ] = useState<string>('')
   const navigate = useNavigate()
-  console.log(menuNm)
 
   useEffect(() => {
     if(encodedMenuNm && encodedMenuNm !== '') {
       setMenuNm(decodeURIComponent(encodedMenuNm))
     }
-  }, [encodedMenuNm])
+    if(encodedName && encodedName !== '') {
+      setName(decodeURIComponent(encodedName))
+    }
+    if(encodedTeam && encodedTeam !== '') {
+      setTeam(decodeURIComponent(encodedTeam))
+    }
+    if(encodedRank && encodedRank !== '') {
+      setRank(decodeURIComponent(encodedRank))
+    }
+  }, [encodedMenuNm, encodedName, encodedTeam, encodedRank])
 
 
   const goOrderDetail = () => {
-    navigate('/order/test')
+    navigate(`/order/${partyNo}`)
   }
 
   return (
@@ -34,9 +49,7 @@ const CompleteMenu = () => {
       </div>
       <div className="order-complete">
         <div className="person">
-            {/*// TODO: */}
-           {/*{orderer.name} {orderer.rank}({orderer.team})*/}
-          정민재 프로(UX디자인팀)
+           {name} {rank}({team})
         </div>
         <div className="menu point">
            {menuNm}

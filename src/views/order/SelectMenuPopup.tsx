@@ -42,9 +42,6 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       menu.id = newMenuId
     } */
 
-    //test
-    console.log(`orderer ::: `, orderer)
-    
     let params = {
       userId: orderer.userId,
       menuId: menu.id === 0 ? '' : menu.id,
