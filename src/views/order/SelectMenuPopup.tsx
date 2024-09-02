@@ -41,6 +41,9 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       let { newMenuId } = await saveNewMenu(menuNm)
       menu.id = newMenuId
     } */
+
+    //test
+    console.log(`orderer ::: `, orderer)
     
     let params = {
       userId: orderer.userId,
@@ -55,7 +58,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
         return
       }
 
-      navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}`)
+      navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}/${encodeURIComponent(orderer.name)}/${encodeURIComponent(orderer.team)}/${encodeURIComponent(orderer.rank)}`)
       
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);

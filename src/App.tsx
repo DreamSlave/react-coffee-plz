@@ -68,7 +68,7 @@ function App() {
           <Route path="/entrance" element={<NoHeaderLayout><Entrance /></NoHeaderLayout>} />
 
           <Route path="/order/menu"                             element={<HeaderLayout><SelectMenu /></HeaderLayout>} />
-          <Route path="/order/complete/:partyNo/:encodedMenuNm" element={<HeaderLayout><CompleteMenu /></HeaderLayout>} />
+          <Route path="/order/complete/:partyNo/:encodedMenuNm/:encodedName/:encodedTeam/:encodedRank" element={<HeaderLayout><CompleteMenu /></HeaderLayout>} />
           <Route path="/order/member"                           element={<HeaderLayout><OrderMember /></HeaderLayout>} />
           <Route path="/order/:partyNo"                         element={<NoHeaderLayout><OrderDetail /></NoHeaderLayout>} />
 
