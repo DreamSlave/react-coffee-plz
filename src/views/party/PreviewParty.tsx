@@ -29,7 +29,7 @@ function PreviewParty() {
       endTime : partyInfo.endTime
     }
     showLoading()
-    const result = await ApiUtil.post(`${ApiConfig.defaultDomain}/party/save`, params)
+    const result = await ApiUtil.put(`${ApiConfig.defaultDomain}/party/save`, params)
     .then(response => response.json())
     .then(json => {
      const resultData = json.data
