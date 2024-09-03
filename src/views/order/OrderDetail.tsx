@@ -144,7 +144,10 @@ function OrderDetail() {
     }
     fetchAndSetUser()
   }, [partyNo]);
-  function closeTime() {setIsStoreOpen(false)}
+  //test
+  function closeTime() {setIsStoreOpen(true)}
+  //real
+  // function closeTime() {setIsStoreOpen(false)}
 
   function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI: string): Date {
     const yyyy = parseInt(stringYYYYMMDDHHMI.substring(0, 4), 10);
