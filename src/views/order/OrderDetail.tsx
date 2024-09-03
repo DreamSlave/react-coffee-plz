@@ -120,9 +120,10 @@ function OrderDetail() {
         setOrderInfo(orderInfoData)
         setMenuList(orderInfoData.orderMenuInfoList)
 
-        if(orderInfoData.endDt === '') {
+        //real
+        /* if(orderInfoData.endDt === '') {
           navigate(`/notfound/order`)
-        }
+        } */
         const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
         const nowTime: Date = new Date();
         const afterTime: number = endTime.getTime() - nowTime.getTime();
