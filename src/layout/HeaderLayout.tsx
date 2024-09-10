@@ -25,17 +25,15 @@ function HeaderLayout({ children }: { children: ReactNode}) {
 
   const doConfirm = () => {
     let goRouterPath = ''
-    switch (location.pathname){
-      case "/party/select":
-      case "/party/save":
-      case "/party/preview":
-        goRouterPath = "/entrance"
-        break
-      case "/order/member":
-      case "/order/menu":
-        goRouterPath = `/order/${userInfo.partyNo}`
-        break
+
+    const pathname = location.pathname
+
+    if(pathname.startsWith("/party/select") || pathname.startsWith("/party/save") || pathname.startsWith("/party/preview")) {
+      goRouterPath = "/entrance"
+    } else if(pathname.startsWith("/order/member") || pathname.startsWith("/order/menu") || pathname.startsWith("/order/complete")) {
+      goRouterPath = `/order/${userInfo.partyNo}`
     }
+
     navigate(goRouterPath);
     closeConfirm()
   }
