@@ -30,6 +30,7 @@ const SelectMenu = () => {
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
   const [pageNo, setPageNo] = useState(1)
+  const [isLastPageNo, setIsLastPageNo] = useState(true)
   const [pageLoading, setPageLoading] = useState(false)
 
   const observer = useRef<IntersectionObserver | null>(null)
@@ -59,6 +60,7 @@ const SelectMenu = () => {
     // TODO: 이렇게 해야만할까..
     setSearchInputValue(tagText)
     setMenuSearchText(tagText)
+    setPageNo(1)
   }
 
   // 메뉴 리스트 조회 API call
@@ -70,8 +72,17 @@ const SelectMenu = () => {
       .then(json => {
         const resultData = json.data
 
-        setCafeId(resultData.content[0].cafeId)
-        setMenuList(prev => [...prev, ...(pageNo === 1 ? [{ id: 0, name: '직접입력' }, { id: 99, name: '괜찮습니다.' }] : []), ...resultData.content])
+        if(resultData.content && resultData.content.length > 0) {
+          setCafeId(resultData.content[0].cafeId)
+        }
+
+        setIsLastPageNo(pageNo === resultData.totalPages || resultData.totalPages === 0 ? true : false)
+
+        if(pageNo === 1) {
+          setMenuList([{ id: 0, name: '직접입력' }, { id: 99, name: '괜찮습니다.' }, ...resultData.content])
+        } else {
+          setMenuList(prev => [...prev, ...resultData.content])
+        }
         setPageLoading(false)
       })
   }
@@ -86,13 +97,13 @@ const SelectMenu = () => {
   }
 
   const lastMenuElemCallback = useCallback((node: HTMLDivElement) => {
-    if(pageLoading) return
+    if(pageLoading || isLastPageNo) return
     if(observer.current) { observer.current.disconnect() }
     observer.current = new IntersectionObserver(entries => {
       if(entries[0].isIntersecting) {
         setPageNo(prev => prev + 1)
       }
-    })
+    }, { rootMargin: '0px 0px 100px 0px' })
     if(node) { observer.current.observe(node) }
   }, [pageLoading])
   
@@ -126,9 +137,9 @@ const SelectMenu = () => {
             />
           </div>
           {/* //test (showAlert 예제) */}
-          <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={() => showAlert("This is an alert!")} /></div>
+          {/* <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={() => showAlert("This is an alert!")} /></div> */}
           {/* //real */}
-          {/* <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div> */}
+          <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div>
         </div>
 
         {/* start : 태그 영역 */}
