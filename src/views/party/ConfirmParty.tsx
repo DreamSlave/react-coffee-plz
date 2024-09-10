@@ -1,5 +1,6 @@
 import '../../assets/css/all.css'
 import '../../assets/css/style.scss'
+import hurryImg from '@/assets/img/icon_hurry.png'
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -30,7 +31,7 @@ const ConfirmParty = () => {
 
         <div className="confirm-area mgt30">
           <div className="mainimg">
-            <img src="/src/assets/img/icon_hurry.png" />
+            <img className="hurry" alt="Hurry" src={hurryImg} />
           </div>
           <div className="link_copy">
             <div className="link">{orderUrl}</div>
