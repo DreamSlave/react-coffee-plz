@@ -9,6 +9,7 @@ type UserInfo = {
   name: string
   team: string
   rank: string
+  telNo: string
 }
 
 function Orderer({
@@ -18,17 +19,22 @@ function Orderer({
 }: OrdererProps) {
   return (
     <>
-      <span
-        onClick={
-        () => !isOrderComplete ?
-          selectOrderer(userInfo.userId, userInfo.name, userInfo.team, userInfo.rank)
-          : ''
-        }
+      <span>
+      <div className={'name ' + (isOrderComplete ? 'gray' : '')}
+           onClick={
+               () => !isOrderComplete ?
+                   selectOrderer(userInfo.userId, userInfo.name, userInfo.team, userInfo.rank)
+                   : ''
+           }
       >
-      <div className={'name ' + (isOrderComplete ? 'gray' : '')}>
         {userInfo.name} ({userInfo.team})
       </div>
-      { isOrderComplete ? <div className="done-label">주문완료</div> : ''}
+          {isOrderComplete ?
+              <div className="done-label">주문완료</div>
+              : <div style={{ background: '#ff5cc3', color: 'white', cursor: 'pointer' }}
+                     className="done-label"
+                     onClick={() => document.location.href = `tel:${userInfo.telNo}`}
+              >전화걸기</div>}
       </span>
     </>
   );

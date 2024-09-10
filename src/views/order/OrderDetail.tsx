@@ -121,9 +121,9 @@ function OrderDetail() {
         setMenuList(orderInfoData.orderMenuInfoList)
 
         //real
-        /* if(orderInfoData.endDt === '') {
+        if(orderInfoData.endDt === '') {
           navigate(`/notfound/order`)
-        } */
+        }
         const endTime: Date = getDateFromYYYYMMDDHHMI(orderInfoData.endDt.replace(/[^0-9]/g, ""));
         const nowTime: Date = new Date();
         const afterTime: number = endTime.getTime() - nowTime.getTime();
@@ -144,10 +144,10 @@ function OrderDetail() {
     }
     fetchAndSetUser()
   }, [partyNo]);
-  //test
-  function closeTime() {setIsStoreOpen(true)}
+  // test
+  // function closeTime() {setIsStoreOpen(true)}
   //real
-  // function closeTime() {setIsStoreOpen(false)}
+  function closeTime() {setIsStoreOpen(false)}
 
   function getDateFromYYYYMMDDHHMI(stringYYYYMMDDHHMI: string): Date {
     const yyyy = parseInt(stringYYYYMMDDHHMI.substring(0, 4), 10);

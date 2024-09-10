@@ -10,6 +10,7 @@ import ApiConfig from "@/api/api.config";
 import {RootState} from "@/store";
 
 interface memberInfo {
+  telNo: string;
   name : string;
   userId: number;
   team: string;
@@ -69,7 +70,7 @@ function OrderMember() {
             orderMemberList.map((item, index) => {
               return (
                 <div key={item.userId + '' +index} className="item">
-                  <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team}}
+                  <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team, telNo: item.telNo }}
                                isOrderComplete={item.orderComplete}
                                selectOrderer={onClickOrderer}/>
                 </div>
