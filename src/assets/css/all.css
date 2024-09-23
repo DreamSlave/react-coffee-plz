@@ -23,6 +23,7 @@ input {
   box-sizing: border-box;
   padding: 0 10px;
   border-radius: 0;
+  outline: none;
 }
 
 input::placeholder {
@@ -37,6 +38,7 @@ input::placeholder {
   width: 100%;
   box-sizing: border-box;
   padding: 0 10px;
+  position: relative;
 }
 
 .select select {
@@ -44,13 +46,14 @@ input::placeholder {
   font-size: 18px;
   width: 100%;
   padding-top: 15px;
+  cursor: pointer;
 }
 
 .select::after {
   content: url(/src/assets/img/arr.png); /* 드롭다운 화살표 GIF 이미지 경로 */
   position: absolute;
-  right: 30px;
-  transform: translateY(-80%);
+  right: 25px;
+  transform: translateY(-95%);
 }
 
 .label {
@@ -73,6 +76,7 @@ input::placeholder {
   margin-top: -1px;
   line-height: 25px;
   float: left;
+  cursor: pointer;
 }
 
 
@@ -80,12 +84,14 @@ input::placeholder {
   background: url(/src/assets/img/calendar_ic.png) no-repeat;
   background-size: 24px;
   background-position: 96%;
+  cursor: pointer;
 }
 
 .timepicker {
   background: url(/src/assets/img/clock_ic.png) no-repeat;
   background-size: 24px;
   background-position: 96%;
+  cursor: pointer;
 }
 
 .react-datepicker-wrapper {
@@ -103,19 +109,24 @@ input::placeholder {
   transform: translate(-50%, 0);
   width: 100%;
   max-width: 650px;
-  padding: 0 25px 30px 25px;
+  padding: 0 5% 30px 5%;
   box-sizing: border-box;
   z-index: 9999;
 }
 
 #order {
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 #party {
   min-height: 100vh;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #fff;
 }
 
 .element {
@@ -153,6 +164,7 @@ h2 {
   letter-spacing: -0.5px;
   font-size: 22px;
   line-height: 52px;
+  cursor: pointer;
 }
 
 .main_tit {
@@ -170,6 +182,7 @@ h2 {
 .order-list-area {
   width: 80%;
   margin: 0 auto;
+  margin-top: 20px;
   padding: 30px 5%;
   background-color: #fff;
   border: 2px #000 solid;
@@ -302,6 +315,10 @@ h2 {
   font-size: 18px;
 }
 
+.chck_person label {
+  cursor: pointer;
+}
+
 .chck_person label input {
   width: 22px;
   height: 22px;
@@ -314,6 +331,7 @@ h2 {
   float:right;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 /*주문자 대상 선택*/
@@ -336,6 +354,7 @@ h2 {
   font-size: 18px;
   font-weight: 600;
   display: inline-block;
+  cursor: pointer;
 }
 
 .orderer-list .item:last-child {
@@ -358,6 +377,10 @@ h2 {
   border-radius: 5px;
   padding: 3px 0;
   max-width: 72px;
+}
+
+.orderer-list .item svg {
+  margin-right: 5px;
 }
 
 /*전화걸기 팝업*/
@@ -444,6 +467,7 @@ h2 {
   padding: 2px 0;
   font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 /*주문자 메뉴 선택*/
@@ -463,12 +487,14 @@ h2 {
   width: 70%;
   margin: 0 15%;
   margin-top: 15px;
+  margin-bottom: 15px;
   box-sizing: border-box;
 }
 
 .form-search {
   width: 90%;
   margin: 0 5%;
+  margin-bottom: 10px;
   display: inline-block;
 }
 
@@ -487,6 +513,11 @@ h2 {
   font-size: 18px;
   box-sizing: border-box;
   padding-top: 15px;
+  cursor: pointer;
+}
+
+.form-search .btn img {
+  cursor: pointer;
 }
 
 .tag-group {
@@ -500,6 +531,13 @@ h2 {
   font-weight: 500;
   display: inline-block;
   margin: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.cafename {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
 }
 
 /*주문자 주문확인 팝업*/
@@ -513,6 +551,7 @@ h2 {
   box-sizing: border-box;
   padding: 35px 25px;
   text-align: center;
+  max-width: 650px;
 }
 
 .pop_confirm .person-info {
@@ -731,7 +770,7 @@ h2 {
 }
 
 .notfound {
-  margin-top: 180px;
+  padding-top: 180px;
   text-align: center;
 }
 .notfound img {
@@ -775,4 +814,22 @@ h2 {
 }
 .listloading img {
   width: 100%;
+}
+.eggpop img {
+  width: 100%;
+}
+
+@media (max-width: 649px) {
+  html {
+    background-color: #fff !important;
+  }
+}
+
+@media (min-width: 650px) {
+  body {
+    height: 100vh;
+  }
+  #popup {
+    padding-top: 200px;
+  }
 }
