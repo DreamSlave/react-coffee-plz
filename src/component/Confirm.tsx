@@ -12,7 +12,7 @@ function Confirm({ message, onConfirm, onCancel }) {
           <ul>
             <li>
               <div className="large-btn bg_sub point" onClick={onCancel}>
-                돌아가기
+                취소
               </div>
             </li>
             <li>

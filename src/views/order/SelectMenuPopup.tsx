@@ -103,7 +103,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
               <ul>
                 <li>
                   <div className="large-btn bg_sub point" onClick={toggleShowPopup}>
-                    재선택
+                    취소
                   </div>
                 </li>
                 <li>
