@@ -35,6 +35,13 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       alert('메뉴명을 확인해주세요.')
       return false
     }
+
+    // 이스터에그!!
+    if(menu.id === 0 && menuNm === '욜룔룔룔료') {
+      // TODO: 이스터 에그 팝업
+      alert('이스터 에그 팝업!')
+      return false
+    }
    
     // 직접입력의 경우 메뉴 등록 먼저 진행
     /* if(menu.id === 99) {
