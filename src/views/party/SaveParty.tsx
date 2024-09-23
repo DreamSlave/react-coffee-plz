@@ -161,7 +161,17 @@ const SaveParty = () => {
     now.setMilliseconds(0);
 
     return now;
-}
+  }
+  // minTime을 설정하는 함수
+  const getMinTime = () => {
+    const newDate = new Date()
+    // 만약 endDate가 오늘이라면 현재 시간 이후만 선택 가능하도록
+    if (endDate?.toDateString() === newDate.toDateString()) {
+      return newDate;
+    }
+    // 오늘이 아니라면 제한 없이 선택 가능
+    return new Date(0, 0, 0, 0, 0);
+  };
 
 
   
@@ -205,20 +215,22 @@ const SaveParty = () => {
               minDate={new Date()}
               onChange={(date: Date ) => setEndDate(date)} />
               
+          </div>
+          <div className="form_date mgb10">
+            <DatePicker
+              className="timepicker"
+              selected={endTime}
+              onChange={(date: Date ) => setEndTime(date)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={15}
+              timeCaption="Time"
+              dateFormat="hh:mm aa"
+              minTime={getMinTime()}
+              maxTime={new Date(0, 0, 0, 23, 59)}
+            />
+          </div>
         </div>
-        <div className="form_date mgb10">
-          <DatePicker
-            className="timepicker"
-            selected={endTime}
-            onChange={(date: Date ) => setEndTime(date)}
-            showTimeSelect
-            showTimeSelectOnly
-            timeIntervals={15}
-            timeCaption="Time"
-            dateFormat="hh:mm aa"
-          />
-        </div>
-      </div>
 
       <footer id="footer">
       {
