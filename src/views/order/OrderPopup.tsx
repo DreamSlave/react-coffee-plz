@@ -3,6 +3,7 @@ import '../../assets/css/all.css'
 import '../../assets/css/style.scss'
 import { useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group'
+import EggImg from '@/assets/img/cfplz_egg_01.png'
 
 interface orderUserInfo {
   name : string;
@@ -81,6 +82,12 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, ordererList,
                     <div className="call-btn point"
                          onClick={() => document.location.href = `tel:${item.telNo}`}>전화걸기
                     </div>
+                    
+                    {/* 이스터에그 시연용 임시 */}
+                    <div className="eggpop">
+                      <img src={EggImg} />
+                    </div>
+
                   </div>
                 )
               })

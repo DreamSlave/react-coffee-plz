@@ -124,6 +124,7 @@ const SelectMenu = () => {
         <h1>
           <span className="point">메뉴를</span><br/>선택해주세요.
         </h1>
+        <div className="cafename"><b>cafe</b> 카페명표기</div>
         <div className="person-info bg_sub point">
           {orderer.name} {orderer.rank}({orderer.team})
         </div>
@@ -158,7 +159,10 @@ const SelectMenu = () => {
         <div className="orderer-list mgt25">
           {
             menuList.map((menu) => (
-              <div className="item" key={menu.id} onClick={() => onClickMenu(menu)}>{menu.name}</div>
+              <div className="item" key={menu.id} onClick={() => onClickMenu(menu)}>
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M7 4h1V0H7v4zM5 2v2H4V2h1z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.5A1.5 1.5 0 011.5 5h9a1.5 1.5 0 011.415 1H13.5A1.5 1.5 0 0115 7.5v2a1.5 1.5 0 01-1.5 1.5H12v.5A3.5 3.5 0 018.5 15h-5A3.5 3.5 0 010 11.5v-5zM12 10h1.5a.5.5 0 00.5-.5v-2a.5.5 0 00-.5-.5H12v3z" fill="currentColor"></path></svg>
+                 {menu.name}
+              </div>
             ))
           }
           { pageLoading && 
