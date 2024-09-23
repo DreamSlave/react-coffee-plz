@@ -6,7 +6,7 @@ const INIT_PARTY = "INIT_PARTY" as const;
 type PartyInfo = {
   memberList : Array<Member>
   partyName : string
-  cafeId : string
+  cafeId : number
   cafeName : string
   endDate : string
   endTime : string
@@ -22,7 +22,7 @@ type Member = {
 const initialPartyInfo: PartyInfo = {
   memberList: [],
   partyName : '',
-  cafeId : '',
+  cafeId : 1,
   cafeName : '',
   endDate : '',
   endTime : ''
@@ -35,7 +35,7 @@ export const setSelectPartyMember = (memberList : Array<Member>) => ({
   }
 })
 
-export const setSaveParty = (partyName : string, cafeId : string, cafeName : string, endDate : string, endTime :  string) => ({
+export const setSaveParty = (partyName : string, cafeId : number, cafeName : string, endDate : string, endTime :  string) => ({
   type: SET_PARTY,
   payload: {
     partyName: partyName,
@@ -79,7 +79,7 @@ function selectParty(partyInfo: PartyInfo = initialPartyInfo, action: SelectPart
       return {
         memberList: [],
         partyName : '',
-        cafeId : '',
+        cafeId : 1,
         cafeName : '',
         endDate : '',
         endTime : ''
