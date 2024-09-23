@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector} from "react-redux";
 import { RootState } from "@/store";
@@ -14,9 +14,44 @@ function HeaderLayout({ children }: { children: ReactNode}) {
   const isHiddenBackbtn = location.pathname.includes("/party/select") || location.pathname.includes("/order/member");
   const userInfo = useSelector((state: RootState) => state.order);
 
-
-  const onClickBack = () => {
-    navigate(-1);
+  
+  // 브라우저 back 버튼 감지
+  //type1
+  useEffect(() => {
+    const handleBackButton = () => {
+      // const handleBackButton = (event: PopStateEvent) => {
+        if(location.pathname.startsWith('/order/complete')) {
+          navigate(`/order/${userInfo.partyNo}`, {replace: true})
+        } else {
+          navigate(-1)
+        }
+      }
+      
+      window.addEventListener('popstate', handleBackButton)
+      return () => {
+        window.removeEventListener('popstate', handleBackButton)
+      }
+      
+    }, [location, navigate])
+    //type2(react-router-dom v6 에서는 불가)
+    /* useEffect(() => {
+      const unlisten = navigate.listen(({action, location}) => {
+        if(action === 'POP' && location.pathname.startsWith('/order/complete')) {
+          navigate(`/order/${userInfo.partyNo}`, {replace: true})
+        }
+      })
+  
+      return () => {
+        unlisten()
+      }
+    }, [navigate]) */
+    
+    const onClickBack = () => {
+    if(location.pathname.startsWith('/order/complete')) {
+      navigate(`/order/${userInfo.partyNo}`, {replace: true})
+    } else {
+      navigate(-1)
+    }
   };
 
   const cancelConfirm = () => {
