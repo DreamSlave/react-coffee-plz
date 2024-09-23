@@ -29,7 +29,7 @@ const SaveParty = () => {
   const [endDate, setEndDate] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [partyName, setPartyName] = useState<string>('')
-  const [cafeId, setCafeId] = useState<string>('')
+  const [cafeId, setCafeId] = useState<number>(1)
   const [cafeName, setCafeName] = useState<string>('')
   const [cafeList, setCafeList] = useState<DataItem[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
@@ -70,7 +70,7 @@ const SaveParty = () => {
         }
       }
       // validation 검사      
-      if (partyName !== '' && cafeId !== '') {
+      if (partyName !== '' && cafeName !== '') {
         setIsValid(true);
       } else {
         setIsValid(false);
@@ -111,7 +111,7 @@ const SaveParty = () => {
   const onChangeDropDown = (data : DataItem) =>{
     const dataItem = cafeList.find(item => item.cafeId === data.cafeId);
     setCafeName(String(dataItem?.cafeName) ?? '');
-    setCafeId(String(dataItem?.cafeId) ?? '');
+    setCafeId(Number(dataItem?.cafeId) ?? 1);
   }
   
 
