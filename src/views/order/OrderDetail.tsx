@@ -15,6 +15,7 @@ import clipImg from "@/assets/img/clip_img.png"
 import ApiUtil from "@/api/api.util.ts";
 import ApiConfig from "@/api/api.config.ts";
 import {useGlobalUI} from "@/contexts/GlobalUIContext";
+import EasterEgg from "@/views/order/EasterEgg.tsx";
 
 interface orderInfo {
   partyName : string;
@@ -160,9 +161,22 @@ function OrderDetail() {
 
   const { addAlert } = useGlobalUI();
 
-  const handleClick = () => {
-    addAlert('ex) API 네트워크 통신 실패');
+  const [clickEasterEggCount, setClickEasterEggCount] = useState<number>(0);
+  const [showEasterEggPopup, setShowEasterEggPopup] = useState<boolean>(false);
+
+  const onClickEasterEggCounter = () => {
+    const newCount = clickEasterEggCount + 1;
+    setClickEasterEggCount(newCount);
+
+    if (newCount === 10) {
+      setShowEasterEggPopup(true);
+    }
   };
+
+  const onClickEasterEggReset = () => {
+    setShowEasterEggPopup(false)
+  }
+
   return (
     <>
       <OrderPopup isOpen={isPopupOpen}
@@ -170,6 +184,10 @@ function OrderDetail() {
                   menuNm={selectedMenuInfo.menuNm}
                   count={selectedMenuInfo.orderCount}
                   ordererList={selectedMenuInfo.ordererList}></OrderPopup>
+      <EasterEgg
+          isOpen={showEasterEggPopup}
+          onClose={onClickEasterEggReset}
+      ></EasterEgg>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
           커피주문현황
@@ -224,7 +242,8 @@ function OrderDetail() {
 
         <footer id="footer" className="bg_pink">
           <div className="">
-            { isStoreOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> : <div className="large-btn bg_gray">주문불가</div>}
+            {isStoreOpen ? <div onClick={onClickGoOrder} className="large-btn bg_black">주문하기</div> :
+                <div className="large-btn bg_gray" onClick={onClickEasterEggCounter}>주문불가</div>}
           </div>
         </footer>
 
