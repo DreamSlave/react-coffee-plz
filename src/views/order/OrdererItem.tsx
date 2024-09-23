@@ -22,9 +22,7 @@ function Orderer({
       <span>
       <div className={'name ' + (isOrderComplete ? 'gray' : '')}
            onClick={
-               () => !isOrderComplete ?
-                   selectOrderer(userInfo.userId, userInfo.name, userInfo.team, userInfo.rank)
-                   : ''
+               () =>selectOrderer(userInfo.userId, userInfo.name, userInfo.team, userInfo.rank)
            }
       >
         {userInfo.name} ({userInfo.team})
