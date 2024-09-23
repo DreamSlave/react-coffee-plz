@@ -42,11 +42,12 @@ const SaveParty = () => {
         try {
           const result = await getCafeList();
           setCafeList(result);
-
+  
           if (partyInfo.partyName) {
+            console.log(":partyInfo:", partyInfo);
             setPartyName(partyInfo.partyName);
           }
-
+  
           if (partyInfo.cafeId) {
             setCafeName(partyInfo.cafeName);
             setCafeId(partyInfo.cafeId);
@@ -54,7 +55,7 @@ const SaveParty = () => {
             setCafeName(result[0].cafeName);
             setCafeId(result[0].cafeId);
           }
-
+  
           if (partyInfo.endDate) {
             setEndDate(stringToDate(partyInfo.endDate));
           }
@@ -63,37 +64,40 @@ const SaveParty = () => {
           } else {
             setEndTime(nearestQuarterHour());
           }
-
+  
           firstRender.current = false;
         } catch (error) {
           console.error(error);
         }
       }
-      // validation 검사      
-      if (partyName !== '' && cafeName !== '') {
-        setIsValid(true);
-      } else {
-        setIsValid(false);
-      }
-
-      const now = new Date();
-      const afterTime = endTime.getTime() - now.getTime();
-
-      if (endDate.getTime() > now.getTime()) {
-        setIsValid(true);
-      } else {
-        setTimeout(() => {
-          if (endTime.getTime() - now.getTime() > 1000 * 60 ) {
-            setIsValid(true);
-          } else {
-            setIsValid(false);
-          }
-        }, afterTime);
-      }
     };
-
+  
     fetchPartyInfo();
-  }, [partyInfo, partyName, cafeId, cafeName, endDate, endTime, isValid]);
+  }, [partyInfo]);  // partyInfo가 업데이트될 때만 fetch 수행
+  
+  useEffect(() => {
+    // Validation 검사      
+    if (partyName !== '' && cafeName !== '') {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+      
+    const now = new Date();
+    const afterTime = endTime.getTime() - now.getTime();
+  
+    if (endDate.getTime() > now.getTime()) {
+      setIsValid(true);
+    } else {
+      setTimeout(() => {
+        if (endTime.getTime() - now.getTime() > 1000 * 60 ) {
+          setIsValid(true);
+        } else {
+          setIsValid(false);
+        }
+      }, afterTime);
+    }
+  }, [partyName, cafeName, endDate, endTime]);  // 상태들이 변경될 때 검증 수행
 
   function getCafeList() {
     return ApiUtil.get(`${ApiConfig.defaultDomain}/cafe/info`)
