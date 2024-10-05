@@ -69,7 +69,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, ordererList,
               orderPopupInfo.ordererList.map((item, index) => {
                 const className = 'list-' + (index + 1)
                 return (
-                  <div key={item.userId} className={className}>
+                  <div key={item.userId}>
                     <div className="person-info">
                       <svg className="fl mgr5" width="22px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                            fill="currentColor">
@@ -82,12 +82,6 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, ordererList,
                     <div className="call-btn point"
                          onClick={() => document.location.href = `tel:${item.telNo}`}>전화걸기
                     </div>
-                    
-                    {/* 이스터에그 시연용 임시 */}
-                    <div className="eggpop">
-                      <img src={EggImg} />
-                    </div>
-
                   </div>
                 )
               })
