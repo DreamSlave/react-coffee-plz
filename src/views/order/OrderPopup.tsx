@@ -79,9 +79,10 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, menuNm, count, ordererList,
                       </svg>
                       {item.name}
                     </div>
-                    <div className="call-btn point"
-                         onClick={() => document.location.href = `tel:${item.telNo}`}>전화걸기
-                    </div>
+                    { !(/iPhone|iPad|Android|BlackBerry/i.test(navigator.userAgent)) ||
+                        <div className="call-btn point"
+                             onClick={() => document.location.href = `tel:${item.telNo}`}>전화걸기
+                        </div>}
                   </div>
                 )
               })

@@ -29,10 +29,10 @@ function Orderer({
       </div>
           {isOrderComplete ?
               <div className="done-label">주문완료</div>
-              : <div style={{ background: '#ff5cc3', color: 'white', cursor: 'pointer' }}
+              : (!(/iPhone|iPad|Android|BlackBerry/i.test(navigator.userAgent)) || (<div style={{ background: '#ff5cc3', color: 'white', cursor: 'pointer' }}
                      className="done-label"
                      onClick={() => document.location.href = `tel:${userInfo.telNo}`}
-              >전화걸기</div>}
+              >전화걸기</div>))}
       </span>
     </>
   );
