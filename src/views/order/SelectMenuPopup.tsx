@@ -11,6 +11,8 @@ import { Orderer } from './OrdererInterface'
 import ApiUtil from '@/api/api.util';
 import ApiConfig from '@/api/api.config';
 
+import EasterEgg from "@/views/order/EasterEgg.tsx";
+
 interface SelectMenuPopupProps {
   partyNo: string
   cafeId: string
@@ -22,6 +24,7 @@ interface SelectMenuPopupProps {
 
 function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup }: SelectMenuPopupProps) {
   const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
+  const [showEasterEggPopup, setShowEasterEggPopup] = useState<boolean>(false);
   const navigate = useNavigate()
 
   const onChangeMenuNmInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +40,8 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     }
 
     // 이스터에그!!
-    if(menu.id === 0 && menuNm === '욜룔룔룔료') {
-      // TODO: 이스터 에그 팝업
-      alert('이스터 에그 팝업!')
+    if(menu.id === 0 && menuNm === '가나다') {
+      setShowEasterEggPopup(true)
       return false
     }
    
@@ -84,10 +86,18 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     })
   }
 
+  const onClickEasterEggReset = () => {
+    setShowEasterEggPopup(false)
+  }
+
   return (
     // @ts-ignore
     <CSSTransition in={show} timeout={5000} className="fade">
       <div>
+        <EasterEgg
+            isOpen={showEasterEggPopup}
+            onClose={onClickEasterEggReset}
+        ></EasterEgg>
         <div id="popup" className="popup">
           <div className='pop_confirm'>
             <h2>선택한 메뉴를 확인해주세요.</h2>
