@@ -39,6 +39,7 @@ input::placeholder {
   box-sizing: border-box;
   padding: 0 10px;
   position: relative;
+  background-color: #fff;
 }
 
 .select select {
@@ -47,6 +48,7 @@ input::placeholder {
   width: 100%;
   padding-top: 15px;
   cursor: pointer;
+  background-color: #fff;
 }
 
 .select::after {
@@ -297,6 +299,7 @@ h2 {
   text-align: right;
   text-decoration: underline;
   font-weight: 700;
+  cursor: pointer;
 }
 
 /*크리에이터 파티원선택*/
@@ -379,6 +382,23 @@ h2 {
   max-width: 72px;
 }
 
+/* .orderer-list .item .done-label {
+  display: inline-block;
+  float: right;
+  width: 30%;
+  color: #ff5cc3;
+  background: #fff;
+  border: 1px #ff5cc3 solid;
+  box-sizing: border-box;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 3px 0;
+  max-width: 72px;
+  cursor: pointer;  
+} */
+
+
 .orderer-list .item svg {
   margin-right: 5px;
 }
@@ -417,6 +437,7 @@ h2 {
   top: 0;
   box-sizing: border-box;
   border-radius: 10px 10px 0 0;
+  cursor: pointer;
 }
 
 .popup-area .alert_txt {
@@ -590,6 +611,7 @@ h2 {
 
 .order-complete_img img {
   width: 100%;
+  max-width: 400px;
 }
 
 .order-complete {
@@ -648,13 +670,19 @@ h2 {
 
 /*크리에이터 최종확인*/
 
+.confirm-area {
+  text-align: center;
+}
+
 .confirm-area .mainimg {
   width: 50%;
-  margin: 50px 21% 0px 29%;
+  margin: auto;
 }
 
 .confirm-area .mainimg img {
   width: 100%;
+  max-width: 125px;
+  margin-bottom: 30px;
 }
 .confirm-area .link_copy {
   width: 100%;

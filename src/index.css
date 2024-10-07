@@ -51,10 +51,12 @@ body {
 
 #header .back_ic {
   width: 13px;
+  cursor: pointer;
 }
 
 #header .x_ic {
   float: right;
+  cursor: pointer;
 }
 
 /* 필요하지 않은 css는 주석처리 해놓음 -저격달인- */
