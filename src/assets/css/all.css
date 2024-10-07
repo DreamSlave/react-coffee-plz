@@ -860,4 +860,8 @@ h2 {
   #popup {
     padding-top: 200px;
   }
+  .popup-area {
+    max-height: 550px;
+    overflow-y: scroll;
+  }
 }
