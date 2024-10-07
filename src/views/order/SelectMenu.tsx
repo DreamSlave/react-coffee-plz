@@ -26,6 +26,7 @@ const SelectMenu = () => {
   const [menuSearchText, setMenuSearchText] = useState<string>('')
   const [menuList, setMenuList] = useState<Menu[]>([])
   const [cafeId, setCafeId] = useState<string>('')
+  const [cafeName, setCafeName] = useState<string>('')
   const [selectedMenu, setSelectedMenu] = useState<Menu>()
   const [defaultTagTextList] = useState<string[]>(['아이스', '핫', '라떼', '에이드', '샷추가', '생과일', '아메리카노'])
   const [showPopup, setShowPopup] = useState(false)
@@ -74,6 +75,7 @@ const SelectMenu = () => {
 
         if(resultData.content && resultData.content.length > 0) {
           setCafeId(resultData.content[0].cafeId)
+          setCafeName(resultData.content[0].cafeName)
         }
 
         setIsLastPageNo(pageNo === resultData.totalPages || resultData.totalPages === 0 ? true : false)
@@ -124,7 +126,8 @@ const SelectMenu = () => {
         <h1>
           <span className="point">메뉴를</span><br/>선택해주세요.
         </h1>
-        <div className="cafename"><b>cafe</b> 카페명표기</div>
+        {/* // TODO:  */}
+        <div className="cafename"><b>{cafeName}</b></div>
         <div className="person-info bg_sub point">
           {orderer.name} {orderer.rank}({orderer.team})
         </div>
