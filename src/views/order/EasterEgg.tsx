@@ -18,7 +18,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
       <CSSTransition in={isOpen} timeout={3000} classNames="order-popup">
         <>
-          { <div id="popup" style={{ paddingTop: '15%'}} className="dis_n">
+            { <div id="popup" style={{ paddingTop: '15%', zIndex : 9999999}} className="dis_n">
               <div className="popup-area">
                   <div onClick={onClose} className="close">
                       <div className="fr">
