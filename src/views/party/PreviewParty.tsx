@@ -43,28 +43,28 @@ function PreviewParty() {
     })
 
     navigate(`/party/confirm/${result.partyId}`)
-     
 
-    
-    
+
+
+
   }
 
 
   const formatDate = (dateString : string) => {
-    const year = dateString.substring(0, 4);
-    const month = dateString.substring(4, 6);
-    const day = dateString.substring(6, 8);
-      
+    const year = parseInt(dateString.substring(0, 4), 10)
+    const month = parseInt(dateString.substring(4, 6), 10)
+    const day = parseInt(dateString.substring(6, 8), 10)
+
     return `${year}/${month}/${day}`;
   };
 
   const formatTime = (timeString : string) => {
-    const hours = timeString.substring(0, 2);
-    const minutes = timeString.substring(2, 4);
-  
+    const hours = parseInt(timeString.substring(0, 2), 10)
+    const minutes = parseInt(timeString.substring(2, 4), 10)
+
     return `${hours}:${minutes}`;
   };
-  
+
 
 
   return (
@@ -87,9 +87,9 @@ function PreviewParty() {
               </div>
             </div>
             <div className="order-time">
-              <span className="mgr5"><b>마감시간</b></span> {formatDate(partyInfo.endDate)} {formatTime(partyInfo.endTime)}
+              <span className="mgr5"><b>마감시간</b></span> {formatDate(partyInfo.endDate.replace(/[^0-9]/g, ""))} {formatTime(partyInfo.endTime.replace(/[^0-9]/g, ""))}
             </div>
-            
+
             <div className="order-list-detail">
               <div className="title"><b>파티원 <span className="point">{partyInfo.memberList.length}</span>명</b></div>
               <div className="list">
@@ -101,13 +101,13 @@ function PreviewParty() {
               </div>
             </div>
         </div>
-        
+
         <footer id="footer" className="bg_white">
           <div className="large-btn" onClick={onClickPreviewParty}>
               파티생성
           </div>
         </footer>
-      
+
       </div>
   )
 }
