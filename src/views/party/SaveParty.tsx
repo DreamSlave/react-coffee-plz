@@ -42,12 +42,12 @@ const SaveParty = () => {
         try {
           const result = await getCafeList();
           setCafeList(result);
-  
+
           if (partyInfo.partyName) {
             console.log(":partyInfo:", partyInfo);
             setPartyName(partyInfo.partyName);
           }
-  
+
           if (partyInfo.cafeId) {
             setCafeName(partyInfo.cafeName);
             setCafeId(partyInfo.cafeId);
@@ -55,7 +55,7 @@ const SaveParty = () => {
             setCafeName(result[0].cafeName);
             setCafeId(result[0].cafeId);
           }
-  
+
           if (partyInfo.endDate) {
             setEndDate(stringToDate(partyInfo.endDate));
           }
@@ -64,28 +64,28 @@ const SaveParty = () => {
           } else {
             setEndTime(nearestQuarterHour());
           }
-  
+
           firstRender.current = false;
         } catch (error) {
           console.error(error);
         }
       }
     };
-  
+
     fetchPartyInfo();
   }, [partyInfo]);  // partyInfo가 업데이트될 때만 fetch 수행
-  
+
   useEffect(() => {
-    // Validation 검사      
+    // Validation 검사
     if (partyName !== '' && cafeName !== '') {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-      
+
     const now = new Date();
     const afterTime = endTime.getTime() - now.getTime();
-  
+
     if (endDate.getTime() > now.getTime()) {
       setIsValid(true);
     } else {
@@ -105,11 +105,11 @@ const SaveParty = () => {
      const resultData = json.data
      return resultData
     })
-        
+
   }
 
   const onChangePartyName = (event: ChangeEvent<HTMLInputElement>) => {
-    setPartyName(event.target.value);        
+    setPartyName(event.target.value);
   };
 
   const onChangeDropDown = (data : DataItem) =>{
@@ -117,7 +117,7 @@ const SaveParty = () => {
     setCafeName(String(dataItem?.cafeName) ?? '');
     setCafeId(Number(dataItem?.cafeId) ?? 1);
   }
-  
+
 
   const navigate  = useNavigate();
   const dispatch = useDispatch();
@@ -125,7 +125,9 @@ const SaveParty = () => {
   const onClickSaveParty = function(){
     const yyyymmdd : string = endDate.toLocaleDateString('en-CA').replace(/-/g, '');
     const HHmm : string = endTime.toLocaleTimeString('en-US', {hour12: false}).slice(0, -3).replace(':', '');
-    
+    console.log(":yyyymmdd:",yyyymmdd);
+    console.log(":HHmm:",HHmm);
+
     dispatch(setSaveParty(partyName, cafeId, cafeName, yyyymmdd, HHmm))
     navigate('/party/preview')
   }
@@ -178,13 +180,13 @@ const SaveParty = () => {
   };
 
 
-  
+
   return (
     <div id='party' className="element">
       <h1>
         본격적으로<br/><span className="point">파티를 생성</span>합니다.
       </h1>
-      
+
       <div className="form-area">
         <div className="input">
           <div className="label">파티명</div>
@@ -206,19 +208,19 @@ const SaveParty = () => {
               defaultValue={cafeId}
             />
           </div>
-          
+
         </div>
         <div className="form_date mgb10">
           <div className="label">마감설정</div>
             <DatePicker
-              locale={ko}   
-              dateFormat='yyyy/MM/dd' // 날짜 형태 
-              shouldCloseOnSelect 
+              locale={ko}
+              dateFormat='yyyy/MM/dd' // 날짜 형태
+              shouldCloseOnSelect
               className="datepicker"
-              selected={endDate} 
+              selected={endDate}
               minDate={new Date()}
               onChange={(date: Date ) => setEndDate(date)} />
-              
+
           </div>
           <div className="form_date mgb10">
             <DatePicker
@@ -238,7 +240,7 @@ const SaveParty = () => {
 
       <footer id="footer">
       {
-        isValid ?   
+        isValid ?
         <div className="large-btn" onClick={onClickSaveParty}>
             미리보기
         </div>:
