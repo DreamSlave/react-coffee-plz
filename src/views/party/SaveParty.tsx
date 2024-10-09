@@ -219,6 +219,7 @@ const SaveParty = () => {
               className="datepicker"
               selected={endDate}
               minDate={new Date()}
+              popperPlacement="top" // 드롭다운을 위로 표시
               onChange={(date: Date ) => setEndDate(date)} />
 
           </div>
@@ -232,6 +233,7 @@ const SaveParty = () => {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="hh:mm aa"
+              popperPlacement="top" // 드롭다운을 위로 표시
               minTime={getMinTime()}
               maxTime={new Date(0, 0, 0, 23, 59)}
             />
