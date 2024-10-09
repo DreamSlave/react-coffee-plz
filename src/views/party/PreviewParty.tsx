@@ -51,16 +51,16 @@ function PreviewParty() {
 
 
   const formatDate = (dateString : string) => {
-    const year = parseInt(dateString.substring(0, 4), 10)
-    const month = parseInt(dateString.substring(4, 6), 10)
-    const day = parseInt(dateString.substring(6, 8), 10)
+    const year = dateString.substring(0, 4)
+    const month = dateString.substring(4, 6)
+    const day = dateString.substring(6, 8)
 
     return `${year}/${month}/${day}`;
   };
 
   const formatTime = (timeString : string) => {
-    const hours = parseInt(timeString.substring(0, 2), 10)
-    const minutes = parseInt(timeString.substring(2, 4), 10)
+    const hours = timeString.substring(0, 2)
+    const minutes = timeString.substring(2, 4)
 
     return `${hours}:${minutes}`;
   };
