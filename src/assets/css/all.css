@@ -43,7 +43,9 @@ input::placeholder {
 }
 
 .select select {
-  appearance: none; 
+  -webkit-appearance: none; /* 사파리 브라우저에서 기본 스타일 제거 */
+  -moz-appearance: none; /* 파이어폭스 브라우저에서 기본 스타일 제거 */
+  appearance: none;
   font-size: 18px;
   width: 100%;
   padding-top: 15px;
@@ -395,7 +397,7 @@ h2 {
   border-radius: 5px;
   padding: 3px 0;
   max-width: 72px;
-  cursor: pointer;  
+  cursor: pointer;
 } */
 
 
@@ -568,7 +570,7 @@ h2 {
   background-color: #fff;
   position: fixed;
   bottom: 0;
-  border-radius: 25px 25px 0 0;  
+  border-radius: 25px 25px 0 0;
   box-sizing: border-box;
   padding: 35px 25px;
   text-align: center;
@@ -791,7 +793,7 @@ h2 {
       opacity: 1;
       transform: translateZ(0);
   }
-} 
+}
 .pop_confirm {
   /* position: relative; */
   animation: fadeInUp 0.5s;
