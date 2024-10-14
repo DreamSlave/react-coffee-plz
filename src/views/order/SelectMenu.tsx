@@ -49,6 +49,13 @@ const SelectMenu = () => {
     setSearchInputValue(e.target.value)
   }
 
+  // 검색어 keydown 이벤트 핸들링
+  const onKeyDownSearchInputValue = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if(e.key === 'Enter') {
+      doSearch()
+    }
+  }
+
   // 검색 실행 함수
   const doSearch = () => {
     setMenuSearchText(searchInputValue)
@@ -137,12 +144,10 @@ const SelectMenu = () => {
                     placeholder="검색"
                     value={searchInputValue}
                     onChange={onChangeSearchInputValue}
+                    onKeyDown={onKeyDownSearchInputValue}
                     className=""
             />
           </div>
-          {/* //test (showAlert 예제) */}
-          {/* <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={() => showAlert("This is an alert!")} /></div> */}
-          {/* //real */}
           <div className='btn'><img className="search-ic" alt="Search ic" src={searchIcSvg} onClick={doSearch} /></div>
         </div>
 
