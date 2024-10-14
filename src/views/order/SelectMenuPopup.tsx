@@ -40,7 +40,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
     }
 
     // 이스터에그!!
-    if(menu.id === 0 && menuNm === '가나다') {
+    if(menu.id === 0 && ['아아', '따아', '아메', '아무'].some(item => menuNm.includes(item))) {
       setShowEasterEggPopup(true)
       return false
     }
