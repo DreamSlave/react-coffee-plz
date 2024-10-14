@@ -39,7 +39,17 @@ const SelectMenu = () => {
 
   const { showAlert } = useGlobalUI();
 
+  // 컴포넌트의 마운트 여부를 추적하는 변수
+  const isInitialRender = useRef(true)
+
   useEffect(() => {
+    // 첫 렌더링시에만 실행
+    if(isInitialRender.current) {
+      window.scrollTo(0, 0)
+      // 첫 렌더링되면 false로 변경
+      isInitialRender.current = false
+    }
+
     fetchMenuList(pageNo)
   }, [menuSearchText, pageNo])
 
