@@ -49,6 +49,7 @@ input::placeholder {
   padding-top: 15px;
   cursor: pointer;
   background-color: #fff;
+  color: #000;
 }
 
 .select::after {
@@ -373,19 +374,6 @@ h2 {
   display: inline-block;
   float: right;
   width: 30%;
-  color: #aaa;
-  background: #eee;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 5px;
-  padding: 3px 0;
-  max-width: 72px;
-}
-
-/* .orderer-list .item .done-label {
-  display: inline-block;
-  float: right;
-  width: 30%;
   color: #ff5cc3;
   background: #fff;
   border: 1px #ff5cc3 solid;
@@ -395,9 +383,18 @@ h2 {
   border-radius: 5px;
   padding: 3px 0;
   max-width: 72px;
-  cursor: pointer;  
-} */
+}
 
+.orderer-list .item .call-label {
+  display: inline-block;
+  float: right;
+}
+
+.orderer-list .item .call-label svg {
+  width: 22px;
+  color: #ff5cc3;
+  margin-right: 0;
+}
 
 .orderer-list .item svg {
   margin-right: 5px;
@@ -707,6 +704,7 @@ h2 {
   height: 35px;
   padding-top: 9px;
   float: right;
+  cursor: pointer;
 }
 
 .confirm-area .go_order {
