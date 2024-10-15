@@ -123,8 +123,8 @@ const SaveParty = () => {
   const dispatch = useDispatch();
 
   const onClickSaveParty = function(){
-    const yyyymmdd : string = endDate.toLocaleDateString('en-CA').replace(/-/g, '');
-    const HHmm : string = endTime.toLocaleTimeString('en-US', {hour12: false}).slice(0, -3).replace(':', '');
+    const yyyymmdd : string = endDate.getFullYear().toString() +("0" + (endDate.getMonth() + 1)).slice(-2) + ("0" + endDate.getDate()).slice(-2);
+    const HHmm : string = endTime.getHours().toString().padStart(2, '0') + endTime.getMinutes().toString().padStart(2, '0')
     console.log(":yyyymmdd:",yyyymmdd);
     console.log(":HHmm:",HHmm);
 
@@ -219,6 +219,7 @@ const SaveParty = () => {
               className="datepicker"
               selected={endDate}
               minDate={new Date()}
+              popperPlacement="top" // 드롭다운을 위로 표시
               onChange={(date: Date ) => setEndDate(date)} />
 
           </div>
@@ -232,6 +233,7 @@ const SaveParty = () => {
               timeIntervals={15}
               timeCaption="Time"
               dateFormat="hh:mm aa"
+              popperPlacement="top" // 드롭다운을 위로 표시
               minTime={getMinTime()}
               maxTime={new Date(0, 0, 0, 23, 59)}
             />
