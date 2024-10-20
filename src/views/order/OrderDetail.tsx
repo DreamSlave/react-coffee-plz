@@ -224,7 +224,13 @@ function OrderDetail() {
           <div className="order-list-sum">
             <div className="title"><b>주문 취합 리스트</b></div>
             {
-              menuList.map((item)=>{
+              menuList.sort((a, b) => {
+                // menuId '99'(괜찮습니다)인 경우 최상단으로
+                if (a.menuId === '99') return -1;
+                if (b.menuId === '99') return 1;
+                // 이름으로 정렬
+                return a.menuNm.localeCompare(b.menuNm);
+              }).map((item)=>{
                 const openPopup = () => {
                   setPopupOpen(!isPopupOpen);
                   setSelectedMenuInfo(item)
