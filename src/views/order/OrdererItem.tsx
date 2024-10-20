@@ -28,7 +28,10 @@ function Orderer({
         {userInfo.name} ({userInfo.team})
       </div>
           {isOrderComplete ?
-              <div className="done-label">주문변경</div>
+              <div className="done-label"
+                   onClick={
+                       () =>selectOrderer(userInfo.userId, userInfo.name, userInfo.team, userInfo.rank)
+                   }>주문변경</div>
               : (!(/iPhone|iPad|Android|BlackBerry/i.test(navigator.userAgent)) || (<div 
                      className="call-label"
                      onClick={() => document.location.href = `tel:${userInfo.telNo}`}
