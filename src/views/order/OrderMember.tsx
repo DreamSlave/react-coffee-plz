@@ -67,7 +67,13 @@ function OrderMember() {
         </h1>
         <div className="orderer-list">
           {
-            orderMemberList.map((item, index) => {
+            orderMemberList.sort((a, b) => {
+              // userId 순으로 정렬
+              const nameComparison = a.userId- b.userId;
+              if (nameComparison !== 0) {
+                return nameComparison;
+              }
+            }).map((item, index) => {
               return (
                 <div key={item.userId + '' +index} className="item">
                   <OrdererItem userInfo={{userId: item.userId, name: item.name, rank: item.rank, team: item.team, telNo: item.telNo }}
