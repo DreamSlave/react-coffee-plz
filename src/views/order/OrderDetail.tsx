@@ -187,6 +187,7 @@ function OrderDetail() {
       <EasterEgg
           isOpen={showEasterEggPopup}
           onClose={onClickEasterEggReset}
+          isForSpecific={false}
       ></EasterEgg>
       <div id='order' className="element bg_pink">
         <div className="main_tit">
