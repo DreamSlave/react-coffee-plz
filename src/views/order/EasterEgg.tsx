@@ -3,14 +3,16 @@ import '../../assets/css/all.css'
 import '../../assets/css/style.scss'
 import { CSSTransition } from 'react-transition-group'
 import EggImg from "@/assets/img/cfplz_egg_01.png";
+import EggImgForSpecific from "@/assets/img/cfplz_egg_02.png";
 
 
 interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
+  isForSpecific: boolean;
 }
 
-const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
+const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose, isForSpecific }) => {
 
   useEffect(() => {
   }, [isOpen]);
@@ -32,7 +34,7 @@ const OrderPopup : React.FC<PopupProps> = ({ isOpen, onClose }) => {
                   <div className="order-person-detail">
                       {/* 이스터에그 시연용 임시 */}
                       <div className="eggpop">
-                          <img src={EggImg}/>
+                          <img src={isForSpecific ? EggImgForSpecific : EggImg}/>
                       </div>
                       <div className="w100">
                           <div className="person-info w100">
