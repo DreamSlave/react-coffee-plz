@@ -25,6 +25,7 @@ interface SelectMenuPopupProps {
 function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup }: SelectMenuPopupProps) {
   const [menuNmInpuValue, setMenuNmInputValue] = useState<string>('')
   const [showEasterEggPopup, setShowEasterEggPopup] = useState<boolean>(false);
+  const [isSpecificEasterEgg, setIsSpecificEasterEgg] = useState<boolean>(false)
   const navigate = useNavigate()
 
   const onChangeMenuNmInputValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +42,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
 
     // 이스터에그!!
     if(menu.id === 0 && ['아아', '따아', '아메', '아무'].some(item => menuNm.includes(item))) {
+      setIsSpecificEasterEgg(menuNm.includes('아무')) 
       setShowEasterEggPopup(true)
       return false
     }
@@ -97,6 +99,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
         <EasterEgg
             isOpen={showEasterEggPopup}
             onClose={onClickEasterEggReset}
+            isForSpecific={isSpecificEasterEgg}
         ></EasterEgg>
         <div id="popup" className="popup">
           <div className='pop_confirm'>
