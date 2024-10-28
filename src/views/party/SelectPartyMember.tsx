@@ -32,7 +32,7 @@ interface TeamProps {
 
 
 const SelectPartyMember = () => {
-  
+
   const [members, setMembers] = useState<MemberProps[]>([])
   const [teamList, setTeamList] = useState<TeamProps[]>([])
   const [isValid, setIsValid] = useState<boolean>(true)
@@ -54,21 +54,21 @@ const SelectPartyMember = () => {
   useEffect(() => {
     const fetchMemberList = async () => {
       try {
-        const result = await getMemberList();        
+        const result = await getMemberList();
         if (firstRender) {
           //member 세팅
           const updatedMembers = result.map((element) => {
             const isChecked = partyInfo.memberList.some((member) => member.userId === element.userId);
             return { ...element, checked: isChecked };
           });
-          
+
           //team 세팅
           const uniqueTeams: string[] = [...new Set( result.map(item => {return item.team;}))] as string[];
           const updatedTeam :TeamProps[] = uniqueTeams.map(mapData => {
             return {
               team : mapData,
               checked : updatedMembers.filter(item => item.team === mapData).every(item => item.checked === true),
-              isView : false,
+              isView : updatedMembers.filter(item => item.team === mapData).some(item => item.checked === true) ? true : false,
             }
           })
 
@@ -82,7 +82,7 @@ const SelectPartyMember = () => {
     };
     fetchMemberList();
   }, []);
-    
+
 
   const changeIsView = (index: number, data: boolean) => {
     const result = [...teamList]
@@ -97,21 +97,21 @@ const SelectPartyMember = () => {
           result.forEach(element => {
             if(element.userId === param){
               element.checked = checked
-            }      
-          }) 
+            }
+          })
         break;
         case 'TEAM' :
           result.forEach(element => {
             if(element.team === param){
               element.checked = checked
-            }      
-          }) 
+            }
+          })
         break;
         default:
         break;
       }
     setMembers(result);
-    
+
   }
 
 
@@ -125,7 +125,7 @@ const SelectPartyMember = () => {
     dispatch(setSelectPartyMember(selectMember))
     navigate('/party/save')
   }
-  
+
   const getMemberList = async () => {
     showLoading();
     try {
@@ -149,8 +149,8 @@ const SelectPartyMember = () => {
     <div className="total_chck mgt20 mgb20">
       {members.filter(item => item.checked).length}명
     </div>
-    
-    {teamList.map((teamItem, teamIndex) => 
+
+    {teamList.map((teamItem, teamIndex) =>
       <div key={teamIndex} className="chck_person">
         <CheckBox checked={teamItem.checked} key={teamItem.team} onChange={(event) => onChangeMember('TEAM', teamItem.team, event.target.checked)}>
           <span key={teamIndex+`_span`}>{teamItem.team}</span>
@@ -163,14 +163,14 @@ const SelectPartyMember = () => {
             }
           </div>
         <div className="p_2dpth mgt10" key={teamIndex+`_innder_div`} >
-          {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) => 
+          {teamItem.isView && members.filter(item => item.team === teamItem.team).map((item, index) =>
           <div className="checkbox">
             <CheckBox key={item.name} checked={item.checked} onChange={(event) => onChangeMember('USERID', item.userId, event.target.checked)}>
               <span key={index}>{item.name} {item.rank} ({item.team})</span>
             </CheckBox>
           </div>
           )}
-        </div>          
+        </div>
       </div>
     )}
 
@@ -186,11 +186,11 @@ const SelectPartyMember = () => {
 
       }
     </footer>
-    
+
   </div>
   );
 };
 
 
-  
+
 export default SelectPartyMember;
