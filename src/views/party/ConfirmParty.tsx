@@ -22,7 +22,7 @@ const ConfirmParty = () => {
 
     const userAgent = navigator.userAgent.toLowerCase();
     
-    if(userAgent.includes('CHONGMUTIME')) {
+    if(userAgent.includes('chongmutimeapp')) {
       navigate(`/order/${partyId}`)
     } else {
       window.open(orderUrl, '_blank')
