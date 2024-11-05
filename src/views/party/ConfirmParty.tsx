@@ -19,7 +19,14 @@ const ConfirmParty = () => {
       });
   }
   function moveOrderUrl(){
-    window.open(orderUrl, '_blank');
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    
+    if(userAgent.includes('CHONGMUTIME')) {
+      navigate(`/order/${partyId}`)
+    } else {
+      window.open(orderUrl, '_blank')
+    }
   }
 
   return (
