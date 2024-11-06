@@ -36,20 +36,24 @@ function PreviewParty() {
       }
       showLoading()
       const result = await ApiUtil.put(`${ApiConfig.defaultDomain}/party/save`, params)
-      .then(response => response.json())
-      .then(json => {
-       const resultData = json.data
-       return resultData
-      })
-      .catch((error: any) => {
-        console.error('[/order/save] Error occurred ::: ', error);
-      })
-      .finally(() => {
-        hideLoading();
-      })
+        .then(response => response.json())
+        .then(json => {
+          const resultData = json.data
+          return resultData
+        })
+        .catch((error: any) => {
+          console.error('[/order/save] Error occurred ::: ', error);
+        })
+        .finally(() => {
+          hideLoading();
+        })
 
-      navigate(`/party/confirm/${result.partyId}`)
-
+      // 특정 partyId인 경우 이스터에그 처리
+      if(!!result.partyId && String(result.partyId) === '157') {
+        setShowEasterEggPopup(true);
+      } else {
+        navigate(`/party/confirm/${result.partyId}`)
+      }
     }
 
   }
