@@ -40,12 +40,17 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       return false
     }
 
-    // 이스터에그!!
-    if(menu.id === 0 && ['아아', '따아', '아메', '아무'].some(item => menuNm.includes(item))) {
-      setIsSpecificEasterEgg(menuNm.includes('아무')) 
+    // 이스터에그 "아무" case만 남기기
+    if(menu.id === 0 && ['아무'].some(item => menuNm.includes(item))) {
+      setIsSpecificEasterEgg(true) 
       setShowEasterEggPopup(true)
       return false
     }
+    /* if(menu.id === 0 && ['아아', '따아', '아메', '아무'].some(item => menuNm.includes(item))) {
+      setIsSpecificEasterEgg(menuNm.includes('아무')) 
+      setShowEasterEggPopup(true)
+      return false
+    } */
    
     // 직접입력의 경우 메뉴 등록 먼저 진행
     /* if(menu.id === 99) {
