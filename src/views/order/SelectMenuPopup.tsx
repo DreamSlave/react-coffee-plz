@@ -34,7 +34,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
 
   const submit = async () => {
     let menuNm = menu.id === 0 ? menuNmInpuValue : menu.name
-    
+
     if(menuNm.trim() === '') {
       alert('메뉴명을 확인해주세요.')
       return false
@@ -42,16 +42,16 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
 
     // 이스터에그 "아무" case만 남기기
     if(menu.id === 0 && ['아무'].some(item => menuNm.includes(item))) {
-      setIsSpecificEasterEgg(true) 
+      setIsSpecificEasterEgg(true)
       setShowEasterEggPopup(true)
       return false
     }
     /* if(menu.id === 0 && ['아아', '따아', '아메', '아무'].some(item => menuNm.includes(item))) {
-      setIsSpecificEasterEgg(menuNm.includes('아무')) 
+      setIsSpecificEasterEgg(menuNm.includes('아무'))
       setShowEasterEggPopup(true)
       return false
     } */
-   
+
     // 직접입력의 경우 메뉴 등록 먼저 진행
     /* if(menu.id === 99) {
       let { newMenuId } = await saveNewMenu(menuNm)
@@ -72,7 +72,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
       }
 
       navigate(`/order/complete/${orderer.partyNo}/${encodeURIComponent(menuNm)}/${encodeURIComponent(orderer.name)}/${encodeURIComponent(orderer.team)}/${encodeURIComponent(orderer.rank)}`)
-      
+
     }).catch((error: any) => {
       console.error('[/order/save] Error occurred ::: ', error);
     })
@@ -119,6 +119,7 @@ function SelectMenuPopup({ partyNo, cafeId, menu, orderer, show, toggleShowPopup
                           value={menuNmInpuValue}
                           onChange={onChangeMenuNmInputValue}
                           className="mgt10 mgb5"
+                          maxLength={50}
                   />
                   <div className='point mgb25'>작성하기 전에 진짜 없는 메뉴인지 확인하셨나요?</div>
                 </div> :
