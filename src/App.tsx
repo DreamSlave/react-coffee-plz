@@ -1,7 +1,7 @@
 import '@/App.css'
 import "@/assets/css/style.scss"
 import '@/assets/css/all.css'
-import '@/assets/css/style.scss'
+// import '@/assets/css/style.scss'
 import { lazy, Suspense } from 'react';
 import {BrowserRouter as Router, Routes, Route, Navigate, useNavigate} from "react-router-dom";
 import HeaderLayout from './layout/HeaderLayout';
@@ -58,6 +58,10 @@ const NotFoundOrderPage = () => {
 }
 
 function App() {
+
+    const userAgent = navigator.userAgent.toLowerCase()
+    const isChongmuMobileApp = userAgent.includes('chongmutimeapp')
+
     return (
         <Router basename="/react-coffee-plz">
             <Suspense fallback={<div>Wait a moment...</div>}>
@@ -65,7 +69,8 @@ function App() {
           <Route path="/" element={<Navigate to="/entrance" />} />
           
           {/* Main routes */}
-          <Route path="/entrance" element={<NoHeaderLayout><Entrance /></NoHeaderLayout>} />
+          
+          <Route path="/entrance" element={ isChongmuMobileApp ? <HeaderLayout><Entrance /></HeaderLayout> : <NoHeaderLayout><Entrance /></NoHeaderLayout> } />
 
           <Route path="/order/menu"                             element={<HeaderLayout><SelectMenu /></HeaderLayout>} />
           <Route path="/order/complete/:partyNo/:encodedMenuNm/:encodedName/:encodedTeam/:encodedRank" element={<HeaderLayout><CompleteMenu /></HeaderLayout>} />
@@ -75,7 +80,7 @@ function App() {
           <Route path="/party/select"   element={<HeaderLayout><SelectPartyMember /></HeaderLayout>} />
           <Route path="/party/save"     element={<HeaderLayout><SaveParty /></HeaderLayout>} />
           <Route path="/party/preview"  element={<HeaderLayout><PreviewParty /></HeaderLayout>} />
-          <Route path="/party/confirm/:partyId"  element={<NoHeaderLayout><ConfirmParty /></NoHeaderLayout>} />
+          <Route path="/party/confirm/:partyId"  element={ isChongmuMobileApp ? <HeaderLayout><ConfirmParty /></HeaderLayout> : <NoHeaderLayout><ConfirmParty /></NoHeaderLayout> } />
 
           {/* Design routes */}
           <Route path="/design/entrance"                element={<NoHeaderLayout><DesignEntrance /></NoHeaderLayout>} />

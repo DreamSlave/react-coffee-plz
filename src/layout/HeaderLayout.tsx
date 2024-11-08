@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, matchPath } from 'react-router-dom';
 import { useSelector} from "react-redux";
 import { RootState } from "@/store";
 import backIcon from "@/assets/img/icon_back.png"
@@ -11,7 +11,8 @@ function HeaderLayout({ children }: { children: ReactNode}) {
   
   const location = useLocation();
   const navigate = useNavigate();
-  const isHiddenBackbtn = location.pathname.includes("/party/select") || location.pathname.includes("/order/member");
+  
+  const isHiddenBackbtn = ['/order/member', '/entrance', '/party/confirm/*'].some(pattern => matchPath(pattern, location.pathname))
   const userInfo = useSelector((state: RootState) => state.order);
 
   
@@ -63,9 +64,9 @@ function HeaderLayout({ children }: { children: ReactNode}) {
 
     const pathname = location.pathname
 
-    if(pathname.startsWith("/party/select") || pathname.startsWith("/party/save") || pathname.startsWith("/party/preview")) {
+    if(['/party/select/*', '/party/save/*', '/party/preview/*', '/party/confirm/*'].some(pattern => matchPath(pattern, pathname))) {
       goRouterPath = "/entrance"
-    } else if(pathname.startsWith("/order/member") || pathname.startsWith("/order/menu") || pathname.startsWith("/order/complete")) {
+    } else if(['/order/member/*', '/order/menu/*', '/order/complete/*'].some(pattern => matchPath(pattern, pathname))) {
       goRouterPath = `/order/${userInfo.partyNo}`
     }
 
@@ -73,12 +74,21 @@ function HeaderLayout({ children }: { children: ReactNode}) {
     closeConfirm()
   }
 
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isChongmuMobileApp = userAgent.includes('chongmutimeapp')
+
   return (
     <div>
       <div id="header">
         { !isHiddenBackbtn ? <img onClick={onClickBack} className="back_ic" src={backIcon} /> : ''}
         <img className="x_ic" src={xIcon}
-          onClick={() => requestConfirm("진행중인 내용이 모두 사라집니다!<br>종료하시겠습니까?", doConfirm, cancelConfirm)}/>
+          onClick={() => {
+            if(isChongmuMobileApp) {
+              window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
+            } else {
+              requestConfirm("진행중인 내용이 모두 사라집니다!<br>종료하시겠습니까?", doConfirm, cancelConfirm)
+            }
+          }}/>
       </div>
       {children}
     </div>
