@@ -60,22 +60,29 @@ function HeaderLayout({ children }: { children: ReactNode}) {
   }
 
   const doConfirm = () => {
-    let goRouterPath = ''
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isChongmuMobileApp = userAgent.includes('chongmutimeapp')
 
-    const pathname = location.pathname
+    if(isChongmuMobileApp) {
+      closeConfirm()
+      window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
+    } else {
+      let goRouterPath = ''
 
-    if(['/party/select/*', '/party/save/*', '/party/preview/*', '/party/confirm/*'].some(pattern => matchPath(pattern, pathname))) {
-      goRouterPath = "/entrance"
-    } else if(['/order/member/*', '/order/menu/*', '/order/complete/*'].some(pattern => matchPath(pattern, pathname))) {
-      goRouterPath = `/order/${userInfo.partyNo}`
+      const pathname = location.pathname
+
+      if(['/party/select/*', '/party/save/*', '/party/preview/*', '/party/confirm/*'].some(pattern => matchPath(pattern, pathname))) {
+        goRouterPath = "/entrance"
+      } else if(['/order/member/*', '/order/menu/*', '/order/complete/*'].some(pattern => matchPath(pattern, pathname))) {
+        goRouterPath = `/order/${userInfo.partyNo}`
+      }
+
+      navigate(goRouterPath);
+      closeConfirm()
     }
-
-    navigate(goRouterPath);
-    closeConfirm()
   }
 
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isChongmuMobileApp = userAgent.includes('chongmutimeapp')
+  
 
   return (
     <div>
@@ -83,11 +90,7 @@ function HeaderLayout({ children }: { children: ReactNode}) {
         { !isHiddenBackbtn ? <img onClick={onClickBack} className="back_ic" src={backIcon} /> : ''}
         <img className="x_ic" src={xIcon}
           onClick={() => {
-            if(isChongmuMobileApp) {
-              window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
-            } else {
-              requestConfirm("진행중인 내용이 모두 사라집니다!<br>종료하시겠습니까?", doConfirm, cancelConfirm)
-            }
+            requestConfirm("진행중인 내용이 모두 사라집니다!<br>종료하시겠습니까?", doConfirm, cancelConfirm)
           }}/>
       </div>
       {children}
