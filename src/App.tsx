@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Routes, Route, Navigate, useNavigate} from "rea
 import HeaderLayout from './layout/HeaderLayout';
 import NoHeaderLayout from './layout/NoHeaderLayout'
 import notfoundImg from '@/assets/img/notfound_img.png'
+import loadingGif from '@/assets/img/loading.gif' 
 
 const Entrance = lazy(() => import('./views/Entrance'))
 const SelectMenu = lazy(() => import('./views/order/SelectMenu'))
@@ -64,7 +65,7 @@ function App() {
 
     return (
         <Router basename="/react-coffee-plz">
-            <Suspense fallback={<div>Wait a moment...</div>}>
+            <Suspense fallback={<div><img src={loadingGif}/></div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/entrance" />} />
           
