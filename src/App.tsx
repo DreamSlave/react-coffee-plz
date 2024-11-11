@@ -65,7 +65,7 @@ function App() {
 
     return (
         <Router basename="/react-coffee-plz">
-            <Suspense fallback={<div><img src={loadingGif}/></div>}>
+            <Suspense fallback={<div className='cfplz_loading'><img src={loadingGif}/></div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/entrance" />} />
           

@@ -860,6 +860,13 @@ h2 {
   width: 100%;
 }
 
+.cfplz_loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+}
+
 @media (max-width: 649px) {
   html {
     background-color: #fff !important;
