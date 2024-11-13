@@ -65,10 +65,15 @@ function HeaderLayout({ children }: { children: ReactNode}) {
     const isIos = /iphone|ipad|ipod/.test(userAgent)
     const isAos = /android/.test(userAgent)
 
+    console.log(`userAgent ::: ${userAgent}`)
+
     if(isChongmuMobileApp) {
       closeConfirm()
-      if(isIos)       window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
-      else if(isAos)  window.Android.closeCoffeePlz(true)
+      if(isIos) {
+        window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
+      } else if(isAos) {
+        window.Android.closeCoffeePlz(true)
+      }
       
     } else {
       let goRouterPath = ''
