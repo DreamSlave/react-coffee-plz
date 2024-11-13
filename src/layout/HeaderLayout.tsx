@@ -68,6 +68,9 @@ function HeaderLayout({ children }: { children: ReactNode}) {
     console.log(`userAgent ::: ${userAgent}`)
 
     if(isChongmuMobileApp) {
+      alert(navigator.userAgent)
+      alert(isIos + "IOS")
+      alert(isAos + "AOS")
       closeConfirm()
       if(isIos) {
         window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
