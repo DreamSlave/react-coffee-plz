@@ -11,7 +11,12 @@ declare global {
     messageHandlers: webkitMessageHandlers
   }
 
+  interface AndroidBridge {
+    closeCoffeePlz: (value: boolean) => void
+  }
+
   interface Window {
-    webkit?: webkit
+    webkit?: webkit,
+    Android?: AndroidBridge
   }
 }

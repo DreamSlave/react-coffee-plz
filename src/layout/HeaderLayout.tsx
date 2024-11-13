@@ -62,10 +62,14 @@ function HeaderLayout({ children }: { children: ReactNode}) {
   const doConfirm = () => {
     const userAgent = navigator.userAgent.toLowerCase();
     const isChongmuMobileApp = userAgent.includes('chongmutimeapp')
+    const isIos = /iphone|ipad|ipod/.test(userAgent)
+    const isAos = /android/.test(userAgent)
 
     if(isChongmuMobileApp) {
       closeConfirm()
-      window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
+      if(isIos)       window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
+      else if(isAos)  window.Android.closeCoffeePlz(true)
+      
     } else {
       let goRouterPath = ''
 
