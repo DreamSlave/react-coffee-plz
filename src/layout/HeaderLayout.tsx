@@ -75,7 +75,7 @@ function HeaderLayout({ children }: { children: ReactNode}) {
       if(isIos) {
         window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
       } else if(isAos) {
-        window.Android.closeCoffeePlz(true)
+        window.Android.closeCoffeePlz()
       }
       
     } else {

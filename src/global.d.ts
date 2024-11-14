@@ -12,7 +12,7 @@ declare global {
   }
 
   interface AndroidBridge {
-    closeCoffeePlz: (value: any) => void
+    closeCoffeePlz: () => void
   }
 
   interface Window {
