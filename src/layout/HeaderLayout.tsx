@@ -65,12 +65,9 @@ function HeaderLayout({ children }: { children: ReactNode}) {
     const isIos = /iphone|ipad|ipod/.test(userAgent)
     const isAos = /android/.test(userAgent)
 
-    console.log(`userAgent ::: ${userAgent}`)
+    console.log(`userAgent ::: ${userAgent} isChongmuMobileApp ::: ${isChongmuMobileApp} isIos ::: ${isIos}`)
 
     if(isChongmuMobileApp) {
-      alert(navigator.userAgent)
-      alert(isIos + "IOS")
-      alert(isAos + "AOS")
       closeConfirm()
       if(isIos) {
         window.webkit.messageHandlers.closeCoffeePlz.postMessage(true)
